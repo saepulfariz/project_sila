@@ -25,6 +25,24 @@ defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
  */
 defined('COMPOSER_PATH') || define('COMPOSER_PATH', ROOTPATH . 'vendor/autoload.php');
 
+if (isset($_SERVER['HTTP_HOST'])) {
+    $explodeFolder = explode('/index.php', $_SERVER['SCRIPT_NAME'])[0];
+    // var_dump($_SERVER['HTTP_HOST']);
+    $folderProject = $explodeFolder;
+    // if ($_SERVER['SERVER_PORT'] == 8080) {
+    //     $folderProject = '';
+    // }
+
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' . $_SERVER['HTTP_HOST'] . $folderProject : 'http://' . $_SERVER['HTTP_HOST'] . $folderProject;
+    defined('BASE') || define('BASE', $protocol);
+
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' . $_SERVER['HTTP_HOST'] : 'http://' . $_SERVER['HTTP_HOST'];
+    defined('SERVERME') || define('SERVERME', $protocol);
+} else {
+    defined('BASE') || define('BASE', '');
+    defined('SERVERME') || define('SERVERME', '');
+}
+
 /*
  |--------------------------------------------------------------------------
  | Timing Constants

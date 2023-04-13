@@ -125,3 +125,4 @@ _modules/*
 /phpunit*.xml
 /.phpunit.*.cache
 
+composer.lock
