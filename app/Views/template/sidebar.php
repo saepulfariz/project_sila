@@ -13,7 +13,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
     <!-- Brand Logo -->
     <a href="<?= base_url(); ?>" class="brand-link">
         <img src="<?= base_url(); ?>assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">KLINIK</span>
+        <span class="brand-text font-weight-light">SILA</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -39,124 +39,6 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                             Dashboard
                         </p>
                     </a>
-                </li>
-
-
-                <li class="nav-item  <?= ($segment == 'kunjungan' || $segment == 'resep' || $segment == 'visit_all') ? 'menu-open' : ''; ?>">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-clinic-medical"></i>
-                        <p>
-                            Kunjungan
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('kunjungan'); ?>" class="nav-link <?= ($segment == 'kunjungan') ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    List Baru
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('resep'); ?>" class="nav-link <?= ($segment == 'resep') ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Resep Obat
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="<?= base_url('visit_all'); ?>" class="nav-link <?= ($segment == 'visit_all') ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    List Semua
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item  <?= ($segment == 'pasien' || $segment == 'dept') ? 'menu-open' : ''; ?>">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-injured"></i>
-                        <p>
-                            Kelola Pasien
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('pasien'); ?>" class="nav-link <?= ($segment == 'pasien') ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    List Pasien
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('dept'); ?>" class="nav-link <?= ($segment == 'dept') ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Kelola Dept
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item  <?= ($segment == 'obat') ? 'menu-open' : ''; ?>">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-pills"></i>
-                        <p>
-                            Kelola Obat
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('obat'); ?>" class="nav-link <?= ($segment2 == 'list') ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    List Obat
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('obat/stock/in'); ?>" class="nav-link <?= ($segment2 == 'stock') ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Stock In
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('gantipass'); ?>" class="nav-link <?= ($segment == 'gantipass') ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Stock Out
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('obat/bentuk'); ?>" class="nav-link <?= ($segment2 == 'bentuk') ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Kelola Bentuk/Jenis
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('obat/kategori'); ?>" class="nav-link <?= ($segment2 == 'kategori') ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Kelola Kategori
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
 

@@ -10,7 +10,7 @@ $alert = new App\Libraries\Alert();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LOGIN | KLINK</title>
+    <title>LOGIN | SILA</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -46,7 +46,7 @@ $alert = new App\Libraries\Alert();
     <?= $alert->get(); ?>
     <div class="login-box">
         <!-- /.login-logo -->
-        <h4>KLINK EVOLUZIONE TYREZ</h4>
+        <h4>PROJECT SILA</h4>
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
                 <a href="<?= base_url(); ?>" class="h1"></a>
@@ -59,7 +59,7 @@ $alert = new App\Libraries\Alert();
                     <?= csrf_field(); ?>
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" required name="username" placeholder="Username Or Email">
+                        <input type="text" class="form-control" required name="username" placeholder="Username Or Email Or NPM">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

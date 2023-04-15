@@ -74,7 +74,7 @@ $alert = new App\Libraries\Alert();
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2023 <a href="<?= base_url(); ?>">KLINIK EVOTY</a>.</strong>
+            <strong>Copyright &copy; 2023 <a href="<?= base_url(); ?>">SILA</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0.0
