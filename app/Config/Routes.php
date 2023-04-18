@@ -29,11 +29,23 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Auth::index');
 $routes->get('/auth', 'Auth::index');
 $routes->post('/auth/proses_login', 'Auth::proses_login');
 
-$routes->get('/dashboard', 'Dashboard::index', ['filter' => 'authFilter']);
+$routes->group('', ['filter' => 'authFilter'], function ($routes) {
+    $routes->get('/dashboard', 'Dashboard::index');
+
+    // $routes->get('/helpdesk/kategori', 'KategoriHelpdesk::index');
+    // $routes->post('/helpdesk/kategori', 'KategoriHelpdesk::create');
+    // $routes->get('/helpdesk/kategori/new', 'KategoriHelpdesk::new');
+    // $routes->get('/helpdesk/kategori/(:any)/edit', 'KategoriHelpdesk::edit/$1');
+    // $routes->put('/helpdesk/kategori/(:any)', 'KategoriHelpdesk::update/$1');
+    // $routes->delete('/helpdesk/kategori/(:any)', 'KategoriHelpdesk::delete/$1');
+
+    $routes->resource('helpdesk/kategori', ['controller' => 'KategoriHelpdesk']);
+});
+
 $routes->get('/logout', 'Auth::logout');
 // $routes->
 

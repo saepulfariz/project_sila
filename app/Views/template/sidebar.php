@@ -55,7 +55,69 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
 
                 <?php endif; ?>
 
+                <li class="nav-item  <?= ($segment == 'helpdesk') ? 'menu-open' : ''; ?>">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-headset"></i>
+                        <p>
+                            Helpdesk
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('helpdesk/list'); ?>" class="nav-link <?= ($segment2 == 'list') ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    List
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('helpdesk/kategori'); ?>" class="nav-link <?= ($segment2 == 'kategori') ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Kategori
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
+                <li class="nav-item  <?= ($segment == 'surat') ? 'menu-open' : ''; ?>">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>
+                            Surat
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('surat/masuk'); ?>" class="nav-link <?= ($segment2 == 'masuk') ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Masuk
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('surat/keluar'); ?>" class="nav-link <?= ($segment2 == 'keluar') ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Keluar
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('surat/kategori'); ?>" class="nav-link <?= ($segment2 == 'kategori') ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Kategori
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
 
                 <li class="nav-item  <?= ($segment == 'profile' || $segment == 'gantipass') ? 'menu-open' : ''; ?>">
