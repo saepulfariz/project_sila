@@ -18,6 +18,16 @@ class TbHelpdesk extends Migration
             'deskripsi' => [
                 'type'       => 'TEXT',
             ],
+            'nama_dosen' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+                'null' => true
+            ],
+            'gambar' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+                'null' => true
+            ],
             'id_user' => [
                 'type'           => 'INT',
                 'constraint'     => 11,

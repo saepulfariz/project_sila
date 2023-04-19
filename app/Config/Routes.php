@@ -44,6 +44,8 @@ $routes->group('', ['filter' => 'authFilter'], function ($routes) {
     // $routes->delete('/helpdesk/kategori/(:any)', 'KategoriHelpdesk::delete/$1');
 
     $routes->resource('helpdesk/kategori', ['controller' => 'KategoriHelpdesk']);
+    $routes->get('/helpdesk/list/status/(:any)', 'Helpdesk::status/$1');
+    $routes->resource('helpdesk/list', ['controller' => 'Helpdesk']);
 });
 
 $routes->get('/logout', 'Auth::logout');
