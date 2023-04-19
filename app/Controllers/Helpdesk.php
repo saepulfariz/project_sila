@@ -95,8 +95,11 @@ class Helpdesk extends BaseController
         }
 
         $dataGambar = $this->request->getFile('gambar');
-        $fileName = $dataGambar->getRandomName();
-        $dataGambar->move('assets/upload/helpdesk/', $fileName);
+        $fileName = '';
+        if ($dataGambar->getError() != 4) {
+            $fileName = $dataGambar->getRandomName();
+            $dataGambar->move('assets/upload/helpdesk/', $fileName);
+        }
 
         $data = [
             'deskripsi' => $this->request->getVar('deskripsi'),
