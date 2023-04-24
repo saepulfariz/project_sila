@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\HelpdeskModel;
 use App\Models\KategoriHelpdeskModel;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -13,9 +14,11 @@ class KategoriHelpdesk extends BaseController
      * @return mixed
      */
     private $modelkategorihelpdesk;
+    private $modelhelpdesk;
     private $title = 'Kategori Helpdesk';
     public function __construct()
     {
+        $this->modelhelpdesk = new HelpdeskModel();
         $this->modelkategorihelpdesk = new KategoriHelpdeskModel();
     }
 
@@ -124,6 +127,12 @@ class KategoriHelpdesk extends BaseController
         $result = $this->modelkategorihelpdesk->find($id);
         if (!$result) {
             $this->alert->set('warning', 'Warning', 'NOT VALID');
+            return redirect()->to('helpdesk/kategori');
+        }
+
+        $cekUsing = $this->modelhelpdesk->where('id_kategori', $id)->first();
+        if ($cekUsing) {
+            $this->alert->set('warning', 'Warning', 'Permission Denied');
             return redirect()->to('helpdesk/kategori');
         }
 
