@@ -43,7 +43,7 @@ $resUser = $user->find(session()->get('id_user'));
                         DASHBOARD
                     </div>
                     <div class="card-body">
-                        <p>Selamat Datang, Sistem Informasi Klink Evoty, Login Sebagai <b><?= $resUser['username']; ?></b></p>
+                        <p>Selamat Datang, Sistem Informasi Layanan Dan Assets, Login Sebagai <b><?= $resUser['username']; ?></b></p>
 
                     </div>
                 </div>
