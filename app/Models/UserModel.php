@@ -63,4 +63,10 @@ class UserModel extends Model
         // SELECT * FROM tb_user WHERE username = username OR npm = username OR email = username
         return $builder->get()->getResultArray();
     }
+
+
+    public function getRole()
+    {
+        return $this->db->table('tb_role')->get()->getResultArray();
+    }
 }

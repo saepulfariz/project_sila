@@ -26,7 +26,7 @@ class Helpdesk extends BaseController
     {
         $data = [
             'title' => $this->title,
-            'helpdesk' => $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori', 'left')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.id_user')->findAll()
+            'helpdesk' => $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.id_user')->findAll()
         ];
 
         return view('helpdesk/list/index', $data);

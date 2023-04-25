@@ -51,6 +51,15 @@ $routes->group('', ['filter' => 'authFilter'], function ($routes) {
     // $routes->get('/surat/kategori/new', 'KategoriSurat::new');
     // $routes->get('/surat/kategori/(:any)/edit', 'KategoriSurat::edit/$1');
     $routes->resource('surat/kategori', ['controller' => 'KategoriSurat']);
+
+    $routes->get('profile', 'User::profile');
+    $routes->get('profile/edit', 'User::editProfile');
+    $routes->put('profile', 'User::updateProfile');
+
+    $routes->get('gantipass', 'User::gantiPass');
+    $routes->post('gantipass', 'User::prosesGantiPass');
+    $routes->get('user/active/(:num)/(:num)', 'User::active/$1/$2');
+    $routes->resource('user');
 });
 
 

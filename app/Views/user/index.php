@@ -30,10 +30,10 @@
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-12">
+                <a href="<?= base_url('user/new'); ?>" class="btn btn-primary btn-sm mb-2">New</a>
                 <div class="card">
                     <div class="card-header">
                         Kelola User
-                        <a href="<?= base_url('user/new'); ?>" class="btn btn-primary btn-sm">New</a>
                     </div>
                     <div class="card-body">
                         <table class="table" id="table">

@@ -49,6 +49,10 @@
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" value="<?= $user['email']; ?>" placeholder="email">
                             </div>
+                            <div class="form-group">
+                                <label for="no_hp">No Hp</label>
+                                <input type="text" class="form-control" id="no_hp" name="no_hp" value="<?= $user['no_hp']; ?>" placeholder="no_hp">
+                            </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <a href="<?= base_url('profile'); ?>" class="btn btn-secondary">Batal</a>
                         </form>

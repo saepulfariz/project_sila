@@ -15,6 +15,9 @@ class SeedStatus extends Seeder
             [
                 'nama_status' => 'Done',
             ],
+            [
+                'nama_status' => 'Reject',
+            ],
         ];
 
 

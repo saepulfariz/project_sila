@@ -73,31 +73,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="nik">NIK</label>
-                                <input type="text" class="form-control" id="nik" name="nik" required placeholder="nik" value="<?= $user['nik']; ?>">
+                                <label for="npm">NPM</label>
+                                <input type="text" class="form-control" id="npm" name="npm" required placeholder="npm" value="<?= $user['npm']; ?>">
                             </div>
-
                             <div class="form-group">
-                                <label for="tanggal_lahir">Tanggal Lahir</label>
-                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required placeholder="tanggal_lahir" value="<?= $user['tanggal_lahir']; ?>">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="jenis_kelamin">Jenis Kelamin</label>
-                                <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
-                                    <option <?= ($user['jenis_kelamin'] == 'LAKI-LAKI') ? 'selected' : ''; ?>>LAKI-LAKI</option>
-                                    <option <?= ($user['jenis_kelamin'] == 'PEREMPUAN') ? 'selected' : ''; ?>>PEREMPUAN</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="asal_instansi">Asal Instansi</label>
-                                <input type="text" class="form-control" id="asal_instansi" name="asal_instansi" required placeholder="Asal Instansi" value="<?= $user['asal_instansi']; ?>">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="asal_instansi">Alamat</label>
-                                <textarea class="form-control" name="alamat" id="alamat" cols="30" rows="5"><?= $user['alamat']; ?></textarea>
+                                <label for="no_hp">No HP</label>
+                                <input type="text" class="form-control" id="no_hp" name="no_hp" required placeholder="no_hp" value="<?= $user['no_hp']; ?>">
                             </div>
 
                             <button type="submit" class="btn btn-primary">Submit</button>

@@ -62,6 +62,16 @@
                                     <td><?= $user['email']; ?></td>
                                 </tr>
                                 <tr>
+                                    <td>NPM</td>
+                                    <td>:</td>
+                                    <td><?= $user['npm']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>No HP</td>
+                                    <td>:</td>
+                                    <td><?= $user['no_hp']; ?></td>
+                                </tr>
+                                <tr>
                                     <td>Anggota Sejak</td>
                                     <td>:</td>
                                     <td><?= date('d/m/Y', strtotime($user['created_at'])); ?></td>
