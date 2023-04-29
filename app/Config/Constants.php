@@ -33,10 +33,10 @@ if (isset($_SERVER['HTTP_HOST'])) {
     //     $folderProject = '';
     // }
 
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' . $_SERVER['HTTP_HOST'] . $folderProject : 'http://' . $_SERVER['HTTP_HOST'] . $folderProject;
+    $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? 'https://' . $_SERVER['HTTP_HOST'] . $folderProject : 'http://' . $_SERVER['HTTP_HOST'] . $folderProject;
     defined('BASE') || define('BASE', $protocol);
 
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' . $_SERVER['HTTP_HOST'] : 'http://' . $_SERVER['HTTP_HOST'];
+    $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? 'https://' . $_SERVER['HTTP_HOST'] : 'http://' . $_SERVER['HTTP_HOST'];
     defined('SERVERME') || define('SERVERME', $protocol);
 } else {
     defined('BASE') || define('BASE', '');

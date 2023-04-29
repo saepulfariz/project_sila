@@ -42,6 +42,14 @@
                                 <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" required placeholder="Nama Kategori">
                             </div>
 
+                            <div class="form-group">
+                                <label for="is_out">Is Out</label>
+                                <select class="form-control" name="is_out" id="is_out">
+                                    <option value="1">Keluar</option>
+                                    <option value="0">Masuk</option>
+                                </select>
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <a href="<?= base_url('surat/kategori'); ?>" class="btn btn-secondary">Batal</a>
 

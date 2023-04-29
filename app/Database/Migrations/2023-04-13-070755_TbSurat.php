@@ -39,10 +39,6 @@ class TbSurat extends Migration
                 'type'           => 'INT',
                 'constraint'     => 11,
             ],
-            'is_out' => [
-                'type'           => 'INT',
-                'constraint'     => 1,
-            ],
             'cid' => [
                 'type'           => 'INT',
                 'constraint'     => 11,

@@ -4,23 +4,31 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KategoriSuratModel extends Model
+class SuratModel extends Model
 {
     // protected $DBGroup          = 'default';
-    protected $table            = 'tb_surat_kategori';
-    protected $primaryKey       = 'id_kategori';
+    protected $table            = 'tb_surat';
+    protected $primaryKey       = 'id_surat';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'nama_kategori',
-        'is_out'
+        'nama_surat',
+        'no_surat',
+        'file_surat',
+        'id_user',
+        'id_kategori',
+        'id_status',
+        'cid',
+        'uid',
+        'created_at',
+        'updated_at',
     ];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

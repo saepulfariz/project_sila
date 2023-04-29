@@ -19,6 +19,10 @@ class TbSuratKategori extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'is_out' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+            ],
         ]);
         $this->forge->addKey('id_kategori', true);
         $this->forge->createTable('tb_surat_kategori');

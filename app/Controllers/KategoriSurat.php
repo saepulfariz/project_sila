@@ -62,7 +62,8 @@ class KategoriSurat extends BaseController
     public function create()
     {
         $data = [
-            'nama_kategori' => $this->request->getVar('nama_kategori')
+            'nama_kategori' => $this->request->getVar('nama_kategori'),
+            'is_out' => $this->request->getVar('is_out'),
         ];
 
         $res = $this->modelkategorisurat->save($data);
@@ -103,7 +104,8 @@ class KategoriSurat extends BaseController
     public function update($id = null)
     {
         $data = [
-            'nama_kategori' => $this->request->getVar('nama_kategori')
+            'nama_kategori' => $this->request->getVar('nama_kategori'),
+            'is_out' => $this->request->getVar('is_out'),
         ];
 
         $res = $this->modelkategorisurat->update($id, $data);

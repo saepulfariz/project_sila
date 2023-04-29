@@ -19,7 +19,7 @@ class User extends BaseController
     {
         $data = [
             'title' => 'Kelola User',
-            'user' => $this->modeluser->join('tb_role', 'tb_role.id_role = tb_user.id_role')->findAll()
+            'user' => $this->modeluser->join('tb_role', 'tb_role.id_role = tb_user.id_role')->orderBy('id_user', 'ASC')->findAll()
         ];
 
         return view('user/index', $data);
