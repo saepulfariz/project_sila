@@ -27,10 +27,10 @@ class SuratKeluar extends BaseController
 
     public function index()
     {
-        $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, username as pemohon')->join('tb_user', 'tb_user.id_user = tb_surat.cid')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->where('tb_surat.cid', session()->get('id_user'))->findAll();
+        $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->where('tb_surat.cid', session()->get('id_user'))->orderBy('id_surat', 'DESC')->findAll();
 
         if (session()->get('id_role') == 1 || session()->get('id_role') == 2 || session()->get('id_role') == 3) {
-            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, username as pemohon')->join('tb_user', 'tb_user.id_user = tb_surat.cid')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->findAll();
+            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->orderBy('id_surat', 'DESC')->findAll();
         }
 
         $data = [
@@ -105,11 +105,14 @@ class SuratKeluar extends BaseController
             return redirect()->to('surat/keluar');
         }
 
-        $cekUser = $this->modelsurat->where('cid', session()->get('id_user'))->where('id_surat', $id)->first();
-        if (!$cekUser) {
-            $this->alert->set('warning', 'Warning', 'Bukan bukan punya kamu');
-            return redirect()->to('surat/keluar');
+        if (session()->get('id_role') == 4) {
+            $cekUser = $this->modelsurat->where('cid', session()->get('id_user'))->where('id_surat', $id)->first();
+            if (!$cekUser) {
+                $this->alert->set('warning', 'Warning', 'Bukan punya kamu');
+                return redirect()->to('surat/keluar');
+            }
         }
+
 
         $cekStatus = $this->modelsurat->where('id_status != ', 1)->where('id_surat', $id)->first();
         if ($cekStatus) {
@@ -121,6 +124,7 @@ class SuratKeluar extends BaseController
             'title' => $this->title,
             'surat' => $result,
             'kategori' => $this->modelkategorisurat->where('is_out', 1)->findAll(),
+            'status' => $this->modelsurat->getStatus(),
         ];
 
         return view('surat/keluar/edit', $data);
@@ -139,10 +143,12 @@ class SuratKeluar extends BaseController
             return redirect()->to('surat/keluar');
         }
 
-        $cekUser = $this->modelsurat->where('cid', session()->get('id_user'))->where('id_surat', $id)->first();
-        if (!$cekUser) {
-            $this->alert->set('warning', 'Warning', 'Bukan bukan punya kamu');
-            return redirect()->to('surat/keluar');
+        if (session()->get('id_role') == 4) {
+            $cekUser = $this->modelsurat->where('cid', session()->get('id_user'))->where('id_surat', $id)->first();
+            if (!$cekUser) {
+                $this->alert->set('warning', 'Warning', 'Bukan punya kamu');
+                return redirect()->to('surat/keluar');
+            }
         }
 
         $cekStatus = $this->modelsurat->where('id_status != ', 1)->where('id_surat', $id)->first();
@@ -151,12 +157,29 @@ class SuratKeluar extends BaseController
             return redirect()->to('surat/keluar');
         }
 
-        $data = [
-            'id_kategori' => htmlspecialchars($this->request->getVar('id_kategori'), true),
-            'nama_surat' => htmlspecialchars($this->request->getVar('nama_surat'), true),
-        ];
 
-        $data = createLog($data, 1);
+        if ($this->request->getVar('nama_surat')) {
+            $data = [
+                'id_kategori' => htmlspecialchars($this->request->getVar('id_kategori'), true),
+                'nama_surat' => htmlspecialchars($this->request->getVar('nama_surat'), true),
+            ];
+        } else {
+            $dataSurat = $this->request->getFile('file_surat');
+            $fileName = '';
+            $data = [
+                'no_surat' => htmlspecialchars($this->request->getVar('no_surat'), true),
+                'id_status' => htmlspecialchars($this->request->getVar('id_status'), true),
+            ];
+
+            if ($dataSurat->getError() != 4) {
+                $fileName = $dataSurat->getRandomName();
+                $dataSurat->move('assets/upload/surat/', $fileName);
+                $data['file_surat'] = $fileName;
+            }
+            $data = createLog($data, 1);
+        }
+
+
         $res = $this->modelsurat->update($id, $data);
         if ($res) {
             $this->alert->set('success', 'Success', 'Updated Success');
@@ -184,10 +207,12 @@ class SuratKeluar extends BaseController
             return redirect()->to('surat/keluar');
         }
 
-        $cekUser = $this->modelsurat->where('cid', session()->get('id_user'))->where('id_surat', $id)->first();
-        if (!$cekUser) {
-            $this->alert->set('warning', 'Warning', 'Bukan bukan punya kamu');
-            return redirect()->to('surat/keluar');
+        if (session()->get('id_role') == 4) {
+            $cekUser = $this->modelsurat->where('cid', session()->get('id_user'))->where('id_surat', $id)->first();
+            if (!$cekUser) {
+                $this->alert->set('warning', 'Warning', 'Bukan punya kamu');
+                return redirect()->to('surat/keluar');
+            }
         }
 
         $cekStatus = $this->modelsurat->where('id_status != ', 1)->where('id_surat', $id)->first();

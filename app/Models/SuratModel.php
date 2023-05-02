@@ -50,4 +50,10 @@ class SuratModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+    public function getStatus()
+    {
+        return $this->db->table('tb_status')->get()->getResultArray();
+    }
 }

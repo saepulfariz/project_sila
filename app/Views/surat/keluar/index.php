@@ -48,7 +48,9 @@
                                     <th>Jenis Surat</th>
                                     <th>Status</th>
                                     <th>Pemohon</th>
-                                    <th>Tanggal</th>
+                                    <th>Date Create </th>
+                                    <th>Approve</th>
+                                    <th>Date Approve</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -59,25 +61,34 @@
                                         <td><?= $a++; ?></td>
                                         <td><?= $d['no_surat']; ?></td>
                                         <td><?= $d['nama_surat']; ?></td>
-                                        <td><?= $d['file_surat']; ?></td>
+                                        <td>
+                                            <?php if ($d['file_surat'] != '') : ?>
+
+                                                <a href="<?= base_url(); ?>assets/upload/surat/<?= $d['file_surat']; ?>" target="_blank">Download Here</a>
+                                            <?php else : ?>
+
+                                            <?php endif; ?>
+                                        </td>
                                         <td><?= $d['nama_kategori']; ?></td>
                                         <td><?= ($d['is_out'] == 1) ? 'Keluar' : 'Masuk'; ?></td>
                                         <td><?= $d['nama_status']; ?></td>
                                         <td><?= $d['pemohon']; ?></td>
                                         <td><?= $d['created_at']; ?></td>
+                                        <td><?= $d['approve']; ?></td>
+                                        <td><?= $d['updated_at']; ?></td>
                                         <td>
                                             <?php if ($d['id_status'] == 1) : ?>
 
                                                 <a class="btn btn-warning btn-sm mb-2" href="<?= base_url('surat/keluar/' . $d['id_surat'] . '/edit'); ?>">Edit</a>
-                                                <?php if (session()->get('id_role') == 2 || session()->get('id_role') == 3) : ?>
+                                                <?php if (session()->get('id_role') == 4 || session()->get('id_role') == 1) : ?>
                                                     <form action='<?= base_url('surat/keluar') . '/' . $d['id_surat']; ?>' method='post' enctype='multipart/form-data'>
                                                         <input type='hidden' name='_method' value='DELETE' />
                                                         <!-- GET, POST, PUT, PATCH, DELETE-->
                                                         <?= csrf_field(); ?>
                                                         <button type="button" onclick="deleteTombol(this)" class="btn btn-danger btn-sm mb-2">Delete</button>
                                                     </form>
-                                                <?php else : ?>
 
+                                                <?php else : ?>
                                                 <?php endif; ?>
                                             <?php else : ?>
 

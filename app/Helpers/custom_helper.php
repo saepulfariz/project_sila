@@ -8,7 +8,7 @@ function createLog($data = [], $key = 0)
     $res = [];
     if ($key == 0) {
         $res['cid'] = $session->get('id_user');
-        $res['uid'] = $session->get('id_user');
+        // $res['uid'] = $session->get('id_user');
     } else {
         $res['uid'] = $session->get('id_user');
     }

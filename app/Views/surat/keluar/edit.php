@@ -28,7 +28,7 @@
 <section class="content">
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
-        <form action="<?= base_url('surat/keluar/' . $surat['id_surat']); ?>" method="post">
+        <form action="<?= base_url('surat/keluar/' . $surat['id_surat']); ?>" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-5 mb-2">
                     <div class="card">
@@ -40,9 +40,11 @@
                             <!-- GET, POST, PUT, PATCH, DELETE-->
                             <?= csrf_field(); ?>
 
+                            <?php $disabled = ((session()->get('id_role') == 2) || session()->get('id_role') == 1) ? 'disabled' : ''; ?>
+
                             <div class="form-group">
                                 <label for="id_kategori">Kategori</label>
-                                <select class="form-control" name="id_kategori" id="id_kategori">
+                                <select class="form-control" name="id_kategori" <?= $disabled; ?> id="id_kategori">
                                     <?php foreach ($kategori as $d) : ?>
                                         <?php if ($d['id_kategori'] == $surat['id_kategori']) : ?>
 
@@ -58,8 +60,38 @@
 
                             <div class="form-group">
                                 <label for="nama_surat">Nama Surat</label>
-                                <input type="text" required class="form-control" id="nama_surat" name="nama_surat" value="<?= $surat['nama_surat']; ?>">
+                                <input type="text" required class="form-control" <?= $disabled; ?> id="nama_surat" name="nama_surat" value="<?= $surat['nama_surat']; ?>">
                             </div>
+
+                            <?php if ((session()->get('id_role') == 2) || (session()->get('id_role') == 1)) : ?>
+                                <div class="form-group">
+                                    <label for="no_surat">No Surat</label>
+                                    <input type="text" required class="form-control" id="no_surat" name="no_surat" value="<?= $surat['no_surat']; ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="file_surat">File Surat</label>
+                                    <a href="<?= base_url(); ?>assets/upload/surat/<?= $surat['file_surat']; ?>" target="_blank"><?= $surat['file_surat']; ?></a>
+                                    <input type="file" class="form-control" id="file_surat" name="file_surat">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="id_status">Status</label>
+                                    <select name="id_status" id="id_status" class="form-control">
+                                        <?php foreach ($status as $d) : ?>
+                                            <?php if ($d['id_status'] == $surat['id_status']) : ?>
+
+                                                <option selected value="<?= $d['id_status']; ?>"><?= $d['nama_status']; ?></option>
+                                            <?php else : ?>
+                                                <option value="<?= $d['id_status']; ?>"><?= $d['nama_status']; ?></option>
+
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            <?php else : ?>
+
+                            <?php endif; ?>
 
 
                             <button type="submit" class="btn btn-primary">Submit</button>
