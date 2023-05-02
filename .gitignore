@@ -126,3 +126,7 @@ _modules/*
 /.phpunit.*.cache
 
 composer.lock
+
+
+public/assets/upload/helpdesk/*
+public/assets/upload/surat/*

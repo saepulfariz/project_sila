@@ -51,6 +51,20 @@ class SeedUser extends Seeder
                 'created_at' => '2023-04-13 14:15:00.000',
                 'updated_at' => '2023-04-13 14:15:00.000',
             ],
+            [
+                'username' => 'penni',
+                'password' => password_hash('123', PASSWORD_DEFAULT),
+                'npm' => 'D1A20401',
+                'email'    => 'penni@mail.com',
+                'nama_lengkap'    => 'penni',
+                'no_hp' => '082216501151',
+                'is_active' => 1,
+                'id_role' => 4,
+                'cid' => 1,
+                'uid' => 1,
+                'created_at' => '2023-04-13 14:15:00.000',
+                'updated_at' => '2023-04-13 14:15:00.000',
+            ],
 
         ];
 

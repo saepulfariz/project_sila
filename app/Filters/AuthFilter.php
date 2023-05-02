@@ -18,6 +18,7 @@ class AuthFilter implements FilterInterface
         $alert = new \App\Libraries\Alert();
 
         $segment = $request->uri->getSegment(1);
+        $segment2 = $request->uri->getSegment(2);
 
 
         if (!$session->has('id_user')) {
@@ -26,7 +27,28 @@ class AuthFilter implements FilterInterface
         }
 
         if ($segment == 'user') {
-            if (session()->get('id_role') == 2) {
+            if (session()->get('id_role') != 1) {
+                $alert->set('warning', 'Warning', 'User Not Access');
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
+        if (($segment == 'surat') && ($segment2 == 'kategori')) {
+            if (session()->get('id_role') == 4 || session()->get('id_role') == 3) {
+                $alert->set('warning', 'Warning', 'User Not Access');
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
+        if (($segment == 'surat') && ($segment2 == 'masuk')) {
+            if (session()->get('id_role') == 4) {
+                $alert->set('warning', 'Warning', 'User Not Access');
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
+        if (($segment == 'helpdesk') && ($segment2 == 'kategori')) {
+            if (session()->get('id_role') == 4 || session()->get('id_role') == 3) {
                 $alert->set('warning', 'Warning', 'User Not Access');
                 return redirect()->to(base_url('dashboard'));
             }
