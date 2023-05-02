@@ -27,5 +27,6 @@ User
 2. username : staff && password : 123
 3. username : pimpinan && password : 123
 4. username : penni && password : 123
+5. username : ilham && password : 123
 
 # by saepulfariz - PROFA ( Programmer Fasilkom )
