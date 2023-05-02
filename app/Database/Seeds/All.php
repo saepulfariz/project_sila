@@ -12,5 +12,6 @@ class All extends Seeder
         $this->call('SeedUser');
         $this->call('SeedStatus');
         $this->call('SeedHelpdeskKategori');
+        $this->call('SeedSuratKategori');
     }
 }
