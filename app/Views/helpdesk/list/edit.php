@@ -28,7 +28,7 @@
 <section class="content">
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
-        <form action="<?= base_url('helpdesk/list/' . $helpdesk['id_helpdesk']); ?>" method="post">
+        <form action="<?= base_url('helpdesk/list/' . $helpdesk['id_helpdesk']); ?>" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-5 mb-2">
                     <div class="card">
@@ -44,9 +44,31 @@
                                 <label for="id_kategori">Kategori</label>
                                 <select class="form-control" name="id_kategori" id="id_kategori">
                                     <?php foreach ($kategori as $d) : ?>
-                                        <option value="<?= $d['id_kategori']; ?>"><?= $d['nama_kategori']; ?></option>
+                                        <?php if ($helpdesk['id_kategori'] == $d['id_kategori']) : ?>
+
+                                            <option selected value="<?= $d['id_kategori']; ?>"><?= $d['nama_kategori']; ?></option>
+                                        <?php else : ?>
+                                            <option value="<?= $d['id_kategori']; ?>"><?= $d['nama_kategori']; ?></option>
+
+                                        <?php endif; ?>
                                     <?php endforeach; ?>
                                 </select>
+                            </div>
+
+                            <div class="form-group <?= ($helpdesk['nama_dosen'] == '') ? 'd-none' : ''; ?>" id="input-dosen">
+                                <label for="nama_dosen">Nama Dosen</label>
+                                <input type="text" class="form-control" name="nama_dosen" id="nama_dosen" value="<?= $helpdesk['nama_dosen']; ?>">
+                            </div>
+
+                            <div class="<?= ($helpdesk['gambar'] == '') ? 'd-none' : ''; ?>" id="input-gambar">
+
+                                <a href="<?= base_url(); ?>assets/upload/helpdesk/<?= $helpdesk['gambar']; ?>" target="_blank">
+                                    <img class="img-thumbnail mb-1" width="170px" src="<?= base_url(); ?>assets/upload/helpdesk/<?= $helpdesk['gambar']; ?>" alt="">
+                                </a>
+                                <div class="form-group ">
+                                    <label for="gambar">Gambar</label>
+                                    <input type="file" class="form-control" name="gambar" id="gambar">
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -68,3 +90,27 @@
     </div>
 </section>
 <?= $this->endSection('content') ?>
+
+<?= $this->section('script') ?>
+<script>
+    function setInput() {
+        var idKategori = $('#id_kategori').val();
+        if ((idKategori == 3) || (idKategori == 4)) {
+            $('#input-dosen').removeClass('d-none');
+            $('#input-gambar').addClass('d-none');
+            $('#gambar').val('');
+        } else if (idKategori == 1) {
+            $('#input-gambar').removeClass('d-none');
+            $('#input-dosen').addClass('d-none');
+            $('#nama_dosen').val('');
+        } else {
+            $('#input-gambar').addClass('d-none');
+            $('#gambar').val('');
+            $('#input-dosen').addClass('d-none');
+            $('#nama_dosen').val('');
+        }
+    }
+    // setInput();
+    $('#id_kategori').on('change', setInput);
+</script>
+<?= $this->endSection('script') ?>

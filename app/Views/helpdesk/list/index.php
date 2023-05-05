@@ -71,13 +71,18 @@
                                         </td>
                                         <td><?= $d['created_at']; ?></td>
                                         <td>
-                                            <!-- <a class="btn btn-warning btn-sm mb-2" href="<?= base_url('helpdesk/list/' . $d['id_helpdesk'] . '/edit'); ?>">Edit</a> -->
-                                            <form action='<?= base_url('helpdesk/list') . '/' . $d['id_helpdesk']; ?>' method='post' enctype='multipart/form-data'>
-                                                <input type='hidden' name='_method' value='DELETE' />
-                                                <!-- GET, POST, PUT, PATCH, DELETE-->
-                                                <?= csrf_field(); ?>
-                                                <button type="button" onclick="deleteTombol(this)" class="btn btn-danger btn-sm mb-2">Delete</button>
-                                            </form>
+                                            <?php if ($d['id_status'] == 1) : ?>
+                                                <a class="btn btn-warning btn-sm mb-2" href="<?= base_url('helpdesk/list/' . $d['id_helpdesk'] . '/edit'); ?>">Edit</a>
+
+                                                <form action='<?= base_url('helpdesk/list') . '/' . $d['id_helpdesk']; ?>' method='post' enctype='multipart/form-data'>
+                                                    <input type='hidden' name='_method' value='DELETE' />
+                                                    <!-- GET, POST, PUT, PATCH, DELETE-->
+                                                    <?= csrf_field(); ?>
+                                                    <button type="button" onclick="deleteTombol(this)" class="btn btn-danger btn-sm mb-2">Delete</button>
+                                                </form>
+                                            <?php else : ?>
+
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

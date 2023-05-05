@@ -24,9 +24,15 @@ class Helpdesk extends BaseController
 
     public function index()
     {
+        if (session()->get('id_role') == 4) {
+            $helpdesk = $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.id_user')->where('tb_helpdesk.cid', session()->get('id_user'))->findAll();
+        } else {
+            $helpdesk = $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.id_user')->findAll();
+        }
+
         $data = [
             'title' => $this->title,
-            'helpdesk' => $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.id_user')->findAll()
+            'helpdesk' => $helpdesk
         ];
 
         return view('helpdesk/list/index', $data);
@@ -127,11 +133,19 @@ class Helpdesk extends BaseController
      */
     public function edit($id = null)
     {
-        return redirect()->to('helpdesk/list');
+        // return redirect()->to('helpdesk/list');
         $result = $this->modelhelpdesk->find($id);
         if (!$result) {
             $this->alert->set('warning', 'Warning', 'NOT VALID');
             return redirect()->to('helpdesk/list');
+        }
+
+        if (session()->get('id_role') == 4) {
+            $cekData = $this->modelhelpdesk->where('cid', session()->get('id_user'))->find($id);
+            if (!$cekData) {
+                $this->alert->set('warning', 'Warning', 'Bukan Punya Mu');
+                return redirect()->to('helpdesk/list');
+            }
         }
 
         $data = [
@@ -150,7 +164,45 @@ class Helpdesk extends BaseController
      */
     public function update($id = null)
     {
-        //
+        $result = $this->modelhelpdesk->find($id);
+        if (!$result) {
+            $this->alert->set('warning', 'Warning', 'NOT VALID');
+            return redirect()->to('helpdesk/list');
+        }
+
+        if (session()->get('id_role') == 4) {
+            $cekData = $this->modelhelpdesk->where('cid', session()->get('id_user'))->find($id);
+            if (!$cekData) {
+                $this->alert->set('warning', 'Warning', 'Bukan Punya Mu');
+                return redirect()->to('helpdesk/list');
+            }
+        }
+
+
+        $dataGambar = $this->request->getFile('gambar');
+        $fileName = '';
+
+
+        $data = [
+            'deskripsi' => $this->request->getVar('deskripsi'),
+            'id_kategori' => $this->request->getVar('id_kategori'),
+            'nama_dosen' => $this->request->getVar('nama_dosen'),
+        ];
+
+        if ($dataGambar->getError() != 4) {
+            $fileName = $dataGambar->getRandomName();
+            $dataGambar->move('assets/upload/helpdesk/', $fileName);
+            $data['gambar'] = $fileName;
+        }
+
+        $data = createLog($data, 1);
+        $res = $this->modelhelpdesk->update($id, $data);
+        if ($res) {
+            $this->alert->set('success', 'Success', 'Updated Success');
+        } else {
+            $this->alert->set('warning', 'Warning', 'Updated Failed');
+        }
+        return redirect()->to('helpdesk/list');
     }
 
     public function status($id)
@@ -186,6 +238,14 @@ class Helpdesk extends BaseController
         if (!$result) {
             $this->alert->set('warning', 'Warning', 'NOT VALID');
             return redirect()->to('helpdesk/list');
+        }
+
+        if (session()->get('id_role') == 4) {
+            $cekData = $this->modelhelpdesk->where('cid', session()->get('id_user'))->find($id);
+            if (!$cekData) {
+                $this->alert->set('warning', 'Warning', 'Bukan Punya Mu');
+                return redirect()->to('helpdesk/list');
+            }
         }
 
         $res = $this->modelhelpdesk->delete($id);
