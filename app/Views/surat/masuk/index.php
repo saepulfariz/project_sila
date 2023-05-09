@@ -46,7 +46,6 @@
                                     <th>File Surat</th>
                                     <th>Kategori</th>
                                     <th>Jenis Surat</th>
-                                    <th>Status</th>
                                     <th>Tanggal</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -58,14 +57,15 @@
                                         <td><?= $a++; ?></td>
                                         <td><?= $d['no_surat']; ?></td>
                                         <td><?= $d['nama_surat']; ?></td>
-                                        <td><?= $d['file_surat']; ?></td>
+                                        <td>
+                                            <a target="_blank" href="<?= base_url('assets/upload/surat/' . $d['file_surat']); ?>">Download Here</a>
+                                        </td>
                                         <td><?= $d['nama_kategori']; ?></td>
                                         <td><?= ($d['is_out'] == 1) ? 'Keluar' : 'Masuk'; ?></td>
-                                        <td><?= $d['nama_status']; ?></td>
                                         <td><?= $d['created_at']; ?></td>
                                         <td>
-                                            <a class="btn btn-warning btn-sm mb-2" href="<?= base_url('surat/surat/' . $d['id_surat'] . '/edit'); ?>">Edit</a>
-                                            <form action='<?= base_url('surat/surat') . '/' . $d['id_surat']; ?>' method='post' enctype='multipart/form-data'>
+                                            <a class="btn btn-warning btn-sm mb-2" href="<?= base_url('surat/masuk/' . $d['id_surat'] . '/edit'); ?>">Edit</a>
+                                            <form action='<?= base_url('surat/masuk') . '/' . $d['id_surat']; ?>' method='post' enctype='multipart/form-data'>
                                                 <input type='hidden' name='_method' value='DELETE' />
                                                 <!-- GET, POST, PUT, PATCH, DELETE-->
                                                 <?= csrf_field(); ?>
