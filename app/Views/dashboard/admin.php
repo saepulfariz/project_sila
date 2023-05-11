@@ -38,11 +38,11 @@ $resUser = $user->find(session()->get('id_user'));
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-md-3 mb-2">
-                <div class="card">
+                <div class="card bg-primary text-white">
                     <div class="card-body">
                         <h4 class="font-weight-bold">Total User</h4>
                         <h5 class=""><?= $count_user; ?></h5>
-                        <a class="mt-1" href="<?= base_url('user'); ?>">
+                        <a class="mt-1 text-white" href="<?= base_url('user'); ?>">
                             <i class="fas fa-search mr-1"></i> Lihat Detail
                         </a>
                     </div>
@@ -50,11 +50,11 @@ $resUser = $user->find(session()->get('id_user'));
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="card">
+                <div class="card bg-gradient-navy">
                     <div class="card-body">
                         <h4 class="font-weight-bold">Total Helpdesk</h4>
                         <h5 class=""><?= $count_helpdesk; ?></h5>
-                        <a class="mt-1" href="<?= base_url('helpdesk/list'); ?>">
+                        <a class="mt-1 text-white" href="<?= base_url('helpdesk/list'); ?>">
                             <i class="fas fa-search mr-1"></i> Lihat Detail
                         </a>
                     </div>
@@ -62,11 +62,11 @@ $resUser = $user->find(session()->get('id_user'));
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="card">
+                <div class="card bg-warning">
                     <div class="card-body">
-                        <h4 class="font-weight-bold">Total Surat Masuk</h4>
-                        <h5 class=""><?= $count_masuk; ?></h5>
-                        <a class="mt-1" href="<?= base_url('surat/masuk'); ?>">
+                        <h4 class="font-weight-bold text-white">Total Surat Masuk</h4>
+                        <h5 class="text-white"><?= $count_masuk; ?></h5>
+                        <a class="mt-1 text-white" href="<?= base_url('surat/masuk'); ?>">
                             <i class="fas fa-search mr-1"></i> Lihat Detail
                         </a>
                     </div>
@@ -74,11 +74,11 @@ $resUser = $user->find(session()->get('id_user'));
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="card">
+                <div class="card bg-gradient-gray">
                     <div class="card-body">
                         <h4 class="font-weight-bold">Total Surat Keluar</h4>
                         <h5 class=""><?= $count_keluar; ?></h5>
-                        <a class="mt-1" href="<?= base_url('surat/keluar'); ?>">
+                        <a class="mt-1 text-white" href="<?= base_url('surat/keluar'); ?>">
                             <i class="fas fa-search mr-1"></i> Lihat Detail
                         </a>
                     </div>
