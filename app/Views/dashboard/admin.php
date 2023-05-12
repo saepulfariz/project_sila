@@ -88,7 +88,7 @@ $resUser = $user->find(session()->get('id_user'));
 
         <div class="row">
             <div class="col-md-4 mb-2">
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-header bg-dark">
                         <i class="fas fa-chart-line mr-1"></i>
                         Helpdesk Kategori
@@ -114,6 +114,33 @@ $resUser = $user->find(session()->get('id_user'));
                                         $countData = $modelhelpdesk->select('count(id_helpdesk) as count')->where('id_kategori', $d['id_kategori'])->first()['count'];
                                         ?>
                                         <td><?= $countData; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-dark">
+                        <i class="fas fa-chart-line mr-1"></i>
+                        Surat Kategori
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Kategori</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $a = 1;
+                                foreach ($surat as $d) : ?>
+                                    <tr>
+                                        <td><?= $a++; ?></td>
+                                        <td><?= $d['nama_kategori']; ?></td>
+                                        <td><?= $d['count']; ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
