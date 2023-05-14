@@ -37,14 +37,50 @@ $resUser = $user->find(session()->get('id_user'));
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        DASHBOARD
-                    </div>
+            <div class="col-md-3 mb-2">
+                <div class="card bg-primary text-white">
                     <div class="card-body">
-                        <p>Selamat Datang, Sistem Informasi Layanan Dan Assets, Login Sebagai <b><?= $resUser['username']; ?></b></p>
+                        <h4 class="font-weight-bold">Helpdesk Pending</h4>
+                        <h5 class=""><?= $helpdesk_pending; ?></h5>
+                        <a class="mt-1 text-white" href="<?= base_url('helpdesk/list'); ?>">
+                            <i class="fas fa-search mr-1"></i> Lihat Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-md-3 mb-2">
+                <div class="card bg-gradient-navy">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold">Helpdesk Done</h4>
+                        <h5 class=""><?= $helpdesk_done; ?></h5>
+                        <a class="mt-1 text-white" href="<?= base_url('helpdesk/list'); ?>">
+                            <i class="fas fa-search mr-1"></i> Lihat Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold text-white">Surat Pending</h4>
+                        <h5 class="text-white"><?= $surat_pending; ?></h5>
+                        <a class="mt-1 text-white" href="<?= base_url('surat/keluar'); ?>">
+                            <i class="fas fa-search mr-1"></i> Lihat Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="card bg-gradient-gray">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold">Surat Done</h4>
+                        <h5 class=""><?= $surat_done; ?></h5>
+                        <a class="mt-1 text-white" href="<?= base_url('surat/keluar'); ?>">
+                            <i class="fas fa-search mr-1"></i> Lihat Detail
+                        </a>
                     </div>
                 </div>
             </div>

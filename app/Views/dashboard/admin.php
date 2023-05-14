@@ -153,8 +153,8 @@ $resUser = $user->find(session()->get('id_user'));
                     <div class="card-header bg-dark">
                         Paling Banyak Pengaduan Helpdesk
                     </div>
-                    <div class="card-bod">
-                        <h1>INI CHART</h1>
+                    <div class="card-body">
+                        <canvas id="myChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -167,4 +167,46 @@ $resUser = $user->find(session()->get('id_user'));
 
 
 <?= $this->section('script') ?>
+<script>
+    // setup 
+    const data = {
+        labels: [
+            <?php foreach ($chart as $d) : ?> '<?= $d['nama_kategori']; ?>',
+            <?php endforeach; ?>
+        ],
+        datasets: [{
+            label: 'Helpdesk',
+            data: [<?php foreach ($chart as $d) : ?>
+                    <?= $d['count']; ?>,
+                <?php endforeach; ?>
+            ],
+            backgroundColor: [
+                'rgb(108,143,233)',
+                'rgb(226,32,56)',
+                'rgb(235,180,96)',
+                'rgb(46,202,43)',
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    // config 
+    const config = {
+        type: 'bar',
+        data,
+        options: {
+            scales: {
+                y: {
+                    // beginAtZero: true
+                }
+            }
+        }
+    };
+
+    // render init block
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+</script>
 <?= $this->endSection('script') ?>

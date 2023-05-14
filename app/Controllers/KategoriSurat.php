@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\KategoriSuratModel;
+use App\Models\SuratModel;
 use CodeIgniter\RESTful\ResourceController;
 
 class KategoriSurat extends BaseController
@@ -14,10 +15,12 @@ class KategoriSurat extends BaseController
      */
 
     private $modelkategorisurat;
+    private $modelsurat;
     private $title = 'Kategori Surat';
     public function __construct()
     {
         $this->modelkategorisurat = new KategoriSuratModel();
+        $this->modelsurat = new SuratModel();
     }
 
     public function index()
@@ -127,6 +130,12 @@ class KategoriSurat extends BaseController
         $result = $this->modelkategorisurat->find($id);
         if (!$result) {
             $this->alert->set('warning', 'Warning', 'NOT VALID');
+            return redirect()->to('surat/kategori');
+        }
+
+        $cekUsing = $this->modelsurat->where('id_kategori', $id)->findAll();
+        if ($cekUsing) {
+            $this->alert->set('warning', 'Warning', 'Permission Denied');
             return redirect()->to('surat/kategori');
         }
 

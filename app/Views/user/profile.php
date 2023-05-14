@@ -31,10 +31,7 @@
                 <div class="card">
                     <div class="card-header ">
                         <h3 class="card-title">
-                            My Profile -
-                            <a href="<?= base_url('profile/edit'); ?>" class="btn btn-sm btn-warning text-left">Edit</a>
-
-
+                            My Profile
                         </h3>
 
                     </div>
@@ -78,6 +75,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="row justify-content-start mt-2">
+                            <div class="col-2">
+                                <a href="<?= base_url('profile/edit'); ?>" class="btn btn-sm btn-warning text-end">Edit</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

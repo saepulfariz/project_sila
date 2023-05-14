@@ -154,7 +154,6 @@ $alert = new App\Libraries\Alert();
     <!-- pace-progress -->
     <script src="<?= base_url(); ?>assets/plugins/pace-progress/pace.min.js"></script>
 
-
     <!-- <script src="<?= base_url(); ?>assets/fullcalendar/main.js"></script>
     <script src="<?= base_url(); ?>assets/fullcalendar/moment.min.js"></script> -->
 
@@ -164,6 +163,8 @@ $alert = new App\Libraries\Alert();
     <script src="<?= base_url(); ?>assets/fullcalendar/2.0.3/fullcalendar.min.js"></script> -->
 
     <?= $alert->init('jquery'); ?>
+
+
 
     <?= $this->renderSection('script'); ?>
 </body>

@@ -10,7 +10,7 @@ class SeedHelpdeskKategori extends Seeder
     {
         $data = [
             [
-                'nama_kategori' => 'Fasilitas (Kerusakan Kursi)',
+                'nama_kategori' => 'Fasilitas',
             ],
             [
                 'nama_kategori' => 'Pelayanan BAAK',
