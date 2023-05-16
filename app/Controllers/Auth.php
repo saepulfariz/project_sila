@@ -19,7 +19,11 @@ class Auth extends BaseController
         if (session()->get('id_user')) {
             return redirect()->to('dashboard');
         }
-        return view('login/index');
+
+        $data = [
+            'title' => 'Login'
+        ];
+        return view('front/login', $data);
     }
 
 
@@ -51,6 +55,15 @@ class Auth extends BaseController
         }
 
         return redirect()->to('auth');
+    }
+
+    public function register()
+    {
+        $data = [
+            'title' => 'Register'
+        ];
+
+        return view('front/register', $data);
     }
 
 
