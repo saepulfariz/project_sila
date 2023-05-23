@@ -44,7 +44,6 @@ class User extends BaseController
             'id_role' => $this->request->getVar('id_role'),
             'email' => $this->request->getVar('email'),
             'nama_lengkap' => $this->request->getVar('nama_lengkap'),
-            'nik' => $this->request->getVar('nik'),
             'npm' => $this->request->getVar('npm'),
             'no_hp' => $this->request->getVar('no_hp'),
             'is_active' => 1,

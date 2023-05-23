@@ -29,8 +29,8 @@ class Auth extends BaseController
 
     public function proses_login()
     {
-        $username = $this->request->getVar('username');
-        $password = $this->request->getVar('password');
+        $username = htmlspecialchars($this->request->getVar('username'), true);
+        $password = htmlspecialchars($this->request->getVar('password'), true);
 
         $res = $this->modeluser->cekLogin($username);
 
@@ -64,6 +64,82 @@ class Auth extends BaseController
         ];
 
         return view('front/register', $data);
+    }
+
+    public function proses_register()
+    {
+        $password = htmlspecialchars($this->request->getVar('password'), true);
+        $password_retype = htmlspecialchars($this->request->getVar('password_retype'), true);
+
+
+
+        $rules = [
+            'npm' => [
+                'rules'  => 'required|min_length[9]|max_length[9]|is_unique[tb_user.npm]',
+                'errors' => [
+                    'required' => 'You must choose a Username.',
+                    'min_length' => 'Min length 9.',
+                    'max_length' => 'Max length 9.',
+                    'is_unique' => 'Already register.',
+                ],
+            ],
+            'nama_lengkap' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'You must choose a Full Name.',
+                ],
+            ],
+            'password' => [
+                'rules'  => 'required|min_length[3]',
+                'errors' => [
+                    'required' => 'You must choose a Password',
+                    'min_length' => 'Min length 3.',
+                ],
+            ],
+            'password_retype' => [
+                'rules'  => 'required|matches[password]',
+                'errors' => [
+                    'required' => 'You must choose a Password',
+                    'matches' => 'Password not match',
+                ],
+            ],
+            'email' => [
+                'rules'  => 'required|valid_email|is_unique[tb_user.email]',
+                'errors' => [
+                    'required' => 'You must choose a Email',
+                    'valid_email' => 'Please check the Email field. It does not appear to be valid.',
+                    'is_unique' => 'Already register.',
+                ],
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput();
+        };
+
+        $data = [
+            'nama_lengkap' => htmlspecialchars($this->request->getVar('nama_lengkap'), true),
+            'npm' => htmlspecialchars($this->request->getVar('npm'), true),
+            'username' => htmlspecialchars($this->request->getVar('npm'), true),
+            'email' => htmlspecialchars($this->request->getVar('email'), true),
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'no_hp' => '',
+            'is_active' => 1,
+            'id_role' => 4,
+        ];
+
+
+
+
+        $data = createLog($data, 0);
+
+        $res = $this->modeluser->save($data);
+        if ($res) {
+            $this->alert->set('success', 'Success', 'Register Success');
+        } else {
+            $this->alert->set('warning', 'Warning', 'Register Failed');
+        }
+        return redirect()->to('auth');
     }
 
 

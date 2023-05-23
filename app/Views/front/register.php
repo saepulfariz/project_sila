@@ -63,63 +63,84 @@
             <img src="<?= base_url(); ?>assets/front/img/vektor1.png" class="vektor-register p-5" alt="" style="">
         </div>
         <div class="col-md-7 col-lg-7 ">
-            <div class="row justify-content-center">
-                <div class="col-12">
+            <form action="<?= base_url('register'); ?>" method="post">
+                <?= csrf_field(); ?>
+                <div class="row justify-content-center">
+                    <div class="col-12">
 
 
-                    <div class="row justify-content-center">
-                        <div class="col-md-9 col-11">
-                            <div class="row">
-                                <div class="col-8 mt-0 mt-lg-5">
-                                    <h1 class="">Buat Akun</h1>
+                        <div class="row justify-content-center">
+                            <div class="col-md-9 col-11">
+                                <div class="row">
+                                    <div class="col-8 mt-0 mt-lg-5">
+                                        <h1 class="">Buat Akun</h1>
+                                    </div>
                                 </div>
-                            </div>
-                            <p class="mb-4">
-                                Silahkan Sign In untuk melanjutkan progres
-                            </p>
+                                <p class="mb-4">
+                                    Silahkan Sign In untuk melanjutkan progres
+                                </p>
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-2">
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Nama
-                                                    Lengkap</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2">
+                                                <div class="mb-3">
+                                                    <label for="nama_lengkap" class="form-label">Nama
+                                                        Lengkap</label>
+                                                    <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="<?= old('nama_lengkap'); ?>">
+                                                    <span class="text-danger"><?= validation_show_error('nama_lengkap'); ?></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-2">
+                                                <div class="mb-3">
+                                                    <label for="npm" class="form-label">NPM</label>
+                                                    <input type="text" name="npm" class="form-control" id="npm" value="<?= old('npm'); ?>">
+                                                    <span class="text-danger"><?= validation_show_error('npm'); ?></span>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 mb-2">
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">NPM</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-control" id="email" value="<?= old('email'); ?>">
+                                            <span class="text-danger"><?= validation_show_error('email'); ?></span>
+                                        </div>
+
+
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2">
+                                                <div class="mb-3">
+                                                    <label for="password" class="form-label">Password</label>
+                                                    <input type="password" class="form-control" name="password" id="password">
+                                                    <span class="text-danger"><?= validation_show_error('password'); ?></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-2">
+                                                <div class="mb-3">
+                                                    <label for="password_retype" class="form-label">Password Retype</label>
+                                                    <input type="password" class="form-control" id="password_retype" name="password_retype">
+                                                    <span class="text-danger"><?= validation_show_error('password_retype'); ?></span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" aria-describedby="emailHelp">
-                                    </div>
-
-                                    <div class="row justify-content-between">
-                                        <div class="col text-start">
-                                            <input type="checkbox">
-                                            I accept the Terms & Conditions
+                                        <div class="row justify-content-between">
+                                            <div class="col text-start">
+                                                <input type="checkbox">
+                                                I accept the Terms & Conditions
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col">
-                                            <button class="mt-4 btn w-100 btn-lg btn-login">SIGN UP</button>
-                                            <p class="mt-3">Sudah mempunyai akun? <a href="<?= base_url('auth'); ?>" class="fw-bold">Login
-                                                    disini</a>
-                                            </p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <button class="mt-4 btn w-100 btn-lg btn-login">SIGN UP</button>
+                                                <p class="mt-3">Sudah mempunyai akun? <a href="<?= base_url('auth'); ?>" class="fw-bold">Login
+                                                        disini</a>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +148,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="col-lg-5 col-lg-5  p-0 text-end d-none d-md-block d-lg-block" id="bg-vektor">
             <!-- <div class="circle"></div> -->

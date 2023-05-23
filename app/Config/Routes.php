@@ -31,6 +31,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Front::index');
 $routes->get('/register', 'Auth::register');
+$routes->post('/register', 'Auth::proses_register');
 $routes->get('/auth', 'Auth::index');
 $routes->post('/auth/proses_login', 'Auth::proses_login');
 

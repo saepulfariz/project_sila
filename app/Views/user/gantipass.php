@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="password_baru">Password Baru</label>
-                                <input type="password" class="form-control" id="password_baru" name="password_baru" required placeholder="Password Lama">
+                                <input type="password" class="form-control" id="password_baru" name="password_baru" required placeholder="Password Baru">
                             </div>
                             <div class="form-group">
                                 <label for="password_retype">Password Retype</label>
