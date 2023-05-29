@@ -71,7 +71,16 @@
                                         </td>
                                         <td><?= $d['nama_kategori']; ?></td>
                                         <td><?= ($d['is_out'] == 1) ? 'Keluar' : 'Masuk'; ?></td>
-                                        <td><?= $d['nama_status']; ?></td>
+                                        <td>
+                                            <?php if ($d['id_status'] == 1) : ?>
+                                                <span class="badge badge-secondary"><?= $d['nama_status']; ?></span>
+                                            <?php elseif ($d['id_status'] == 2) : ?>
+                                                <span class="badge badge-success"><?= $d['nama_status']; ?></span>
+                                            <?php else : ?>
+                                                <span class="badge badge-danger"><?= $d['nama_status']; ?></span>
+                                            <?php endif; ?>
+
+                                        </td>
                                         <td><?= $d['pemohon']; ?></td>
                                         <td><?= $d['created_at']; ?></td>
                                         <td><?= $d['approve']; ?></td>

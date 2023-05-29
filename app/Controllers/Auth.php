@@ -89,6 +89,12 @@ class Auth extends BaseController
                     'required' => 'You must choose a Full Name.',
                 ],
             ],
+            'no_hp' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'You must choose NO HP.',
+                ],
+            ],
             'password' => [
                 'rules'  => 'required|min_length[3]',
                 'errors' => [
@@ -123,7 +129,7 @@ class Auth extends BaseController
             'username' => htmlspecialchars($this->request->getVar('npm'), true),
             'email' => htmlspecialchars($this->request->getVar('email'), true),
             'password' => password_hash($password, PASSWORD_DEFAULT),
-            'no_hp' => '',
+            'no_hp' => htmlspecialchars($this->request->getVar('no_hp'), true),
             'is_active' => 1,
             'id_role' => 4,
         ];

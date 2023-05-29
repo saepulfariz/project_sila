@@ -18,7 +18,7 @@ class HelpdeskModel extends Model
         'deskripsi',
         'nama_dosen',
         'gambar',
-        'id_user',
+        'catatan',
         'id_kategori',
         'id_status',
         'cid',

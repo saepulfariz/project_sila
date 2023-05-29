@@ -37,13 +37,13 @@
     </div>
 </section>
 
-<section id="tentang-kami">
+<section id="tentang-kami" class="text-white">
     <div class="container">
         <div class="row">
             <div class="col-md-5 pt-0 pt-md-0  d-flex flex-column align-items-center justify-content-center">
 
                 <div>
-                    <h2 class="sila">Tentang Kami</h2>
+                    <h2 class="">Tentang Kami</h2>
                     <p class="fw-bold">Sistem Informasi Layanan & Aset</p>
 
                     <p class="mb-4 mt-4">
@@ -51,14 +51,21 @@
                         adalah sebuah website layanan mahasiswa
                         Fakultas Ilmu Komputer, Universitas Subang
                     </p>
-                    <a href="#" class="fw-bold mt-4 position-relative text-black text-decoration-none">
+                    <a href="#" class="fw-bold mt-4 position-relative text-white text-decoration-none">
                         <span class="p-0 me-1">Selengkapnya Tentang Kami </span>
-                        <i class="sila fs-5 bi bi-arrow-right position-absolute" style="top: -2px;"></i>
+                        <i class=" fs-5 bi bi-arrow-right position-absolute" style="top: -2px;"></i>
                     </a>
                 </div>
             </div>
             <div class="col-md-7 ">
-                <img src="<?= base_url(); ?>assets/front/img/fasilkom.png" width="100%" class="p-5" alt="">
+                <div class="position-relative">
+
+                    <img src="<?= base_url(); ?>assets/front/img/fasilkom.png" width="100%" class="p-5 blur" alt="">
+                    <div class="position-absolute top-50 start-50 translate-middle">
+
+                        <img src="<?= base_url(); ?>assets/front/img/logo_horizontal.png" alt="">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

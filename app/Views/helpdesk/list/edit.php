@@ -73,8 +73,18 @@
 
                             <div class="form-group">
                                 <label for="deskripsi">Deskripsi</label>
-                                <textarea class="form-control" name="deskripsi" id="deskripsi" cols="30" rows="5"><?= $helpdesk['deskripsi']; ?></textarea>
+                                <textarea class="form-control" name="deskripsi" id="deskripsi" cols="30" rows="3"><?= $helpdesk['deskripsi']; ?></textarea>
                             </div>
+
+                            <?php if (session()->get('id_role') != 4) : ?>
+
+                                <div class="form-group">
+                                    <label for="catatan">Catatan</label>
+                                    <textarea class="form-control" name="catatan" id="catatan" cols="30" rows="5"><?= $helpdesk['catatan']; ?></textarea>
+                                </div>
+
+                            <?php endif; ?>
+
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <a href="<?= base_url('helpdesk/list'); ?>" class="btn btn-secondary">Batal</a>

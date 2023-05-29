@@ -87,7 +87,7 @@
                                                 <div class="mb-3">
                                                     <label for="nama_lengkap" class="form-label">Nama
                                                         Lengkap</label>
-                                                    <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="<?= old('nama_lengkap'); ?>">
+                                                    <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="<?= old('nama_lengkap'); ?>" placeholder="Nama Lengkap">
                                                     <span class="text-danger"><?= validation_show_error('nama_lengkap'); ?></span>
                                                 </div>
                                             </div>
@@ -95,17 +95,32 @@
                                             <div class="col-md-6 mb-2">
                                                 <div class="mb-3">
                                                     <label for="npm" class="form-label">NPM</label>
-                                                    <input type="text" name="npm" class="form-control" id="npm" value="<?= old('npm'); ?>">
+                                                    <input type="text" name="npm" class="form-control" id="npm" value="<?= old('npm'); ?>" placeholder="D1A2XXXXX">
                                                     <span class="text-danger"><?= validation_show_error('npm'); ?></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="mb-3">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control" id="email" value="<?= old('email'); ?>">
-                                            <span class="text-danger"><?= validation_show_error('email'); ?></span>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2">
+
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email</label>
+                                                    <input type="email" name="email" class="form-control" id="email" value="<?= old('email'); ?>" placeholder="email@gmail.com">
+                                                    <span class="text-danger"><?= validation_show_error('email'); ?></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-2">
+
+                                                <div class="mb-3">
+                                                    <label for="no_hp" class="form-label">No HP</label>
+                                                    <input type="text" name="no_hp" class="form-control" id="no_hp" value="<?= old('no_hp'); ?>" placeholder="082XXXCCCVVV">
+                                                    <span class="text-danger"><?= validation_show_error('no_hp'); ?></span>
+                                                </div>
+                                            </div>
                                         </div>
+
 
 
 

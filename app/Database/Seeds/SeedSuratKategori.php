@@ -10,15 +10,63 @@ class SeedSuratKategori extends Seeder
     {
         $data = [
             [
-                'nama_kategori' => 'Surat Dinas',
+                'nama_kategori' => 'SK',
                 'is_out' => 0
             ],
             [
-                'nama_kategori' => 'Surat Magang',
+                'nama_kategori' => 'Undangan',
+                'is_out' => 0
+            ],
+            [
+                'nama_kategori' => 'Permohonan',
+                'is_out' => 0
+            ],
+            [
+                'nama_kategori' => 'Pengajuan',
+                'is_out' => 0
+            ],
+            [
+                'nama_kategori' => 'Dokumen Lainnya',
+                'is_out' => 0
+            ],
+            [
+                'nama_kategori' => 'Surat Pengantar PKL',
                 'is_out' => 1
             ],
             [
-                'nama_kategori' => 'Surat Pindah',
+                'nama_kategori' => 'Surat Pengantar Magang',
+                'is_out' => 1
+            ],
+            [
+                'nama_kategori' => 'Surat Pengantar Nilai',
+                'is_out' => 1
+            ],
+            [
+                'nama_kategori' => 'Surat Pengantar Penelitian Skripsi',
+                'is_out' => 1
+            ],
+            [
+                'nama_kategori' => 'Surat Pengantar Observasi Tugas',
+                'is_out' => 1
+            ],
+            [
+                'nama_kategori' => 'Surat Pengantar Observasi Tugas',
+                'is_out' => 1
+            ],
+            [
+                'nama_kategori' => 'Surat SKMK Biasa',
+                'is_out' => 1
+            ],
+            [
+                'nama_kategori' => 'Surat SKMK PNS',
+                'is_out' => 1
+            ],
+            [
+                'nama_kategori' => 'Surat Perbaikan Absensi',
+                'is_out' => 1
+            ],
+            [
+                'nama_kategori' => 'Surat Pengantar Perbaikan Nilai UTS',
                 'is_out' => 1
             ],
         ];

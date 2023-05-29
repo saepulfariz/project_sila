@@ -28,9 +28,8 @@ class TbHelpdesk extends Migration
                 'constraint' => '100',
                 'null' => true
             ],
-            'id_user' => [
-                'type'           => 'INT',
-                'constraint'     => 11,
+            'catatan' => [
+                'type'           => 'TEXT',
             ],
             'id_kategori' => [
                 'type'           => 'INT',

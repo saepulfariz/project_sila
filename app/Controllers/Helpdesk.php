@@ -25,9 +25,9 @@ class Helpdesk extends BaseController
     public function index()
     {
         if (session()->get('id_role') == 4) {
-            $helpdesk = $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.id_user')->where('tb_helpdesk.cid', session()->get('id_user'))->findAll();
+            $helpdesk = $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.cid')->where('tb_helpdesk.cid', session()->get('id_user'))->findAll();
         } else {
-            $helpdesk = $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.id_user')->findAll();
+            $helpdesk = $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.cid')->findAll();
         }
 
         $data = [
@@ -193,6 +193,10 @@ class Helpdesk extends BaseController
             $fileName = $dataGambar->getRandomName();
             $dataGambar->move('assets/upload/helpdesk/', $fileName);
             $data['gambar'] = $fileName;
+        }
+
+        if (session()->get('id_role') != 4) {
+            $data['catatan'] = htmlspecialchars($this->request->getVar('catatan'));
         }
 
         $data = createLog($data, 1);

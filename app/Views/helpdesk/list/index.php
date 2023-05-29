@@ -47,6 +47,7 @@
                                     <th>Gambar</th>
                                     <th>Nama Dosen</th>
                                     <th>Status</th>
+                                    <th>Catatan</th>
                                     <th>Waktu</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -63,12 +64,13 @@
                                         <td><?= $d['nama_dosen']; ?></td>
                                         <td>
                                             <?php if ($d['id_status'] == 1) : ?>
-                                                <a href="<?= base_url(); ?>helpdesk/list/status/<?= $d['id_helpdesk']; ?>" class="btn btn-sm btn-secondary"><?= $d['nama_status']; ?></a>
+                                                <a href="<?= base_url(); ?>helpdesk/list/status/<?= $d['id_helpdesk']; ?>" class="badge badge-secondary"><?= $d['nama_status']; ?></a>
                                             <?php else : ?>
-                                                <button class="btn btn-sm btn-success"><?= $d['nama_status']; ?></button>
+                                                <button class="badge badge-success"><?= $d['nama_status']; ?></button>
                                             <?php endif; ?>
 
                                         </td>
+                                        <td><?= $d['catatan']; ?></td>
                                         <td><?= $d['created_at']; ?></td>
                                         <td>
                                             <?php if ($d['id_status'] == 1) : ?>
