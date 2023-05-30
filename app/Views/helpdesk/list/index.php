@@ -66,7 +66,7 @@
                                             <?php if ($d['id_status'] == 1) : ?>
                                                 <a href="<?= base_url(); ?>helpdesk/list/status/<?= $d['id_helpdesk']; ?>" class="badge badge-secondary"><?= $d['nama_status']; ?></a>
                                             <?php else : ?>
-                                                <button class="badge badge-success"><?= $d['nama_status']; ?></button>
+                                                <span class="badge badge-success"><?= $d['nama_status']; ?></span>
                                             <?php endif; ?>
 
                                         </td>

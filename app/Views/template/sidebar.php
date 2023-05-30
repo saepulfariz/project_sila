@@ -12,7 +12,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= base_url(); ?>" class="brand-link">
-        <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="SILA Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">SILA</span>
     </a>
     <!-- Sidebar -->
@@ -155,7 +155,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('surat/history'); ?>" class="nav-link <?= ($segment2 == 'keluar') ? 'active' : ''; ?>">
+                                <a href="<?= base_url('surat/history'); ?>" class="nav-link <?= ($segment2 == 'history') ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         History
@@ -187,7 +187,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= base_url('laporan/helpdesk'); ?>" class="nav-link <?= ($segment2 == 'helpdesk') ? 'active' : ''; ?>">
+                                <a href="<?= base_url('laporan/helpdesk'); ?>" class="nav-link <?= ($segment == 'laporan' && $segment2 == 'helpdesk') ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Helpdesk
@@ -195,7 +195,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('laporan/history'); ?>" class="nav-link <?= ($segment2 == 'history') ? 'active' : ''; ?>">
+                                <a href="<?= base_url('laporan/history'); ?>" class="nav-link <?= ($segment == 'laporan' && $segment2 == 'history') ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         History
@@ -203,7 +203,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('laporan/keluar'); ?>" class="nav-link <?= ($segment2 == 'keluar') ? 'active' : ''; ?>">
+                                <a href="<?= base_url('laporan/keluar'); ?>" class="nav-link <?= ($segment == 'laporan' && $segment2 == 'keluar') ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Surat Pengajuan
@@ -211,7 +211,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('laporan/masuk'); ?>" class="nav-link <?= ($segment2 == 'masuk') ? 'active' : ''; ?>">
+                                <a href="<?= base_url('laporan/masuk'); ?>" class="nav-link <?= ($segment == 'laporan' && $segment2 == 'masuk') ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Surat Masuk
