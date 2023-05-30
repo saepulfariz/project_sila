@@ -47,10 +47,14 @@
                                 </select>
                             </div>
 
+                            <div class="form-group">
+                                <label for="perihal">Perihal</label>
+                                <textarea required class="form-control" id="perihal" name="perihal"></textarea>
+                            </div>
 
                             <div class="form-group">
-                                <label for="nama_surat">Nama Surat</label>
-                                <input type="text" required class="form-control" id="nama_surat" name="nama_surat">
+                                <label for="kepada">Ditujukan kepada</label>
+                                <input type="text" required class="form-control" id="kepada" name="kepada">
                             </div>
 
 

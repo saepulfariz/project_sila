@@ -23,13 +23,18 @@ class TbSurat extends Migration
                 'type'       => 'VARCHAR',
                 'constraint'     => '128',
             ],
+            'perihal' => [
+                'type'       => 'TEXT',
+                'null' => true
+            ],
+            'kepada' => [
+                'type'       => 'VARCHAR',
+                'constraint'     => '128',
+                'null' => true
+            ],
             'file_surat' => [
                 'type'       => 'VARCHAR',
                 'constraint'     => '128',
-            ],
-            'id_user' => [
-                'type'           => 'INT',
-                'constraint'     => 11,
             ],
             'id_kategori' => [
                 'type'           => 'INT',

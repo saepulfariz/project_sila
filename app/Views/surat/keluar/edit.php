@@ -58,12 +58,25 @@
                             </div>
 
 
+
+
                             <div class="form-group">
-                                <label for="nama_surat">Nama Surat</label>
-                                <input type="text" required class="form-control" <?= $disabled; ?> id="nama_surat" name="nama_surat" value="<?= $surat['nama_surat']; ?>">
+                                <label for="perihal">Perihal</label>
+                                <textarea required class="form-control" id="perihal" name="perihal" <?= $disabled; ?>><?= $surat['perihal']; ?></textarea>
                             </div>
 
+                            <div class="form-group">
+                                <label for="kepada">Ditujukan kepada</label>
+                                <input type="text" required class="form-control" id="kepada" name="kepada" <?= $disabled; ?> value="<?= $surat['kepada']; ?>">
+                            </div>
+
+
                             <?php if ((session()->get('id_role') == 2) || (session()->get('id_role') == 1)) : ?>
+                                <div class="form-group">
+                                    <label for="nama_surat">Nama Surat</label>
+                                    <input type="text" required class="form-control" id="nama_surat" name="nama_surat" value="<?= $surat['nama_surat']; ?>">
+                                </div>
+
                                 <div class="form-group">
                                     <label for="no_surat">No Surat</label>
                                     <input type="text" required class="form-control" id="no_surat" name="no_surat" value="<?= $surat['no_surat']; ?>">

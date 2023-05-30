@@ -27,10 +27,12 @@ class SuratKeluar extends BaseController
 
     public function index()
     {
-        $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->where('tb_surat.cid', session()->get('id_user'))->orderBy('id_surat', 'DESC')->findAll();
+
 
         if (session()->get('id_role') == 1 || session()->get('id_role') == 2 || session()->get('id_role') == 3) {
-            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->orderBy('id_surat', 'DESC')->findAll();
+            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->orderBy('id_surat', 'DESC')->where('tb_surat_kategori.is_out', 1)->findAll();
+        } else {
+            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->where('tb_surat.cid', session()->get('id_user'))->orderBy('id_surat', 'DESC')->where('tb_surat_kategori.is_out', 1)->findAll();
         }
 
         $data = [
@@ -75,8 +77,9 @@ class SuratKeluar extends BaseController
     {
         $data = [
             'id_kategori' => htmlspecialchars($this->request->getVar('id_kategori'), true),
-            'nama_surat' => htmlspecialchars($this->request->getVar('nama_surat'), true),
-            'id_user' => session()->get('id_user'),
+            'perihal' => htmlspecialchars($this->request->getVar('perihal'), true),
+            'kepada' => htmlspecialchars($this->request->getVar('kepada'), true),
+            'nama_surat' => '',
             'no_surat' => '',
             'file_surat' => '',
             'id_status' => 1,
@@ -158,16 +161,19 @@ class SuratKeluar extends BaseController
         }
 
 
-        if ($this->request->getVar('nama_surat')) {
+        if ($this->request->getVar('perihal')) {
             $data = [
                 'id_kategori' => htmlspecialchars($this->request->getVar('id_kategori'), true),
-                'nama_surat' => htmlspecialchars($this->request->getVar('nama_surat'), true),
+                'perihal' => htmlspecialchars($this->request->getVar('perihal'), true),
+                'kepada' => htmlspecialchars($this->request->getVar('kepada'), true),
+
             ];
         } else {
             $dataSurat = $this->request->getFile('file_surat');
             $fileName = '';
             $data = [
                 'no_surat' => htmlspecialchars($this->request->getVar('no_surat'), true),
+                'nama_surat' => htmlspecialchars($this->request->getVar('nama_surat'), true),
                 'id_status' => htmlspecialchars($this->request->getVar('id_status'), true),
             ];
 

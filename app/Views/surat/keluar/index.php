@@ -45,7 +45,8 @@
                                     <th>Nama Surat</th>
                                     <th>File Surat</th>
                                     <th>Kategori</th>
-                                    <th>Jenis Surat</th>
+                                    <th>Perihal</th>
+                                    <th>Ditujukan</th>
                                     <th>Status</th>
                                     <th>Pemohon</th>
                                     <th>Date Create </th>
@@ -70,7 +71,8 @@
                                             <?php endif; ?>
                                         </td>
                                         <td><?= $d['nama_kategori']; ?></td>
-                                        <td><?= ($d['is_out'] == 1) ? 'Keluar' : 'Masuk'; ?></td>
+                                        <td><?= $d['perihal']; ?></td>
+                                        <td><?= $d['kepada']; ?></td>
                                         <td>
                                             <?php if ($d['id_status'] == 1) : ?>
                                                 <span class="badge badge-secondary"><?= $d['nama_status']; ?></span>
