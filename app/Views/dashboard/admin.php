@@ -197,7 +197,7 @@ $resUser = $user->find(session()->get('id_user'));
         options: {
             scales: {
                 y: {
-                    // beginAtZero: true
+                    beginAtZero: true
                 }
             }
         }

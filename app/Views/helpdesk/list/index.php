@@ -64,10 +64,11 @@
                                         <td><?= $d['nama_dosen']; ?></td>
                                         <td>
                                             <?php if ($d['id_status'] == 1) : ?>
-                                                <a href="<?= base_url(); ?>helpdesk/list/status/<?= $d['id_helpdesk']; ?>" class="badge badge-secondary"><?= $d['nama_status']; ?></a>
+                                                <span class="badge badge-secondary"><?= $d['nama_status']; ?></span>
                                             <?php else : ?>
                                                 <span class="badge badge-success"><?= $d['nama_status']; ?></span>
                                             <?php endif; ?>
+
 
                                         </td>
                                         <td><?= $d['catatan']; ?></td>

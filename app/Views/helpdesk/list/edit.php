@@ -82,7 +82,13 @@
                                     <label for="catatan">Catatan</label>
                                     <textarea class="form-control" name="catatan" id="catatan" cols="30" rows="5"><?= $helpdesk['catatan']; ?></textarea>
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="id_status">Status</label>
+                                    <select class="form-control" name="id_status" id="id_status">
+                                        <option value="1">Pending</option>
+                                        <option value="2">Done</option>
+                                    </select>
+                                </div>
                             <?php endif; ?>
 
 

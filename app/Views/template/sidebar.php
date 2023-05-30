@@ -57,7 +57,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
 
                 <?php if (session()->get('id_role') == 4) : ?>
                     <li class="nav-item">
-                        <a href="<?= base_url('helpdesk'); ?>" class="nav-link <?= ($segment == 'helpdesk') ? 'active' : ''; ?>">
+                        <a href="<?= base_url('helpdesk/list'); ?>" class="nav-link <?= ($segment == 'helpdesk') ? 'active' : ''; ?>">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Helpdesk

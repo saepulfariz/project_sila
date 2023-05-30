@@ -27,7 +27,7 @@ $routes->set404Override();
  * --------------------------------------------------------------------
  */
 
-// We get a performance increase by specifying the default
+// We get a performance increase by specifying the defaul
 // route since we don't have to scan directories.
 $routes->get('/', 'Front::index');
 $routes->get('/register', 'Auth::register');
@@ -46,7 +46,7 @@ $routes->group('', ['filter' => 'authFilter'], function ($routes) {
     // $routes->delete('/helpdesk/kategori/(:any)', 'KategoriHelpdesk::delete/$1');
 
     $routes->resource('helpdesk/kategori', ['controller' => 'KategoriHelpdesk']);
-    $routes->get('/helpdesk/list/status/(:any)', 'Helpdesk::status/$1');
+    // $routes->get('/helpdesk/list/status/(:any)', 'Helpdesk::status/$1');
     $routes->resource('helpdesk/list', ['controller' => 'Helpdesk']);
     // $routes->get('/surat/kategori', 'KategoriSurat::index');
     // $routes->post('/surat/kategori', 'KategoriSurat::create');

@@ -197,6 +197,7 @@ class Helpdesk extends BaseController
 
         if (session()->get('id_role') != 4) {
             $data['catatan'] = htmlspecialchars($this->request->getVar('catatan'));
+            $data['id_status'] = htmlspecialchars($this->request->getVar('id_status'));
         }
 
         $data = createLog($data, 1);
@@ -209,27 +210,6 @@ class Helpdesk extends BaseController
         return redirect()->to('helpdesk/list');
     }
 
-    public function status($id)
-    {
-        $result = $this->modelhelpdesk->find($id);
-        if (!$result) {
-            $this->alert->set('warning', 'Warning', 'NOT VALID');
-            return redirect()->to('helpdesk/list');
-        }
-
-        $data = [
-            'id_status' => 2
-        ];
-
-        $data = createLog($data, 1);
-        $res = $this->modelhelpdesk->update($id, $data);
-        if ($res) {
-            $this->alert->set('success', 'Success', 'Status Done');
-        } else {
-            $this->alert->set('warning', 'Warning', 'Status Failed');
-        }
-        return redirect()->to('helpdesk/list');
-    }
 
     /**
      * Delete the designated resource object from the model
