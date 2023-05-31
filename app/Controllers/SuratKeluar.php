@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\KategoriSuratModel;
+use App\Models\SuratHistoryModel;
 use App\Models\SuratModel;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -17,10 +18,12 @@ class SuratKeluar extends BaseController
 
     private $modelsurat;
     private $modelkategorisurat;
+    private $modelsurathistory;
     private $title = "Surat Keluar";
     public function __construct()
     {
         $this->modelkategorisurat = new KategoriSuratModel();
+        $this->modelsurathistory = new SuratHistoryModel();
         $this->modelsurat = new SuratModel();
     }
 
@@ -87,6 +90,22 @@ class SuratKeluar extends BaseController
 
         $data = createLog($data, 0);
         $res = $this->modelsurat->save($data);
+        $id_surat = $this->modelsurat->select('id_surat')->orderBy('id_surat', 'DESC')->first()['id_surat'];
+
+        $data_history = [
+
+            'id_surat' => $id_surat,
+            'id_kategori' => htmlspecialchars($this->request->getVar('id_kategori'), true),
+            'perihal' => htmlspecialchars($this->request->getVar('perihal'), true),
+            'kepada' => htmlspecialchars($this->request->getVar('kepada'), true),
+            'nama_surat' => '',
+            'no_surat' => '',
+            'file_surat' => '',
+            'id_status' => 1,
+        ];
+        $data_history = createLog($data_history, 0);
+        $this->modelsurathistory->save($data_history);
+
         if ($res) {
             $this->alert->set('success', 'Success', 'Add Success');
         } else {
@@ -168,6 +187,14 @@ class SuratKeluar extends BaseController
                 'kepada' => htmlspecialchars($this->request->getVar('kepada'), true),
 
             ];
+            $data_history = [
+                'id_kategori' => htmlspecialchars($this->request->getVar('id_kategori'), true),
+                'perihal' => htmlspecialchars($this->request->getVar('perihal'), true),
+                'kepada' => htmlspecialchars($this->request->getVar('kepada'), true),
+
+            ];
+            $id_kategori = $data['id_kategori'];
+            $id_status = $result['id_status'];
         } else {
             $dataSurat = $this->request->getFile('file_surat');
             $fileName = '';
@@ -177,16 +204,34 @@ class SuratKeluar extends BaseController
                 'id_status' => htmlspecialchars($this->request->getVar('id_status'), true),
             ];
 
+            $data_history = [
+                'no_surat' => htmlspecialchars($this->request->getVar('no_surat'), true),
+                'nama_surat' => htmlspecialchars($this->request->getVar('nama_surat'), true),
+                'id_status' => htmlspecialchars($this->request->getVar('id_status'), true),
+            ];
+
             if ($dataSurat->getError() != 4) {
                 $fileName = $dataSurat->getRandomName();
                 $dataSurat->move('assets/upload/surat/', $fileName);
                 $data['file_surat'] = $fileName;
+                $data_history['file_surat'] = $fileName;
             }
             $data = createLog($data, 1);
+            $id_kategori = $result['id_kategori'];
+            $id_status = $data['id_status'];
         }
 
 
+
         $res = $this->modelsurat->update($id, $data);
+
+        $data_history['id_surat'] = $id;
+        $data_history['id_kategori'] = $id_kategori;
+        $data_history['id_status'] = $id_status;
+        $data_history['cid'] =  $result['cid'];
+        $data_history['uid'] =  session()->get('id_user');
+
+        $this->modelsurathistory->save($data_history);
         if ($res) {
             $this->alert->set('success', 'Success', 'Updated Success');
         } else {

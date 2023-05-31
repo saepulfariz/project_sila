@@ -48,6 +48,7 @@ $routes->group('', ['filter' => 'authFilter'], function ($routes) {
     $routes->resource('helpdesk/kategori', ['controller' => 'KategoriHelpdesk']);
     // $routes->get('/helpdesk/list/status/(:any)', 'Helpdesk::status/$1');
     $routes->resource('helpdesk/list', ['controller' => 'Helpdesk']);
+    $routes->get('surat/history', 'SuratHistory::index');
     // $routes->get('/surat/kategori', 'KategoriSurat::index');
     // $routes->post('/surat/kategori', 'KategoriSurat::create');
     // $routes->get('/surat/kategori/new', 'KategoriSurat::new');
