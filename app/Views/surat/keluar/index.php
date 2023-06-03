@@ -41,12 +41,12 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>No Surat</th>
-                                    <th>Nama Surat</th>
-                                    <th>File Surat</th>
                                     <th>Kategori</th>
                                     <th>Perihal</th>
                                     <th>Ditujukan</th>
+                                    <th>No Surat</th>
+                                    <th>Nama Surat</th>
+                                    <th>File Surat</th>
                                     <th>Status</th>
                                     <th>Pemohon</th>
                                     <th>Date Create </th>
@@ -60,6 +60,9 @@
                                 foreach ($surat as $d) : ?>
                                     <tr>
                                         <td><?= $a++; ?></td>
+                                        <td><?= $d['nama_kategori']; ?></td>
+                                        <td><?= $d['perihal']; ?></td>
+                                        <td><?= $d['kepada']; ?></td>
                                         <td><?= $d['no_surat']; ?></td>
                                         <td><?= $d['nama_surat']; ?></td>
                                         <td>
@@ -70,9 +73,6 @@
 
                                             <?php endif; ?>
                                         </td>
-                                        <td><?= $d['nama_kategori']; ?></td>
-                                        <td><?= $d['perihal']; ?></td>
-                                        <td><?= $d['kepada']; ?></td>
                                         <td>
                                             <?php if ($d['id_status'] == 1) : ?>
                                                 <span class="badge badge-secondary"><?= $d['nama_status']; ?></span>

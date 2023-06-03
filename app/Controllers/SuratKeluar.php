@@ -225,6 +225,8 @@ class SuratKeluar extends BaseController
 
         $res = $this->modelsurat->update($id, $data);
 
+        $data_history['perihal'] = $result['perihal'];
+        $data_history['kepada'] = $result['kepada'];
         $data_history['id_surat'] = $id;
         $data_history['id_kategori'] = $id_kategori;
         $data_history['id_status'] = $id_status;

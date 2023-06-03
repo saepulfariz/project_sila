@@ -15,7 +15,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
-                    <li class="breadcrumb-item">Surat</li>
+                    <li class="breadcrumb-item">Laporan</li>
                     <li class="breadcrumb-item">Surat History</li>
                 </ol>
             </div>

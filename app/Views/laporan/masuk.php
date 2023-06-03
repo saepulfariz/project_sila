@@ -10,13 +10,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Surat History</h1>
+                <h1 class="m-0">Surat Masuk</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
-                    <li class="breadcrumb-item">Surat</li>
-                    <li class="breadcrumb-item">Surat History</li>
+                    <li class="breadcrumb-item">Laporan</li>
+                    <li class="breadcrumb-item">Surat Masuk</li>
                 </ol>
             </div>
             <!-- /.col -->
@@ -31,26 +31,22 @@
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-12">
+                <a href="<?= base_url('surat/masuk/new'); ?>" class="btn btn-primary btn-sm mb-2">New</a>
                 <div class="card">
                     <div class="card-header">
-                        Surat History
+                        Kelola Surat
                     </div>
                     <div class="card-body">
                         <table class="table" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kategori</th>
-                                    <th>Perihal</th>
-                                    <th>Ditujukan</th>
                                     <th>No Surat</th>
                                     <th>Nama Surat</th>
                                     <th>File Surat</th>
-                                    <th>Status</th>
-                                    <th>Pemohon</th>
-                                    <th>Date Create </th>
-                                    <th>Approve</th>
-                                    <th>Date Approve</th>
+                                    <th>Kategori</th>
+                                    <th>Jenis Surat</th>
+                                    <th>Tanggal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,33 +54,14 @@
                                 foreach ($surat as $d) : ?>
                                     <tr>
                                         <td><?= $a++; ?></td>
-                                        <td><?= $d['nama_kategori']; ?></td>
-                                        <td><?= $d['perihal']; ?></td>
-                                        <td><?= $d['kepada']; ?></td>
                                         <td><?= $d['no_surat']; ?></td>
                                         <td><?= $d['nama_surat']; ?></td>
                                         <td>
-                                            <?php if ($d['file_surat'] != '') : ?>
-
-                                                <a href="<?= base_url(); ?>assets/upload/surat/<?= $d['file_surat']; ?>" target="_blank">Download Here</a>
-                                            <?php else : ?>
-
-                                            <?php endif; ?>
+                                            <a target="_blank" href="<?= base_url('assets/upload/surat/' . $d['file_surat']); ?>">Download Here</a>
                                         </td>
-                                        <td>
-                                            <?php if ($d['id_status'] == 1) : ?>
-                                                <span class="badge badge-secondary"><?= $d['nama_status']; ?></span>
-                                            <?php elseif ($d['id_status'] == 2) : ?>
-                                                <span class="badge badge-success"><?= $d['nama_status']; ?></span>
-                                            <?php else : ?>
-                                                <span class="badge badge-danger"><?= $d['nama_status']; ?></span>
-                                            <?php endif; ?>
-
-                                        </td>
-                                        <td><?= $d['pemohon']; ?></td>
+                                        <td><?= $d['nama_kategori']; ?></td>
+                                        <td><?= ($d['is_out'] == 1) ? 'Keluar' : 'Masuk'; ?></td>
                                         <td><?= $d['created_at']; ?></td>
-                                        <td><?= $d['approve']; ?></td>
-                                        <td><?= $d['updated_at']; ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
