@@ -70,7 +70,7 @@ $routes->group('', ['filter' => 'authFilter'], function ($routes) {
     $routes->get('laporan/helpdesk', 'Laporan::index');
     $routes->get('laporan/history', 'Laporan::history');
     $routes->get('laporan/masuk', 'Laporan::masuk');
-    $routes->get('laporan/pengajuan', 'Laporan::pengajuan');
+    $routes->get('laporan/keluar', 'Laporan::keluar');
 });
 
 

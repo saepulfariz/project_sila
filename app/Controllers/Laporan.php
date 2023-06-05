@@ -61,4 +61,22 @@ class Laporan extends BaseController
 
         return view('laporan/masuk', $data);
     }
+
+    public function keluar()
+    {
+
+
+        if (session()->get('id_role') == 1 || session()->get('id_role') == 2 || session()->get('id_role') == 3) {
+            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->orderBy('id_surat', 'DESC')->where('tb_surat_kategori.is_out', 1)->findAll();
+        } else {
+            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->where('tb_surat.cid', session()->get('id_user'))->orderBy('id_surat', 'DESC')->where('tb_surat_kategori.is_out', 1)->findAll();
+        }
+
+        $data = [
+            'title' => $this->title,
+            'surat' => $getAll
+        ];
+
+        return view('laporan/keluar', $data);
+    }
 }
