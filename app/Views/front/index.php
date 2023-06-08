@@ -128,7 +128,7 @@
         <div class="row pt-0 pt-lg-3">
             <div class="col-md-6 pt-4 pt-lg-4">
                 <h2 class="sila">Surat</h2>
-                <p class="fw-bold text-white">Template Surat</p>
+                <p class="fw-bold text-white">kategori Surat</p>
             </div>
         </div>
     </div>
@@ -136,89 +136,17 @@
     <div class="container mb-3">
 
         <div class="row justify-content-center mb-3">
-            <div class="col-md-3 col-lg-3 mb-4 col-6">
-                <div class="card">
-                    <div class="card-body mb-2">
-                        <img src="<?= base_url(); ?>assets/front/img/word.png" class="card-img-top" alt="...">
-                        <p class="card-text">Some quick example text to build on the card title and make up the
-                            bulk
-                            of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
+            <?php foreach ($kategori_surat as $d) : ?>
 
-            <div class="col-md-3 col-lg-3 mb-4 col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="<?= base_url(); ?>assets/front/img/word.png" class="card-img-top" alt="...">
-                        <p class="card-text">Some quick example text to build on the card title and make up the
-                            bulk
-                            of
-                            the card's content.</p>
+                <div class="col-md-3 col-lg-3 mb-4 col-6">
+                    <div class="card">
+                        <div class="card-body mb-2">
+                            <img src="<?= base_url(); ?>assets/front/img/word.png" class="card-img-top" alt="...">
+                            <p class="card-text"><?= $d['nama_kategori']; ?></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-3 col-lg-3 mb-4 col-6">
-                <div class="card">
-                    <div class="card-body mb-2">
-                        <img src="<?= base_url(); ?>assets/front/img/word.png" class="card-img-top" alt="...">
-                        <p class="card-text">Some quick example text to build on the card title and make up the
-                            bulk
-                            of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-lg-3 mb-4 col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="<?= base_url(); ?>assets/front/img/word.png" class="card-img-top" alt="...">
-                        <p class="card-text">Some quick example text to build on the card title and make up the
-                            bulk
-                            of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-lg-3 mb-4 col-6">
-                <div class="card">
-                    <div class="card-body mb-2">
-                        <img src="<?= base_url(); ?>assets/front/img/word.png" class="card-img-top" alt="...">
-                        <p class="card-text">Some quick example text to build on the card title and make up the
-                            bulk
-                            of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-lg-3 mb-4 col-6">
-                <div class="card">
-                    <div class="card-body mb-2">
-                        <img src="<?= base_url(); ?>assets/front/img/word.png" class="card-img-top" alt="...">
-                        <p class="card-text">Some quick example text to build on the card title and make up the
-                            bulk
-                            of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-lg-3 mb-4 col-6">
-                <div class="card">
-                    <div class="card-body mb-2">
-                        <img src="<?= base_url(); ?>assets/front/img/word.png" class="card-img-top" alt="...">
-                        <p class="card-text">Some quick example text to build on the card title and make up the
-                            bulk
-                            of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
 
     </div>
@@ -239,286 +167,46 @@
         <div class="row">
             <!-- Set up your HTML -->
             <div class="owl-carousel owl-theme col px-3 px-lg-0">
-                <div class=" me-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3 col-3 text-center mt-2">
-                                    <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="">
+                <?php foreach ($helpdesk as $d) : ?>
+                    <div class=" me-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 col-3 text-center mt-2">
+                                        <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="">
+                                    </div>
+                                    <div class="col-md-9 col-9">
+                                        <?= $d['nama_lengkap']; ?>
+                                        <p>
+                                            <?= date('H:i', strtotime($d['created_at'])); ?>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col-md-9 col-9">
-                                    Anonim User
-                                    <p>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9 col-12 text-center">
-                                    <p style="font-size: 12px;" class=" bg-success text-white rounded-pill px-1">
-                                        <i class="bi bi-check2"></i> Sudah Terverifikasi
+                                <div class="row">
+                                    <?php if ($d['id_status'] == 1) : ?>
+                                        <div class="col-md-7 col-12 text-center">
 
-                                    </p>
+                                            <p style="font-size: 12px;" class=" bg-warning text-white rounded-pill px-1">
+                                                <i class="bi bi-clock"></i> <?= $d['nama_status']; ?>
+                                            </p>
+                                        </div>
+                                    <?php else : ?>
+                                        <div class="col-md-6 col-12 text-center">
+                                            <p style="font-size: 12px;" class=" bg-success text-white rounded-pill px-1">
+                                                <i class="bi bi-check2"></i> <?= $d['nama_status']; ?>
+                                            </p>
+
+                                        </div>
+                                    <?php endif; ?>
 
                                 </div>
+                                <p>
+                                    <?= $d['deskripsi']; ?>
+                                </p>
                             </div>
-                            <p>
-                                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                officia consequat duis enim velit mollit.
-                                Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-                            </p>
                         </div>
                     </div>
-                </div>
-                <div class="me-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-3 text-center mt-2">
-                                    <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="">
-                                </div>
-                                <div class="col-9">
-                                    Anonim User
-                                    <p>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9 col-12 text-center">
-                                    <p style="font-size: 12px;" class=" bg-success text-white rounded-pill px-1">
-                                        <i class="bi bi-check2"></i> Sudah Terverifikasi
-
-                                    </p>
-
-                                </div>
-                            </div>
-                            <p>
-                                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                officia consequat duis enim velit mollit.
-                                Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="me-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-3 text-center mt-2">
-                                    <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="">
-                                </div>
-                                <div class="col-9">
-                                    Anonim User
-                                    <p>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9 col-12 text-center">
-                                    <p style="font-size: 12px;" class=" bg-success text-white rounded-pill px-1">
-                                        <i class="bi bi-check2"></i> Sudah Terverifikasi
-
-                                    </p>
-
-                                </div>
-                            </div>
-                            <p>
-                                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                officia consequat duis enim velit mollit.
-                                Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="me-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-3 text-center mt-2">
-                                    <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="">
-                                </div>
-                                <div class="col-9">
-                                    Anonim User
-                                    <p>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9 col-12 text-center">
-                                    <p style="font-size: 12px;" class=" bg-success text-white rounded-pill px-1">
-                                        <i class="bi bi-check2"></i> Sudah Terverifikasi
-
-                                    </p>
-
-                                </div>
-                            </div>
-                            <p>
-                                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                officia consequat duis enim velit mollit.
-                                Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="me-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-3 text-center mt-2">
-                                    <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="">
-                                </div>
-                                <div class="col-9">
-                                    Anonim User
-                                    <p>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9 col-12 text-center">
-                                    <p style="font-size: 12px;" class=" bg-success text-white rounded-pill px-1">
-                                        <i class="bi bi-check2"></i> Sudah Terverifikasi
-
-                                    </p>
-
-                                </div>
-                            </div>
-                            <p>
-                                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                officia consequat duis enim velit mollit.
-                                Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="me-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-3 text-center mt-2">
-                                    <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="">
-                                </div>
-                                <div class="col-9">
-                                    Anonim User
-                                    <p>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9 col-12 text-center">
-                                    <p style="font-size: 12px;" class=" bg-success text-white rounded-pill px-1">
-                                        <i class="bi bi-check2"></i> Sudah Terverifikasi
-
-                                    </p>
-
-                                </div>
-                            </div>
-                            <p>
-                                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                officia consequat duis enim velit mollit.
-                                Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="me-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-3 text-center mt-2">
-                                    <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="">
-                                </div>
-                                <div class="col-9">
-                                    Anonim User
-                                    <p>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9 col-12 text-center">
-                                    <p style="font-size: 12px;" class=" bg-success text-white rounded-pill px-1">
-                                        <i class="bi bi-check2"></i> Sudah Terverifikasi
-
-                                    </p>
-
-                                </div>
-                            </div>
-                            <p>
-                                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                officia consequat duis enim velit mollit.
-                                Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="me-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-3 text-center mt-2">
-                                    <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="">
-                                </div>
-                                <div class="col-9">
-                                    Anonim User
-                                    <p>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9 col-12 text-center">
-                                    <p style="font-size: 12px;" class=" bg-success text-white rounded-pill px-1">
-                                        <i class="bi bi-check2"></i> Sudah Terverifikasi
-
-                                    </p>
-
-                                </div>
-                            </div>
-                            <p>
-                                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                officia consequat duis enim velit mollit.
-                                Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
