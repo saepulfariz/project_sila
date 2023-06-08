@@ -41,17 +41,22 @@ class Laporan extends BaseController
     public function history()
     {
 
+        $start = (htmlspecialchars($this->request->getVar('start'), true) == '') ? date('Y-m-d') : htmlspecialchars($this->request->getVar('start'), true);
+        $end = (htmlspecialchars($this->request->getVar('end'), true) == '') ? date('Y-m-d') : htmlspecialchars($this->request->getVar('end'), true);
+
         if (session()->get('id_role') == 4) {
 
-            $getAll = $this->modelsurathistory->select('tb_surat_history.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat_history.cid')->join('tb_user as u', 'u.id_user = tb_surat_history.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat_history.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat_history.id_status')->orderBy('id_history', 'DESC')->where('tb_surat_kategori.is_out', 1)->where('tb_surat_history.cid', session()->get('id_user'))->findAll();
+            $getAll = $this->modelsurathistory->select('tb_surat_history.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat_history.cid')->join('tb_user as u', 'u.id_user = tb_surat_history.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat_history.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat_history.id_status')->orderBy('id_history', 'DESC')->where('tb_surat_kategori.is_out', 1)->where('tb_surat_history.cid', session()->get('id_user'))->where('CONVERT(tb_surat_history.created_at, DATE) >=', $start)->where('CONVERT(tb_surat_history.created_at, DATE) <=', $end)->findAll();
         } else {
 
-            $getAll = $this->modelsurathistory->select('tb_surat_history.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat_history.cid')->join('tb_user as u', 'u.id_user = tb_surat_history.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat_history.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat_history.id_status')->orderBy('id_history', 'DESC')->where('tb_surat_kategori.is_out', 1)->findAll();
+            $getAll = $this->modelsurathistory->select('tb_surat_history.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat_history.cid')->join('tb_user as u', 'u.id_user = tb_surat_history.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat_history.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat_history.id_status')->orderBy('id_history', 'DESC')->where('tb_surat_kategori.is_out', 1)->where('CONVERT(tb_surat_history.created_at, DATE) >=', $start)->where('CONVERT(tb_surat_history.created_at, DATE) <=', $end)->findAll();
         }
 
         $data = [
             'title' => 'History Surat',
-            'surat' => $getAll
+            'surat' => $getAll,
+            'start' => $start,
+            'end' => $end
         ];
         return view('laporan/history', $data);
     }
