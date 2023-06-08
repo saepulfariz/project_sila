@@ -31,7 +31,6 @@
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-12">
-                <a href="<?= base_url('surat/masuk/new'); ?>" class="btn btn-primary btn-sm mb-2">New</a>
                 <div class="card">
                     <div class="card-header">
                         Kelola Surat

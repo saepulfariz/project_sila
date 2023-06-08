@@ -27,9 +27,13 @@ class Laporan extends BaseController
 
     public function index()
     {
+        $start = (htmlspecialchars($this->request->getVar('start'), true) == '') ? date('Y-m-d') : htmlspecialchars($this->request->getVar('start'), true);
+        $end = (htmlspecialchars($this->request->getVar('end'), true) == '') ? date('Y-m-d') : htmlspecialchars($this->request->getVar('end'), true);
         $data = [
             'title' => $this->title . ' Helpdesk',
-            'helpdesk' => $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.cid')->findAll()
+            'start' => $start,
+            'end' => $end,
+            'helpdesk' => $this->modelhelpdesk->select('tb_helpdesk.*')->select('nama_lengkap')->select('nama_kategori')->select('nama_status')->join('tb_helpdesk_kategori', 'tb_helpdesk.id_kategori = tb_helpdesk_kategori.id_kategori')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status')->join('tb_user', 'tb_user.id_user = tb_helpdesk.cid')->where('CONVERT(tb_helpdesk.created_at, DATE) >=', $start)->where('CONVERT(tb_helpdesk.created_at, DATE) <=', $end)->findAll()
         ];
         return view('laporan/helpdesk', $data);
     }
