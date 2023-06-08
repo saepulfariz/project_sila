@@ -63,9 +63,13 @@ class Laporan extends BaseController
 
     public function masuk()
     {
+        $start = (htmlspecialchars($this->request->getVar('start'), true) == '') ? date('Y-m-d') : htmlspecialchars($this->request->getVar('start'), true);
+        $end = (htmlspecialchars($this->request->getVar('end'), true) == '') ? date('Y-m-d') : htmlspecialchars($this->request->getVar('end'), true);
         $data = [
             'title' => $this->title,
-            'surat' => $this->modelsurat->select('tb_surat.*, nama_kategori, is_out')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->where('is_out', 0)->findAll()
+            'surat' => $this->modelsurat->select('tb_surat.*, nama_kategori, is_out')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->where('is_out', 0)->where('CONVERT(tb_surat.created_at, DATE) >=', $start)->where('CONVERT(tb_surat.created_at, DATE) <=', $end)->findAll(),
+            'start' => $start,
+            'end' => $end
         ];
 
         return view('laporan/masuk', $data);
@@ -74,16 +78,20 @@ class Laporan extends BaseController
     public function keluar()
     {
 
+        $start = (htmlspecialchars($this->request->getVar('start'), true) == '') ? date('Y-m-d') : htmlspecialchars($this->request->getVar('start'), true);
+        $end = (htmlspecialchars($this->request->getVar('end'), true) == '') ? date('Y-m-d') : htmlspecialchars($this->request->getVar('end'), true);
 
         if (session()->get('id_role') == 1 || session()->get('id_role') == 2 || session()->get('id_role') == 3) {
-            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->orderBy('id_surat', 'DESC')->where('tb_surat_kategori.is_out', 1)->findAll();
+            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->orderBy('id_surat', 'DESC')->where('tb_surat_kategori.is_out', 1)->where('CONVERT(tb_surat.created_at, DATE) >=', $start)->where('CONVERT(tb_surat.created_at, DATE) <=', $end)->findAll();
         } else {
-            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->where('tb_surat.cid', session()->get('id_user'))->orderBy('id_surat', 'DESC')->where('tb_surat_kategori.is_out', 1)->findAll();
+            $getAll = $this->modelsurat->select('tb_surat.*, is_out, nama_kategori, nama_status, c.username as pemohon, u.username as approve')->join('tb_user as c', 'c.id_user = tb_surat.cid')->join('tb_user as u', 'u.id_user = tb_surat.uid', 'left')->join('tb_surat_kategori', 'tb_surat_kategori.id_kategori = tb_surat.id_kategori')->join('tb_status', 'tb_status.id_status = tb_surat.id_status')->where('tb_surat.cid', session()->get('id_user'))->orderBy('id_surat', 'DESC')->where('tb_surat_kategori.is_out', 1)->where('CONVERT(tb_surat.created_at, DATE) >=', $start)->where('CONVERT(tb_surat.created_at, DATE) <=', $end)->findAll();
         }
 
         $data = [
             'title' => $this->title,
-            'surat' => $getAll
+            'surat' => $getAll,
+            'start' => $start,
+            'end' => $end
         ];
 
         return view('laporan/keluar', $data);

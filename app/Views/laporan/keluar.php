@@ -36,6 +36,31 @@
                         Kelola Surat
                     </div>
                     <div class="card-body">
+                        <form action="" method="get">
+                            <div class="row">
+                                <div class="col-md-3 mb-2">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Start</span>
+                                        </div>
+                                        <input type="date" class="form-control" name="start" id="start" value="<?= $start; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 mb-2">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">End</span>
+                                        </div>
+                                        <input type="date" class="form-control" name="end" id="name" value="<?= $end; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 mb-2">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
                         <table class="table" id="table">
                             <thead>
                                 <tr>
