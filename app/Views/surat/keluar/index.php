@@ -44,6 +44,7 @@
                                     <th>Kategori</th>
                                     <th>Perihal</th>
                                     <th>Ditujukan</th>
+                                    <th>Catatan</th>
                                     <th>No Surat</th>
                                     <th>Nama Surat</th>
                                     <th>File Surat</th>
@@ -63,6 +64,7 @@
                                         <td><?= $d['nama_kategori']; ?></td>
                                         <td><?= $d['perihal']; ?></td>
                                         <td><?= $d['kepada']; ?></td>
+                                        <td><?= $d['catatan']; ?></td>
                                         <td><?= $d['no_surat']; ?></td>
                                         <td><?= $d['nama_surat']; ?></td>
                                         <td>

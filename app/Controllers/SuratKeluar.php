@@ -98,6 +98,7 @@ class SuratKeluar extends BaseController
             'id_kategori' => htmlspecialchars($this->request->getVar('id_kategori'), true),
             'perihal' => htmlspecialchars($this->request->getVar('perihal'), true),
             'kepada' => htmlspecialchars($this->request->getVar('kepada'), true),
+            'catatan' => '',
             'nama_surat' => '',
             'no_surat' => '',
             'file_surat' => '',
@@ -199,12 +200,14 @@ class SuratKeluar extends BaseController
             $dataSurat = $this->request->getFile('file_surat');
             $fileName = '';
             $data = [
+                'catatan' => htmlspecialchars($this->request->getVar('catatan'), true),
                 'no_surat' => htmlspecialchars($this->request->getVar('no_surat'), true),
                 'nama_surat' => htmlspecialchars($this->request->getVar('nama_surat'), true),
                 'id_status' => htmlspecialchars($this->request->getVar('id_status'), true),
             ];
 
             $data_history = [
+                'catatan' => htmlspecialchars($this->request->getVar('catatan'), true),
                 'no_surat' => htmlspecialchars($this->request->getVar('no_surat'), true),
                 'nama_surat' => htmlspecialchars($this->request->getVar('nama_surat'), true),
                 'id_status' => htmlspecialchars($this->request->getVar('id_status'), true),

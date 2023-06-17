@@ -31,6 +31,10 @@ class TbSuratHistory extends Migration
                 'type'       => 'TEXT',
                 'null' => true
             ],
+            'catatan' => [
+                'type'       => 'TEXT',
+                'null' => true
+            ],
             'kepada' => [
                 'type'       => 'VARCHAR',
                 'constraint'     => '128',

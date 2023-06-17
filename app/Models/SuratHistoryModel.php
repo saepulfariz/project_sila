@@ -20,6 +20,7 @@ class SuratHistoryModel extends Model
         'no_surat',
         'file_surat',
         'perihal',
+        'catatan',
         'kepada',
         'id_kategori',
         'id_status',

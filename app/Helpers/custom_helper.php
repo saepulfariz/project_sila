@@ -27,3 +27,40 @@ function calAge($date)
 
     return $diff->y;
 }
+
+
+function makeString($number)
+{
+    $string = '';
+    for ($i = 0; $i < $number; $i++) {
+        $string .= '*';
+    }
+
+    return $string;
+}
+
+
+function makeStringAnonymous($string, $start, $end)
+{
+    $string_start = substr($string, 0, $start);
+    $count_string = strlen($string);
+    $count_string_anony = $count_string - ($start + $end);
+    $string_end = substr($string, $count_string - $end, $end);
+    return $string_start . makeString($count_string_anony) . $string_end;
+}
+
+
+function cuplikKonten($konten, $maxKata = 20)
+{
+    // $maxKata = 20; //max kata dalam cuplikan artikel --> silahkan diganti sesuai kebutuhan
+    $pecahArtikel = explode(' ', $konten); //pecah artikel menjadi array of string
+    if (count($pecahArtikel) > $maxKata) {
+        $cuplik = '';
+        for ($a = 0; $a < $maxKata; $a++) {
+            $cuplik .= $pecahArtikel[$a] . " ";
+        }
+        return "$cuplik..";
+    } else {
+        return $konten;
+    }
+}

@@ -176,7 +176,7 @@
                                         <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="">
                                     </div>
                                     <div class="col-md-9 col-9">
-                                        <?= $d['nama_lengkap']; ?>
+                                        <?= makeStringAnonymous($d['nama_lengkap'], 1, 1); ?>
                                         <p>
                                             <?= date('H:i', strtotime($d['created_at'])); ?>
                                         </p>
@@ -201,7 +201,7 @@
 
                                 </div>
                                 <p>
-                                    <?= $d['deskripsi']; ?>
+                                    <?= makeStringAnonymous(cuplikKonten($d['deskripsi']), 1, 1); ?>
                                 </p>
                             </div>
                         </div>
