@@ -40,7 +40,7 @@
 <section id="tentang-kami" class="text-white">
     <div class="container">
         <div class="row">
-            <div class="col-md-5 pt-0 pt-md-0  d-flex flex-column align-items-center justify-content-center">
+            <div class="col-md-5 pt-3 pt-md-0  d-flex flex-column align-items-center justify-content-center">
 
                 <div>
                     <h2 class="">Tentang Kami</h2>
@@ -63,7 +63,7 @@
                     <img src="<?= base_url(); ?>assets/front/img/fasilkom.png" width="100%" class="p-5 blur" alt="">
                     <div class="position-absolute top-50 start-50 translate-middle">
 
-                        <img src="<?= base_url(); ?>assets/front/img/logo_horizontal.png" alt="">
+                        <img class="w-100 w-md-100 mx-auto text-center" src="<?= base_url(); ?>assets/front/img/logo_horizontal.png" alt="">
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
     </div>
 </section>
 
-<section id="log" class="mt-4">
+<section id="helpdesk" class="mt-4">
     <div class="container mb-4">
 
         <div class="row pt-0 pt-lg-3">
@@ -212,7 +212,7 @@
     </div>
 </section>
 
-<footer class="bg-black">
+<footer class="bg-black" id="about">
     <div class="container py-5">
         <div class="row mb-4">
             <div class="col">
@@ -248,9 +248,9 @@
             <div class="col-md-3 mb-2">
                 <h4 class="mb-3">Contact</h4>
                 <ul>
-                    <li><i class="bi bi-telephone-fill"></i> (406) 555-0120</li>
-                    <li><i class="bi bi-envelope-fill"></i> mangcoding123@gmail.com</li>
-                    <li><i class="bi bi-geo-alt-fill"></i> 2972 Westheimer Rd. Santa Ana, Illinois 85486 </li>
+                    <li><i class="bi bi-telephone-fill"></i> 081312436643/081214086626</li>
+                    <li><i class="bi bi-envelope-fill"></i> fasilkom@unsub.ac.id</li>
+                    <li><i class="bi bi-geo-alt-fill"></i> Pasirkareumbi, Kec. Subang. Kabupaten Subang. Jawa Barat 41285 </li>
 
                 </ul>
                 <hr class="d-lg-none d-md-none border-2 border-white">
