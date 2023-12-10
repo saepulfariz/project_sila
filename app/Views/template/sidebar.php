@@ -175,6 +175,26 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                     </ul>
                 </li>
 
+                <li class="nav-item  <?= ($segment == 'asset') ? 'menu-open' : ''; ?>">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>
+                            Asset
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('asset/kategori'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'kategori')) ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Kategori
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <?php if (session()->get('id_role') != 4) : ?>
 
                     <li class="nav-item  <?= ($segment == 'laporan') ? 'menu-open' : ''; ?>">
