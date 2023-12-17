@@ -28,7 +28,7 @@ class AssetStatus extends BaseController
             'data' => $this->model->findAll()
         ];
 
-        return view('asset/status/index', $data);
+        return view($this->view . '/index', $data);
     }
 
     /**

@@ -28,7 +28,7 @@ class AssetKategori extends BaseController
             'data' => $this->model->findAll()
         ];
 
-        return view('asset/kategori/index', $data);
+        return view($this->view . '/index', $data);
     }
 
     /**

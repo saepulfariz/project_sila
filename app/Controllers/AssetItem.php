@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
 
-class AssetBarang extends BaseController
+class AssetItem extends BaseController
 {
     /**
      * Return an array of resource objects, themselves in array format
@@ -12,14 +12,16 @@ class AssetBarang extends BaseController
      * @return mixed
      */
     private $model;
-    private $modelkategori;
-    private $link = 'asset/barang';
-    private $view = 'asset/barang';
-    private $title = 'Asset Barang';
+    private $modelbarang;
+    private $modelstatus;
+    private $link = 'asset/item';
+    private $view = 'asset/item';
+    private $title = 'Asset Item';
     public function __construct()
     {
-        $this->model = new \App\Models\AssetBarangModel();
-        $this->modelkategori = new \App\Models\AssetKategoriModel();
+        $this->model = new \App\Models\AssetItemModel();
+        $this->modelbarang = new \App\Models\AssetBarangModel();
+        $this->modelstatus = new \App\Models\AssetStatusModel();
     }
 
     public function index()
@@ -27,7 +29,7 @@ class AssetBarang extends BaseController
         $data = [
             'title' => $this->title,
             'link' => $this->link,
-            'data' => $this->model->join('tb_asset_kategori', 'tb_asset_kategori.id_kategori = tb_asset_barang.id_kategori')->findAll()
+            'data' => $this->model->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->join('tb_asset_kategori', 'tb_asset_kategori.id_kategori = tb_asset_barang.id_kategori')->join('tb_asset_status', 'tb_asset_status.id_status = tb_asset_item.id_status')->orderBy('id_item', 'DESC')->findAll()
         ];
 
         return view($this->view . '/index', $data);
@@ -53,7 +55,8 @@ class AssetBarang extends BaseController
         $data = [
             'title' => $this->title,
             'link' => $this->link,
-            'kategori' => $this->modelkategori->findAll(),
+            'barang' => $this->modelbarang->findAll(),
+            'status' => $this->modelstatus->findAll(),
         ];
 
         return view($this->view . '/new', $data);
@@ -67,9 +70,9 @@ class AssetBarang extends BaseController
     public function create()
     {
         $data = [
-            'nama_barang' => $this->request->getVar('nama_barang'),
-            'kode_barang' => $this->request->getVar('kode_barang'),
-            'id_kategori' => $this->request->getVar('id_kategori'),
+            'kode_item' => $this->request->getVar('kode_item'),
+            'id_barang' => $this->request->getVar('id_barang'),
+            'id_status' => $this->request->getVar('id_status'),
         ];
 
         $res = $this->model->save($data);
@@ -97,7 +100,8 @@ class AssetBarang extends BaseController
         $data = [
             'title' => $this->title,
             'link' => $this->link,
-            'kategori' => $this->modelkategori->findAll(),
+            'barang' => $this->modelbarang->findAll(),
+            'status' => $this->modelstatus->findAll(),
             'data' => $result
         ];
 
@@ -112,9 +116,9 @@ class AssetBarang extends BaseController
     public function update($id = null)
     {
         $data = [
-            'nama_barang' => $this->request->getVar('nama_barang'),
-            'kode_barang' => $this->request->getVar('kode_barang'),
-            'id_kategori' => $this->request->getVar('id_kategori'),
+            'kode_item' => $this->request->getVar('kode_item'),
+            'id_barang' => $this->request->getVar('id_barang'),
+            'id_status' => $this->request->getVar('id_status'),
         ];
 
         $res = $this->model->update($id, $data);
