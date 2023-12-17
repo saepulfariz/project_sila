@@ -201,6 +201,15 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                                 </p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="<?= base_url('asset/status'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'status')) ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Status
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
