@@ -67,6 +67,7 @@ $routes->group('', ['filter' => 'authFilter'], function ($routes) {
     $routes->resource('surat/masuk', ['controller' => 'SuratMasuk']);
     $routes->resource('surat/keluar', ['controller' => 'SuratKeluar']);
     $routes->resource('asset/kategori', ['controller' => 'AssetKategori']);
+    $routes->resource('asset/barang', ['controller' => 'AssetBarang']);
     $routes->get('laporan', 'Laporan::index');
     $routes->get('laporan/helpdesk', 'Laporan::index');
     $routes->get('laporan/history', 'Laporan::history');
