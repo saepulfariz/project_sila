@@ -14,6 +14,7 @@ class AssetItem extends BaseController
     private $model;
     private $modelbarang;
     private $modelstatus;
+    private $modelkategori;
     private $link = 'asset/item';
     private $view = 'asset/item';
     private $title = 'Asset Item';
@@ -22,6 +23,7 @@ class AssetItem extends BaseController
         $this->model = new \App\Models\AssetItemModel();
         $this->modelbarang = new \App\Models\AssetBarangModel();
         $this->modelstatus = new \App\Models\AssetStatusModel();
+        $this->modelkategori = new \App\Models\AssetKategoriModel();
     }
 
     public function index()
@@ -40,9 +42,37 @@ class AssetItem extends BaseController
      *
      * @return mixed
      */
-    public function show($id = null)
+    public function show($id_barang = null)
     {
-        //
+        $kode_barang = $this->modelbarang->find($id_barang);
+
+        if (!$kode_barang) {
+            $data = [
+                'error' => true,
+                'message' => 'not found'
+            ];
+            return json_encode($data);
+        }
+
+        // GET kode_item berdasarkan
+        $result = $this->model->where('id_barang', $id_barang)->first();
+
+        $kode_barang = $kode_barang['kode_barang'];
+
+        // get date
+        $date = date('ymd');
+
+        if (!$result) {
+            $kode_item = $kode_barang . $date . '0000';
+        } else {
+            $kode_item = $result['kode_item'];
+        }
+
+        $data = [
+            'error' => true,
+            'data' => autonumberDate($kode_item, 3, 4)
+        ];
+        return json_encode($data);
     }
 
     /**

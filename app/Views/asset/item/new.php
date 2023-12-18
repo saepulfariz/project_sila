@@ -41,17 +41,17 @@
                             <div class="form-group">
                                 <label for="id_barang">Barang</label>
                                 <select name="id_barang" id="id_barang" class="form-control">
+                                    <option selected disabled>== PILIH == </option>
                                     <?php foreach ($barang as $d) : ?>
-                                        <option value="<?= $d['id_barang']; ?>"><?= $d['nama_barang']; ?> - <?= $d['kode_barang']; ?></option>
+                                        <option value="<?= $d['id_barang']; ?>"><?= $d['nama_barang']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="kode_item">Kode Item</label>
-                                <input type="text" class="form-control" id="kode_item" name="kode_item" required placeholder="Kode Item">
+                                <input type="text" class="form-control" readonly id="kode_item" name="kode_item" required placeholder="Kode Item">
                             </div>
-
 
 
                             <div class="form-group">
@@ -77,3 +77,31 @@
     </div>
 </section>
 <?= $this->endSection('content') ?>
+
+
+<?= $this->section('script') ?>
+<script>
+    function setKodeItem() {
+        var id = $('#id_barang').val();
+        $.ajax({
+            url: '<?= base_url($link); ?>/' + id,
+            method: 'GET', // POST
+            data: {
+                // id: id
+            },
+            dataType: 'json', // json
+            success: function(data) {
+                if (data.error != true) {
+                    alert('not found');
+                } else {
+                    $('#kode_item').val(data.data);
+                }
+            }
+        });
+    }
+
+    $('#id_barang').on('change', function() {
+        setKodeItem();
+    })
+</script>
+<?= $this->endSection('script') ?>

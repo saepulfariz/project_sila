@@ -87,3 +87,33 @@
     </div>
 </section>
 <?= $this->endSection('content') ?>
+
+
+
+<?= $this->section('script') ?>
+<script>
+    function setKodeItem() {
+        var id = $('#id_barang').val();
+        $.ajax({
+            url: '<?= base_url($link); ?>/' + id,
+            method: 'GET', // POST
+            data: {
+                // id: id
+            },
+            dataType: 'json', // json
+            success: function(data) {
+                if (data.error != true) {
+                    alert('not found');
+                } else {
+                    $('#kode_item').val(data.data);
+                }
+            }
+        });
+    }
+
+    setKodeItem();
+    $('#id_barang').on('change', function() {
+        setKodeItem();
+    })
+</script>
+<?= $this->endSection('script') ?>

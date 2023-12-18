@@ -64,3 +64,69 @@ function cuplikKonten($konten, $maxKata = 20)
         return $konten;
     }
 }
+
+
+function autonumber($id_terakhir, $panjang_kode, $panjang_angka)
+{
+
+    // mengambil nilai kode ex: KNS0015 hasil KNS
+    $kode = substr($id_terakhir, 0, $panjang_kode);
+
+    // mengambil nilai angka
+    // ex: KNS0015 hasilnya 0015
+    $angka = substr($id_terakhir, $panjang_kode, $panjang_angka);
+
+    // menambahkan nilai angka dengan 1
+    // kemudian memberikan string 0 agar panjang string angka menjadi 4
+    // ex: angka baru = 6 maka ditambahkan strig 0 tiga kali
+    // sehingga menjadi 0006
+    $angka_baru = str_repeat("0", $panjang_angka - strlen($angka + 1)) . ($angka + 1);
+
+    // menggabungkan kode dengan nilang angka baru
+    $id_baru = $kode . $angka_baru;
+
+    return $id_baru;
+}
+
+function autonumberDate($id_terakhir, $panjang_kode, $panjang_angka)
+{
+
+    // mengambil nilai kode ex: KNS0015 hasil KNS
+    $kode = substr($id_terakhir, 0, $panjang_kode);
+
+    // panjang kode
+    $lengthKode = strlen($id_terakhir);
+    $dateAdd = "";
+    if ($lengthKode == $panjang_angka + $panjang_kode) {
+        $angka = substr($id_terakhir, $panjang_kode, $panjang_angka);
+        $angka_baru = str_repeat("0", $panjang_angka - strlen($angka + 1)) . ($angka + 1);
+    } else {
+
+        $panjang_date = $lengthKode - $panjang_angka - $panjang_kode;
+        $getDate = substr($id_terakhir, $panjang_kode, $panjang_date);
+        $dateNow = date('ymd');
+
+        // mengambil nilai angka
+        // ex: KNS0015 hasilnya 0015
+        // jika date nya sama maka kita auto increment jika beda kita reset ke 0000
+        if ($dateNow == $getDate) {
+            $dateAdd = $getDate;
+            $angka = substr($id_terakhir, $panjang_kode + $panjang_date, $panjang_angka);
+
+            // menambahkan nilai angka dengan 1
+            // kemudian memberikan string 0 agar panjang string angka menjadi 4
+            // ex: angka baru = 6 maka ditambahkan strig 0 tiga kali
+            // sehingga menjadi 0006
+            $angka_baru = str_repeat("0", $panjang_angka - strlen($angka + 1)) . ($angka + 1);
+        } else {
+            $dateAdd = $dateNow;
+            $angka_baru = str_repeat('0', $panjang_angka);
+        }
+    }
+
+
+    // menggabungkan kode dengan nilang angka baru
+    $id_baru = $kode . $dateAdd . $angka_baru;
+
+    return $id_baru;
+}
