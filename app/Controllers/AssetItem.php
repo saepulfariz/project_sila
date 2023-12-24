@@ -121,7 +121,7 @@ class AssetItem extends BaseController
      */
     public function edit($id = null)
     {
-        $result = $this->model->find($id);
+        $result = $this->model->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->find($id);
         if (!$result) {
             $this->alert->set('warning', 'Warning', 'NOT VALID');
             return redirect()->to($this->link);
@@ -146,8 +146,8 @@ class AssetItem extends BaseController
     public function update($id = null)
     {
         $data = [
-            'kode_item' => $this->request->getVar('kode_item'),
-            'id_barang' => $this->request->getVar('id_barang'),
+            // 'kode_item' => $this->request->getVar('kode_item'),
+            // 'id_barang' => $this->request->getVar('id_barang'),
             'id_status' => $this->request->getVar('id_status'),
         ];
 

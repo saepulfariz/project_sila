@@ -28,7 +28,7 @@
 <section class="content">
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
-        <form action="<?= base_url($link . '/' . $data['id_barang']); ?>" method="post">
+        <form action="<?= base_url($link . '/' . $data['id_item']); ?>" method="post">
             <div class="row">
                 <div class="col-md-5 mb-2">
                     <div class="card">
@@ -39,22 +39,17 @@
                             <input type='hidden' name='_method' value='PUT' />
                             <!-- GET, POST, PUT, PATCH, DELETE-->
                             <?= csrf_field(); ?>
+
                             <div class="form-group">
                                 <label for="id_barang">Barang</label>
-                                <select name="id_barang" id="id_barang" class="form-control">
-                                    <?php foreach ($barang as $d) : ?>
-                                        <?php if ($d['id_barang'] == $data['id_barang']) : ?>
-                                            <option selected value="<?= $d['id_barang']; ?>"><?= $d['nama_barang']; ?> - <?= $d['kode_barang']; ?></option>
-                                        <?php else : ?>
-                                            <option value="<?= $d['id_barang']; ?>"><?= $d['nama_barang']; ?> - <?= $d['kode_barang']; ?></option>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </select>
+                                <input type="text" name="id_barang" readonly id="id_barang" class="form-control" value="<?= $data['nama_barang']; ?> - <?= $data['kode_barang']; ?>">
                             </div>
+
+
 
                             <div class="form-group">
                                 <label for="kode_item">Kode Item</label>
-                                <input type="text" class="form-control" id="kode_item" name="kode_item" required placeholder="Kode Item" value="<?= $data['kode_item']; ?>">
+                                <input type="text" class="form-control" id="kode_item" name="kode_item" required readonly placeholder="Kode Item" value="<?= $data['kode_item']; ?>">
                             </div>
 
 
@@ -111,7 +106,7 @@
         });
     }
 
-    setKodeItem();
+    // setKodeItem();
     $('#id_barang').on('change', function() {
         setKodeItem();
     })

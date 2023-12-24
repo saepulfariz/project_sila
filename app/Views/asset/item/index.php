@@ -58,8 +58,8 @@
                     <td><?= $d['nama_kategori']; ?></td>
                     <td><?= $d['nama_status']; ?></td>
                     <td>
-                      <a class="btn btn-warning btn-sm mb-2" href="<?= base_url($link . '/' . $d['id_barang'] . '/edit'); ?>">Edit</a>
-                      <form action='<?= base_url($link . '') . '/' . $d['id_barang']; ?>' method='post' enctype='multipart/form-data'>
+                      <a class="btn btn-warning btn-sm mb-2" href="<?= base_url($link . '/' . $d['id_item'] . '/edit'); ?>">Edit</a>
+                      <form action='<?= base_url($link . '') . '/' . $d['id_item']; ?>' method='post' enctype='multipart/form-data'>
                         <input type='hidden' name='_method' value='DELETE' />
                         <!-- GET, POST, PUT, PATCH, DELETE-->
                         <?= csrf_field(); ?>
