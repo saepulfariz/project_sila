@@ -4,6 +4,7 @@ $user = new App\Models\UserModel();
 $request = \Config\Services::request();
 $segment = $request->uri->getSegment(1);
 $segment2 = $request->uri->getSegment(2);
+$segment3 = $request->uri->getSegment(3);
 
 $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(session()->get('id_user'));
 
@@ -216,6 +217,15 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     Barang
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="<?= base_url('asset/pinjam/status'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'pinjam') && ($segment3 == 'status')) ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Pinjam Status
                                 </p>
                             </a>
                         </li>
