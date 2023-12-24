@@ -21,7 +21,7 @@ class TbAssetPinjam extends Migration
             'jatuh_tempo' => [
                 'type'       => 'DATE',
             ],
-            'tgl_pinjam' => [
+            'tgl_kembali' => [
                 'type'       => 'DATE',
             ],
             'perihal' => [

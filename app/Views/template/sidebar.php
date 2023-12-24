@@ -221,11 +221,21 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                             </a>
                         </li>
 
+
                         <li class="nav-item">
                             <a href="<?= base_url('asset/pinjam/status'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'pinjam') && ($segment3 == 'status')) ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     Pinjam Status
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="<?= base_url('asset/pinjam/list'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'pinjam') && ($segment3 == 'list')) ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Pinjam List
                                 </p>
                             </a>
                         </li>

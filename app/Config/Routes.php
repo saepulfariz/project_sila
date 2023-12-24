@@ -76,6 +76,10 @@ $routes->group('', ['filter' => 'authFilter'], function ($routes) {
     $routes->get('laporan/masuk', 'Laporan::masuk');
     $routes->get('laporan/keluar', 'Laporan::keluar');
 
+    $routes->get('asset/pinjam/list/list_barang', 'AssetPinjam::listBarang');
+    $routes->get('asset/pinjam/list/add_barang', 'AssetPinjam::addBarang');
+    $routes->get('asset/pinjam/list/delete_barang', 'AssetPinjam::deleteBarang');
+    $routes->resource('asset/pinjam/list', ['controller' => 'AssetPinjam']);
     $routes->resource('asset/pinjam/status', ['controller' => 'AssetPinjamStatus']);
 });
 
