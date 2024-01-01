@@ -41,6 +41,7 @@
               <thead>
                 <tr>
                   <th>No</th>
+                  <th>Nama Pinjam</th>
                   <th>Tgl Pinjam</th>
                   <th>Tgl Jatuh Tempo</th>
                   <th>Tgl Kembali</th>
@@ -55,6 +56,12 @@
                 foreach ($data as $d) : ?>
                   <tr>
                     <td><?= $a++; ?></td>
+                    <td><?= $d['nama_lengkap']; ?></td>
+                    <td><?= $d['tgl_pinjam']; ?></td>
+                    <td><?= $d['jatuh_tempo']; ?></td>
+                    <td><?= $d['tgl_kembali']; ?></td>
+                    <td><?= $d['perihal']; ?></td>
+                    <td><?= $d['catatan']; ?></td>
                     <td><?= $d['nama_status']; ?></td>
                     <td>
                       <a class="btn btn-warning btn-sm mb-2" href="<?= base_url($link . '/' . $d['id_pinjam'] . '/edit'); ?>">Edit</a>

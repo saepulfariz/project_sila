@@ -15,10 +15,9 @@ class TbAssetPinjamTransaksi extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'id_pinjam' => [
-                'type'           => 'INT',
-                'constraint'     => 11,
-                'unsigned'       => true,
+            'kode_pinjam' => [
+                'type'       => 'VARCHAR',
+                'constraint'     => '100',
             ],
             'id_item' => [
                 'type'           => 'INT',

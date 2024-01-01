@@ -3,8 +3,8 @@
 $user = new App\Models\UserModel();
 $request = \Config\Services::request();
 $segment = $request->uri->getSegment(1);
-$segment2 = ($request->uri->getTotalSegments() == 2) ? $request->uri->getSegment(2) : NULL;
-$segment3 = ($request->uri->getTotalSegments() > 3) ? $request->uri->getSegment(3) : NULL;
+$segment2 = ($request->uri->getTotalSegments() > 1) ? $request->uri->getSegment(2) : NULL;
+$segment3 = ($request->uri->getTotalSegments() > 2) ? $request->uri->getSegment(3) : NULL;
 
 $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(session()->get('id_user'));
 

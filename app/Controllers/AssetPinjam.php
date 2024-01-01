@@ -31,7 +31,7 @@ class AssetPinjam extends BaseController
         $data = [
             'title' => $this->title,
             'link' => $this->link,
-            'data' => $this->model->findAll()
+            'data' => $this->model->join('tb_user', 'tb_user.id_user = tb_asset_pinjam.cid')->join('tb_asset_pinjam_status', 'tb_asset_pinjam_status.id_status = tb_asset_pinjam.id_status')->orderBy('id_pinjam', 'DESC')->findAll()
         ];
 
         return view($this->view . '/index', $data);
@@ -39,20 +39,35 @@ class AssetPinjam extends BaseController
 
     public function listBarang()
     {
-        $id_pinjam = $this->model->orderBy('id_pinjam', 'DESC')->limit(1)->first();
-        $id_pinjam = ($id_pinjam) ? $id_pinjam['id_pinjam'] + 1 : 1;
-        $id_pinjam = $id_pinjam;
+        $get_kode = $this->request->getVar('kode_pinjam');
+        if ($get_kode) {
+            $kode_pinjam =  $get_kode;
+        } else {
+            $kode_pinjam = $this->model->orderBy('id_pinjam', 'DESC')->limit(1)->first();
+            $date = date('ymd');
+            $kode_pinjam = ($kode_pinjam) ? $kode_pinjam['kode_pinjam'] : 'PJ' . $date . '0000';
+            $kode_pinjam = autonumberDate($kode_pinjam, 2, 4);
+        }
+
         $result['error'] = false;
-        $result['data'] = $this->modelpinjamdetail->select('id, qty, nama_barang')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_pinjam_detail.id_barang')->where('id_pinjam', $id_pinjam)->findAll();
+        $result['data'] = $this->modelpinjamdetail->select('id, qty, nama_barang')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_pinjam_detail.id_barang')->where('kode_pinjam', $kode_pinjam)->findAll();
         return json_encode($result);
     }
 
     public function addBarang()
     {
-        $id_pinjam = $this->model->orderBy('id_pinjam', 'DESC')->limit(1)->first();
-        $id_pinjam = ($id_pinjam) ? $id_pinjam['id_pinjam'] + 1 : 1;
+        $get_kode = $this->request->getVar('kode_pinjam');
+        if ($get_kode) {
+            $kode_pinjam =  $get_kode;
+        } else {
+            $kode_pinjam = $this->model->orderBy('id_pinjam', 'DESC')->limit(1)->first();
+            $date = date('ymd');
+            $kode_pinjam = ($kode_pinjam) ? $kode_pinjam['kode_pinjam'] : 'PJ' . $date . '0000';
+            $kode_pinjam = autonumberDate($kode_pinjam, 2, 4);
+        }
+
         $data = [
-            'id_pinjam' => $id_pinjam,
+            'kode_pinjam' => $kode_pinjam,
             'id_barang' => $this->request->getVar('id_barang'),
             'qty' => $this->request->getVar('qty'),
         ];
@@ -92,9 +107,15 @@ class AssetPinjam extends BaseController
      */
     public function new()
     {
+        $kode_pinjam = $this->model->orderBy('id_pinjam', 'DESC')->limit(1)->first();
+        $date = date('ymd');
+        $kode_pinjam = ($kode_pinjam) ? $kode_pinjam['kode_pinjam'] : 'PJ' . $date . '0000';
+        $kode_pinjam = autonumberDate($kode_pinjam, 2, 4);
+
         $data = [
             'title' => $this->title,
             'link' => $this->link,
+            'kode_pinjam' => $kode_pinjam,
             'status' => $this->modelstatus->findAll(),
             'barang' => $this->modelbarang->select('id_barang, nama_barang, (SELECT COUNT(id_item) as qty FROM tb_asset_item WHERE id_status = 1 AND id_barang = tb_asset_barang.id_barang) as qty')->findAll(),
         ];
@@ -110,9 +131,16 @@ class AssetPinjam extends BaseController
     public function create()
     {
         $data = [
-            'nama_status' => $this->request->getVar('nama_status')
+            'kode_pinjam' => $this->request->getVar('kode_pinjam'),
+            'tgl_pinjam' => $this->request->getVar('tgl_pinjam'),
+            'jatuh_tempo' => $this->request->getVar('jatuh_tempo'),
+            'tgl_kembali' => $this->request->getVar('tgl_kembali'),
+            'perihal' => $this->request->getVar('perihal'),
+            'catatan' => $this->request->getVar('catatan'),
+            'id_status' => $this->request->getVar('id_status'),
         ];
 
+        $data = createLog($data, 0);
         $res = $this->model->save($data);
         if ($res) {
             $this->alert->set('success', 'Success', 'Add Success');
@@ -138,7 +166,9 @@ class AssetPinjam extends BaseController
         $data = [
             'title' => $this->title,
             'link' => $this->link,
-            'data' => $result
+            'data' => $result,
+            'status' => $this->modelstatus->findAll(),
+            'barang' => $this->modelbarang->select('id_barang, nama_barang, (SELECT COUNT(id_item) as qty FROM tb_asset_item WHERE id_status = 1 AND id_barang = tb_asset_barang.id_barang) as qty')->findAll(),
         ];
 
         return view($this->view . '/edit', $data);
@@ -152,9 +182,16 @@ class AssetPinjam extends BaseController
     public function update($id = null)
     {
         $data = [
-            'nama_status' => $this->request->getVar('nama_status')
+            'kode_pinjam' => $this->request->getVar('kode_pinjam'),
+            'tgl_pinjam' => $this->request->getVar('tgl_pinjam'),
+            'jatuh_tempo' => $this->request->getVar('jatuh_tempo'),
+            'tgl_kembali' => $this->request->getVar('tgl_kembali'),
+            'perihal' => $this->request->getVar('perihal'),
+            'catatan' => $this->request->getVar('catatan'),
+            'id_status' => $this->request->getVar('id_status'),
         ];
 
+        $data = createLog($data, 1);
         $res = $this->model->update($id, $data);
         if ($res) {
             $this->alert->set('success', 'Success', 'Update Success');
@@ -176,6 +213,8 @@ class AssetPinjam extends BaseController
             $this->alert->set('warning', 'Warning', 'NOT VALID');
             return redirect()->to($this->link);
         }
+
+        $this->modelpinjamdetail->where('kode_pinjam', $result['kode_pinjam'])->delete();
 
         $res = $this->model->delete($id);
         if ($res) {

@@ -14,9 +14,10 @@ class AssetPinjamModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'kode_pinjam',
         'tgl_pinjam',
         'jatuh_tempo',
-        'tgl_pinjam',
+        'tgl_kembali',
         'perihal',
         'catatan',
         'id_status',

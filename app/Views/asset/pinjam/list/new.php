@@ -38,6 +38,11 @@
                         <div class="card-body">
                             <?= csrf_field(); ?>
                             <div class="form-group">
+                                <label for="kode_pinjam">Kode Pinjam</label>
+                                <input type="text" readonly class="form-control" id="kode_pinjam" name="kode_pinjam" value="<?= $kode_pinjam; ?>" required>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="tgl_pinjam">Tgl Pinjam</label>
                                 <input type="date" class="form-control" id="tgl_pinjam" name="tgl_pinjam" required>
                             </div>
@@ -147,11 +152,12 @@
 <?= $this->section('script') ?>
 <script>
     function listBarang() {
+        var kode_pinjam = $('#kode_pinjam').val();
         $.ajax({
             url: '<?= base_url($link . '/list_barang'); ?>',
             method: 'GET', // POST
             data: {
-                // id: id
+                kode_pinjam: kode_pinjam
             },
             dataType: 'json', // json
             success: function(data) {
@@ -176,11 +182,13 @@
 
     function addBarang() {
         var id_barang = $('#id_barang').val();
+        var kode_pinjam = $('#kode_pinjam').val();
         var qty = $('#qty').val();
         $.ajax({
             url: '<?= base_url($link . '/add_barang'); ?>',
             method: 'GET', // POST
             data: {
+                kode_pinjam: kode_pinjam,
                 id_barang: id_barang,
                 qty: qty,
             },

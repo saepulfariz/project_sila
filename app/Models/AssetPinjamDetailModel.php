@@ -14,7 +14,7 @@ class AssetPinjamDetailModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_pinjam',
+        'kode_pinjam',
         'id_barang',
         'qty',
     ];

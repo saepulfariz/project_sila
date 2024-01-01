@@ -15,6 +15,10 @@ class TbAssetPinjam extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'kode_pinjam' => [
+                'type'       => 'VARCHAR',
+                'constraint'     => '100',
+            ],
             'tgl_pinjam' => [
                 'type'       => 'DATE',
             ],
