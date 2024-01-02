@@ -18,7 +18,8 @@ class AuthFilter implements FilterInterface
         $alert = new \App\Libraries\Alert();
 
         $segment = $request->uri->getSegment(1);
-        $segment2 = $request->uri->getSegment(2);
+        $segment2 = ($request->uri->getTotalSegments() > 1) ? $request->uri->getSegment(2) : NULL;
+        $segment3 = ($request->uri->getTotalSegments() > 2) ? $request->uri->getSegment(3) : NULL;
 
 
         if (!$session->has('id_user')) {
@@ -48,6 +49,43 @@ class AuthFilter implements FilterInterface
         }
 
         if (($segment == 'helpdesk') && ($segment2 == 'kategori')) {
+            if (session()->get('id_role') == 4 || session()->get('id_role') == 3) {
+                $alert->set('warning', 'Warning', 'User Not Access');
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
+        // filter menu asset
+
+        if (($segment == 'asset') && ($segment2 == 'item')) {
+            if (session()->get('id_role') == 4 || session()->get('id_role') == 3) {
+                $alert->set('warning', 'Warning', 'User Not Access');
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
+        if (($segment == 'asset') && ($segment2 == 'status')) {
+            if (session()->get('id_role') == 4 || session()->get('id_role') == 3) {
+                $alert->set('warning', 'Warning', 'User Not Access');
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
+        if (($segment == 'asset') && ($segment2 == 'kategori')) {
+            if (session()->get('id_role') == 4 || session()->get('id_role') == 3) {
+                $alert->set('warning', 'Warning', 'User Not Access');
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
+        if (($segment == 'asset') && ($segment2 == 'barang')) {
+            if (session()->get('id_role') == 4 || session()->get('id_role') == 3) {
+                $alert->set('warning', 'Warning', 'User Not Access');
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
+        if (($segment == 'asset') && ($segment2 == 'pinjam') && ($segment3 == 'status')) {
             if (session()->get('id_role') == 4 || session()->get('id_role') == 3) {
                 $alert->set('warning', 'Warning', 'User Not Access');
                 return redirect()->to(base_url('dashboard'));

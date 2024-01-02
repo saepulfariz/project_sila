@@ -178,58 +178,62 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
 
                 <li class="nav-item  <?= ($segment == 'asset') ? 'menu-open' : ''; ?>">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-envelope"></i>
+                        <i class="nav-icon  fas fa-shapes"></i>
                         <p>
                             Asset
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('asset/item'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'item')) ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Item
-                                </p>
-                            </a>
-                        </li>
+                        <?php if (session()->get('id_role') != 4) : ?>
 
-                        <li class="nav-item">
-                            <a href="<?= base_url('asset/status'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'status')) ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Status
-                                </p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('asset/item'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'item')) ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Item
+                                    </p>
+                                </a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a href="<?= base_url('asset/kategori'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'kategori')) ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Kategori
-                                </p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('asset/status'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'status')) ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Status
+                                    </p>
+                                </a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a href="<?= base_url('asset/barang'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'barang')) ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Barang
-                                </p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('asset/kategori'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'kategori')) ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Kategori
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="<?= base_url('asset/barang'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'barang')) ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Barang
+                                    </p>
+                                </a>
+                            </li>
 
 
-                        <li class="nav-item">
-                            <a href="<?= base_url('asset/pinjam/status'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'pinjam') && ($segment3 == 'status')) ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Pinjam Status
-                                </p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('asset/pinjam/status'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'pinjam') && ($segment3 == 'status')) ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Pinjam Status
+                                    </p>
+                                </a>
+                            </li>
+
+                        <?php endif; ?>
 
                         <li class="nav-item">
                             <a href="<?= base_url('asset/pinjam/list'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'pinjam') && ($segment3 == 'list')) ? 'active' : ''; ?>">
