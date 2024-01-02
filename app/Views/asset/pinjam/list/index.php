@@ -41,6 +41,7 @@
               <thead>
                 <tr>
                   <th>No</th>
+                  <th>Kode Pinjam</th>
                   <th>Nama Pinjam</th>
                   <th>Tgl Pinjam</th>
                   <th>Tgl Jatuh Tempo</th>
@@ -56,6 +57,7 @@
                 foreach ($data as $d) : ?>
                   <tr>
                     <td><?= $a++; ?></td>
+                    <td><?= $d['kode_pinjam']; ?></td>
                     <td><?= $d['nama_lengkap']; ?></td>
                     <td><?= $d['tgl_pinjam']; ?></td>
                     <td><?= $d['jatuh_tempo']; ?></td>
@@ -64,6 +66,7 @@
                     <td><?= $d['catatan']; ?></td>
                     <td><?= $d['nama_status']; ?></td>
                     <td>
+                      <a class="btn btn-info btn-sm mb-2" href="<?= base_url($link . '/' . $d['kode_pinjam'] . ''); ?>">Detail</a>
                       <a class="btn btn-warning btn-sm mb-2" href="<?= base_url($link . '/' . $d['id_pinjam'] . '/edit'); ?>">Edit</a>
                       <form action='<?= base_url($link . '') . '/' . $d['id_pinjam']; ?>' method='post' enctype='multipart/form-data'>
                         <input type='hidden' name='_method' value='DELETE' />

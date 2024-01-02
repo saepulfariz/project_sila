@@ -17,6 +17,7 @@ class AssetPinjam extends BaseController
     private $modelpinjamdetail;
     private $modelitem;
     private $modelpinjamtransaksi;
+    private $modelassetstatus;
     private $link = 'asset/pinjam/list';
     private $view = 'asset/pinjam/list';
     private $title = 'Asset Pinjam';
@@ -28,6 +29,7 @@ class AssetPinjam extends BaseController
         $this->modelpinjamdetail = new \App\Models\AssetPinjamDetailModel();
         $this->modelitem = new \App\Models\AssetItemModel();
         $this->modelpinjamtransaksi = new \App\Models\AssetPinjamTransaksiModel();
+        $this->modelassetstatus = new \App\Models\AssetStatusModel();
     }
 
     public function index()
@@ -123,11 +125,85 @@ class AssetPinjam extends BaseController
         return json_encode($result);
     }
 
+    public function returnOrderItemBarang()
+    {
+        $id = $this->request->getVar('id');
+        $id_status = $this->request->getVar('id_status');
+
+        $res = $this->modelpinjamtransaksi->find($id);
+        if ($res) {
+            $data = [
+                'kode_pinjam' => $res['kode_pinjam'],
+                'id_item' => $res['id_item'],
+                'id_status' =>  $id_status
+            ];
+            $this->modelpinjamtransaksi->save($data);
+
+            $result['error'] = false;
+            $result['message'] = "Success Return";
+        } else {
+            $result['error'] = true;
+            $result['message'] = "Not Found";
+        }
+
+        return json_encode($result);
+    }
+
+    public function returnUpdate($id = null)
+    {
+        $result = $this->model->find($id);
+        if (!$result) {
+            $this->alert->set('warning', 'Warning', 'NOT VALID');
+            return redirect()->to($this->link);
+        }
+
+        $data = [
+            'catatan' => $this->request->getVar('catatan'),
+            'tgl_kembali' => date('Y-m-d'),
+            'id_status' => 4, // kembali
+        ];
+
+        $data = createLog($data, 1);
+
+        $pinjam = $this->modelassetstatus->like('nama_status', 'pinjam')->first()['id_status'];
+
+        $data_return  = $this->modelpinjamtransaksi->where('id_status !=', $pinjam)->where('kode_pinjam', $result['kode_pinjam'])->findAll();
+        foreach ($data_return as $d) {
+            $id_status = ($d['id_status'] == 5) ? 1 : $d['id_status'];
+            // jika kembali maka jadi ada status nya
+            $data_update = [
+                'id_status' => $id_status
+            ];
+            $this->modelitem->where('id_item', $d['id_item'])->update(null, $data_update);
+        }
+
+
+        $res = $this->model->update($id, $data);
+        if ($res) {
+            $this->alert->set('success', 'Success', 'Return Success');
+        } else {
+            $this->alert->set('warning', 'Warning', 'Return Failed');
+        }
+        return redirect()->to($this->link);
+    }
+
     public function listItemOrderBarang()
     {
         $kode_pinjam = $this->request->getVar('kode_pinjam');
+        $id_status = $this->request->getVar('id_status');
+        $pinjam = $this->modelassetstatus->like('nama_status', 'pinjam')->first()['id_status'];
 
-        $data = $this->modelpinjamtransaksi->join('tb_asset_item', 'tb_asset_item.id_item = tb_asset_pinjam_transaksi.id_item')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->join('tb_asset_status', 'tb_asset_status.id_status = tb_asset_pinjam_transaksi.id_status')->where('kode_pinjam', $kode_pinjam)->findAll();
+        $data = $this->modelpinjamtransaksi->join('tb_asset_item', 'tb_asset_item.id_item = tb_asset_pinjam_transaksi.id_item')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->join('tb_asset_status', 'tb_asset_status.id_status = tb_asset_pinjam_transaksi.id_status')->where('kode_pinjam', $kode_pinjam);
+
+        if ($id_status == 1) {
+            // jika list di pinjam kan
+            $data = $data->where('tb_asset_pinjam_transaksi.id_status', $pinjam);
+        } else {
+            // list yang mau di kembalikan
+            $data = $data->where('tb_asset_pinjam_transaksi.id_status != ', $pinjam)->where('tb_asset_pinjam_transaksi.id_status != ', 1);
+        }
+
+        $data = $data->findAll();
 
         if ($data) {
             $result['error'] = false;
@@ -166,7 +242,27 @@ class AssetPinjam extends BaseController
      */
     public function show($id = null)
     {
-        //
+        // $result = $this->model->find($id);
+        $result = $this->model->where('kode_pinjam', $id)->first();
+        if (!$result) {
+            $this->alert->set('warning', 'Warning', 'NOT VALID');
+            return redirect()->to($this->link);
+        }
+
+        $data = [
+            'title' => $this->title,
+            'link' => $this->link,
+            'data' => $result,
+            'status_id' => [
+                'kembali' => $this->modelassetstatus->like('nama_status', 'kembali')->first()['id_status'],
+                'rusak' => $this->modelassetstatus->like('nama_status', 'rusak')->first()['id_status'],
+                'hilang' => $this->modelassetstatus->like('nama_status', 'hilang')->first()['id_status'],
+            ],
+            'status' => $this->modelstatus->findAll(),
+            'barang' => $this->modelbarang->select('id_barang, nama_barang, (SELECT COUNT(id_item) as qty FROM tb_asset_item WHERE id_status = 1 AND id_barang = tb_asset_barang.id_barang) as qty')->findAll(),
+        ];
+
+        return view($this->view . '/show', $data);
     }
 
     /**
