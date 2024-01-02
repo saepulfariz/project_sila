@@ -35,7 +35,7 @@
                 <div class="col-md-3 mb-2">
                     <div class="card">
                         <div class="card-header">
-                            New Pinjam
+                            Edit Pinjam
                         </div>
                         <div class="card-body">
                             <?= csrf_field(); ?>
@@ -138,6 +138,38 @@
                                 </thead>
                                 <tbody id="result"></tbody>
                             </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <p>List Item Pinjam</p>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Kode Item</th>
+                                        <th>Nama Barang</th>
+                                        <th>Nama Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="result-item-order"></tbody>
+                            </table>
+                            <hr>
+                            <p>List Item Barang</p>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Kode Item</th>
+                                        <th>Nama Barang</th>
+                                        <th>Nama Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="result-item-list"></tbody>
+                            </table>
                             <hr>
                             <button type="submit" class="btn btn-primary ">Submit</button>
                             <a href="<?= base_url($link); ?>" class="btn btn-secondary">Batal</a>
@@ -157,6 +189,114 @@
 
 <?= $this->section('script') ?>
 <script>
+    function deleteOrderItemBarang(id) {
+        $.ajax({
+            url: '<?= base_url($link . '/delete_order_item_barang'); ?>',
+            method: 'GET', // POST
+            data: {
+                id: id,
+            },
+            dataType: 'json', // json
+            success: function(data) {
+                if (data.error == true) {
+                    alert('not found');
+                } else {
+                    listItemOrderBarang();
+                }
+            }
+        });
+    }
+
+    function AddOrderItemBarang(id_item) {
+        var kode_pinjam = $('#kode_pinjam').val();
+        var qty = $('#qty').val();
+        $.ajax({
+            url: '<?= base_url($link . '/add_order_item_barang'); ?>',
+            method: 'GET', // POST
+            data: {
+                kode_pinjam: kode_pinjam,
+                id_item: id_item,
+            },
+            dataType: 'json', // json
+            success: function(data) {
+                if (data.error == true) {
+                    alert('not found');
+                } else {
+                    listItemOrderBarang();
+                }
+            }
+        });
+    }
+
+    function listItemOrderBarang() {
+        var kode_pinjam = $('#kode_pinjam').val();
+        $.ajax({
+            url: '<?= base_url($link . '/list_item_order_barang'); ?>',
+            method: 'GET', // POST
+            data: {
+                kode_pinjam: kode_pinjam
+            },
+            dataType: 'json', // json
+            success: function(data) {
+                var list = '';
+                if (data.error == true) {
+                    // alert('not found');
+                } else {
+                    // var list = '';
+                    var i = 1;
+                    for (let index = 0; index < data.data.length; index++) {
+                        const element = data.data[index];
+                        list = list + `<tr>
+                            <td>` + i + `</td>
+                            <td>` + element.kode_item + `</td>
+                            <td>` + element.nama_barang + `</td>
+                            <td>` + element.nama_status + `</td>
+                            <td class="d-flex flex-row"><button class="btn btn-sm ml-2 btn-danger " type="button" onclick="deleteOrderItemBarang(` + element.id + `)"><i class="fas fa-times"></i></button></td>
+                        </tr>`;
+                        i++;
+                    }
+
+                }
+                $('#result-item-order').html(list);
+            }
+        });
+    }
+
+    listItemOrderBarang();
+
+
+    function listItemBarang(id) {
+        var id = id;
+        $.ajax({
+            url: '<?= base_url($link . '/list_item_barang'); ?>',
+            method: 'GET', // POST
+            data: {
+                id: id
+            },
+            dataType: 'json', // json
+            success: function(data) {
+                var list = '';
+                if (data.error == true) {
+                    alert('not found');
+                } else {
+                    var i = 1;
+                    for (let index = 0; index < data.data.length; index++) {
+                        const element = data.data[index];
+                        list = list + `<tr>
+                            <td>` + i + `</td>
+                            <td>` + element.kode_item + `</td>
+                            <td>` + element.nama_barang + `</td>
+                            <td>` + element.nama_status + `</td>
+                            <td class="d-flex flex-row"><button class="btn btn-sm ml-2 btn-info " type="button" onclick="AddOrderItemBarang(` + element.id_item + `)"><i class="fas fa-caret-square-right"></i></button></td>
+                        </tr>`;
+                        i++;
+                    }
+                }
+                $('#result-item-list').html(list);
+            }
+        });
+    }
+
     function listBarang() {
         var kode_pinjam = $('#kode_pinjam').val();
         $.ajax({
@@ -175,7 +315,7 @@
                         <td>` + i + `</td>
                         <td>` + element.nama_barang + `</td>
                         <td>` + element.qty + `</td>
-                        <td><button class="btn btn-sm btn-danger" type="button" onclick="deleteBarang(` + element.id + `)">X</button></td>
+                        <td class="d-flex flex-row"><button class="btn btn-sm ml-2 btn-info " type="button" onclick="listItemBarang(` + element.id_barang + `)"><i class="fas fa-cart-plus"></i></button><button class="btn btn-sm ml-2 btn-danger mr-2" type="button" onclick="deleteBarang(` + element.id + `)"><i class="fas fa-times"></i></button></td>
                     </tr>`;
                     i++;
                 }
@@ -228,5 +368,21 @@
             }
         });
     }
+</script>
+
+<script>
+    var table = $('.table').DataTable({
+        responsive: true,
+        // "dom": 'Bflrtip',
+        // buttons: [
+        //     'copy', 'excel', 'pdf'
+        // ],
+        "pageLength": 5,
+        "lengthMenu": [
+            [5, 100, 1000, -1],
+            [5, 100, 1000, "ALL"],
+        ],
+
+    })
 </script>
 <?= $this->endSection('script') ?>

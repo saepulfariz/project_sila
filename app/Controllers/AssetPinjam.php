@@ -15,6 +15,8 @@ class AssetPinjam extends BaseController
     private $modelstatus;
     private $modelbarang;
     private $modelpinjamdetail;
+    private $modelitem;
+    private $modelpinjamtransaksi;
     private $link = 'asset/pinjam/list';
     private $view = 'asset/pinjam/list';
     private $title = 'Asset Pinjam';
@@ -24,6 +26,8 @@ class AssetPinjam extends BaseController
         $this->modelstatus = new \App\Models\AssetPinjamStatusModel();
         $this->modelbarang = new \App\Models\AssetBarangModel();
         $this->modelpinjamdetail = new \App\Models\AssetPinjamDetailModel();
+        $this->modelitem = new \App\Models\AssetItemModel();
+        $this->modelpinjamtransaksi = new \App\Models\AssetPinjamTransaksiModel();
     }
 
     public function index()
@@ -50,7 +54,7 @@ class AssetPinjam extends BaseController
         }
 
         $result['error'] = false;
-        $result['data'] = $this->modelpinjamdetail->select('id, qty, nama_barang')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_pinjam_detail.id_barang')->where('kode_pinjam', $kode_pinjam)->findAll();
+        $result['data'] = $this->modelpinjamdetail->select('id, qty, nama_barang, tb_asset_pinjam_detail.id_barang')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_pinjam_detail.id_barang')->where('kode_pinjam', $kode_pinjam)->findAll();
         return json_encode($result);
     }
 
@@ -86,7 +90,72 @@ class AssetPinjam extends BaseController
         $this->modelpinjamdetail->delete($id);
 
         $result['error'] = false;
-        $result['message'] = "Delete Add";
+        $result['message'] = "Success Delete";
+        return json_encode($result);
+    }
+
+    public function addOrderItemBarang()
+    {
+        $kode_pinjam = $this->request->getVar('kode_pinjam');
+        $id_item = $this->request->getVar('id_item');
+
+        $data = [
+            'kode_pinjam' => $kode_pinjam,
+            'id_item' => $id_item,
+            'id_status' =>  3, // pinjam
+        ];
+
+        $data = createLog($data, 0);
+        $this->modelpinjamtransaksi->save($data);
+        $result['error'] = false;
+        $result['message'] = "Success Add";
+        return json_encode($result);
+    }
+
+    public function deleteOrderItemBarang()
+    {
+        $id = $this->request->getVar('id');
+
+        $this->modelpinjamtransaksi->delete($id);
+
+        $result['error'] = false;
+        $result['message'] = "Success Delete";
+        return json_encode($result);
+    }
+
+    public function listItemOrderBarang()
+    {
+        $kode_pinjam = $this->request->getVar('kode_pinjam');
+
+        $data = $this->modelpinjamtransaksi->join('tb_asset_item', 'tb_asset_item.id_item = tb_asset_pinjam_transaksi.id_item')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->join('tb_asset_status', 'tb_asset_status.id_status = tb_asset_pinjam_transaksi.id_status')->where('kode_pinjam', $kode_pinjam)->findAll();
+
+        if ($data) {
+            $result['error'] = false;
+            $result['message'] = "result data";
+            $result['data'] = $data;
+        } else {
+            $result['error'] = true;
+            $result['message'] = "Not Found";
+        }
+
+        return json_encode($result);
+    }
+
+    public function listItemBarang()
+    {
+        $id = $this->request->getVar('id');
+
+        $data = $this->modelitem->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->join('tb_asset_status', 'tb_asset_status.id_status = tb_asset_item.id_status')->where('tb_asset_item.id_barang', $id)->where('id_status', 1)->findAll();
+
+        if ($data) {
+            $result['error'] = false;
+            $result['message'] = "result data";
+            $result['data'] = $data;
+        } else {
+            $result['error'] = true;
+            $result['message'] = "Not Found";
+        }
+
         return json_encode($result);
     }
 
@@ -192,6 +261,17 @@ class AssetPinjam extends BaseController
         ];
 
         $data = createLog($data, 1);
+
+        if (session()->get('id_role') != 4) {
+            $data_pinjam = $this->modelpinjamtransaksi->where('kode_pinjam', $data['kode_pinjam'])->findAll();
+            foreach ($data_pinjam as $d) {
+                $data_update = [
+                    'id_status' => $d['id_status']
+                ];
+                $this->modelitem->where('id_item', $d['id_item'])->update(null, $data_update);
+            }
+        }
+
         $res = $this->model->update($id, $data);
         if ($res) {
             $this->alert->set('success', 'Success', 'Update Success');

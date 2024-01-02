@@ -79,6 +79,14 @@ $routes->group('', ['filter' => 'authFilter'], function ($routes) {
     $routes->get('asset/pinjam/list/list_barang', 'AssetPinjam::listBarang');
     $routes->get('asset/pinjam/list/add_barang', 'AssetPinjam::addBarang');
     $routes->get('asset/pinjam/list/delete_barang', 'AssetPinjam::deleteBarang');
+
+    $routes->get('asset/pinjam/list/list_item_barang', 'AssetPinjam::listItemBarang');
+    $routes->get('asset/pinjam/list/list_item_order_barang', 'AssetPinjam::listItemOrderBarang');
+    $routes->get('asset/pinjam/list/add_order_item_barang', 'AssetPinjam::AddOrderItemBarang');
+    $routes->get('asset/pinjam/list/delete_order_item_barang', 'AssetPinjam::DeleteOrderItemBarang');
+
+
+
     $routes->resource('asset/pinjam/list', ['controller' => 'AssetPinjam']);
     $routes->resource('asset/pinjam/status', ['controller' => 'AssetPinjamStatus']);
 });
