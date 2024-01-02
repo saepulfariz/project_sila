@@ -21,6 +21,8 @@ class AssetPinjamModel extends Model
         'perihal',
         'catatan',
         'id_status',
+        'cid',
+        'uid',
     ];
 
     // Dates

@@ -34,10 +34,16 @@ class AssetPinjam extends BaseController
 
     public function index()
     {
+        if (session()->get('id_role') == 4) {
+            $result = $this->model->join('tb_user', 'tb_user.id_user = tb_asset_pinjam.cid')->join('tb_asset_pinjam_status', 'tb_asset_pinjam_status.id_status = tb_asset_pinjam.id_status')->orderBy('id_pinjam', 'DESC')->where('tb_asset_pinjam.cid', session()->get('id_user'))->findAll();
+        } else {
+            $result = $this->model->join('tb_user', 'tb_user.id_user = tb_asset_pinjam.cid')->join('tb_asset_pinjam_status', 'tb_asset_pinjam_status.id_status = tb_asset_pinjam.id_status')->orderBy('id_pinjam', 'DESC')->findAll();
+        }
+
         $data = [
             'title' => $this->title,
             'link' => $this->link,
-            'data' => $this->model->join('tb_user', 'tb_user.id_user = tb_asset_pinjam.cid')->join('tb_asset_pinjam_status', 'tb_asset_pinjam_status.id_status = tb_asset_pinjam.id_status')->orderBy('id_pinjam', 'DESC')->findAll()
+            'data' => $result
         ];
 
         return view($this->view . '/index', $data);
@@ -70,6 +76,15 @@ class AssetPinjam extends BaseController
             $date = date('ymd');
             $kode_pinjam = ($kode_pinjam) ? $kode_pinjam['kode_pinjam'] : 'PJ' . $date . '0000';
             $kode_pinjam = autonumberDate($kode_pinjam, 2, 4);
+        }
+
+        $check_edit = $this->model->where('kode_pinjam', $kode_pinjam)->first();
+        if ($check_edit) {
+            if ($check_edit['id_status'] != 2) {
+                $result['error'] = true;
+                $result['message'] = "Failed Add, Bukan PENDING";
+                return json_encode($result);
+            }
         }
 
         $data = [
@@ -158,7 +173,7 @@ class AssetPinjam extends BaseController
         }
 
         $data = [
-            'catatan' => $this->request->getVar('catatan'),
+            'catatan' => 'STAFF - ' . $result['catatan'] . ' || MAHASISWA - ' . $this->request->getVar('catatan'),
             'tgl_kembali' => date('Y-m-d'),
             'id_status' => 4, // kembali
         ];
@@ -221,7 +236,7 @@ class AssetPinjam extends BaseController
     {
         $id = $this->request->getVar('id');
 
-        $data = $this->modelitem->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->join('tb_asset_status', 'tb_asset_status.id_status = tb_asset_item.id_status')->where('tb_asset_item.id_barang', $id)->where('id_status', 1)->findAll();
+        $data = $this->modelitem->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->join('tb_asset_status', 'tb_asset_status.id_status = tb_asset_item.id_status')->where('tb_asset_item.id_barang', $id)->where('tb_asset_item.id_status', 1)->findAll();
 
         if ($data) {
             $result['error'] = false;
@@ -299,10 +314,11 @@ class AssetPinjam extends BaseController
             'kode_pinjam' => $this->request->getVar('kode_pinjam'),
             'tgl_pinjam' => $this->request->getVar('tgl_pinjam'),
             'jatuh_tempo' => $this->request->getVar('jatuh_tempo'),
-            'tgl_kembali' => $this->request->getVar('tgl_kembali'),
+            // 'tgl_kembali' => $this->request->getVar('tgl_kembali'),
             'perihal' => $this->request->getVar('perihal'),
-            'catatan' => $this->request->getVar('catatan'),
-            'id_status' => $this->request->getVar('id_status'),
+            // 'catatan' => $this->request->getVar('catatan'),
+            // 'id_status' => $this->request->getVar('id_status'),
+            'id_status' => 2,
         ];
 
         $data = createLog($data, 0);
@@ -346,15 +362,31 @@ class AssetPinjam extends BaseController
      */
     public function update($id = null)
     {
+        $result = $this->model->find($id);
+        if (!$result) {
+            $this->alert->set('warning', 'Warning', 'NOT VALID');
+            return redirect()->to($this->link);
+        }
+
+        if ($result['id_status'] != 2) {
+            $this->alert->set('warning', 'Warning', 'NOT EDIT, BUKAN PENDING');
+            return redirect()->to($this->link);
+        }
+
         $data = [
             'kode_pinjam' => $this->request->getVar('kode_pinjam'),
             'tgl_pinjam' => $this->request->getVar('tgl_pinjam'),
             'jatuh_tempo' => $this->request->getVar('jatuh_tempo'),
-            'tgl_kembali' => $this->request->getVar('tgl_kembali'),
+            // 'tgl_kembali' => $this->request->getVar('tgl_kembali'),
             'perihal' => $this->request->getVar('perihal'),
-            'catatan' => $this->request->getVar('catatan'),
-            'id_status' => $this->request->getVar('id_status'),
+            // 'catatan' => $this->request->getVar('catatan'),
+            // 'id_status' => $this->request->getVar('id_status'),
         ];
+
+        if ((session()->get('id_role') != 4) && (session()->get('id_role') != 3)) {
+            $data['catatan'] = $this->request->getVar('catatan');
+            $data['id_status'] = $this->request->getVar('id_status');
+        }
 
         $data = createLog($data, 1);
 
@@ -387,6 +419,11 @@ class AssetPinjam extends BaseController
         $result = $this->model->find($id);
         if (!$result) {
             $this->alert->set('warning', 'Warning', 'NOT VALID');
+            return redirect()->to($this->link);
+        }
+
+        if ($result['id_status'] != 2) {
+            $this->alert->set('warning', 'Warning', 'NOT DELETE, BUKAN PENDINg');
             return redirect()->to($this->link);
         }
 

@@ -24,7 +24,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                 <img src="<?= base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?= $resUser['username']; ?> - <?= $resUser['nama_role']; ?></a>
+                <a href="#" class="d-block"><span class="text-capitalize"><?= $resUser['username']; ?></span> - <span class="text-capitalize"><?= $resUser['nama_role']; ?></span></a>
             </div>
         </div>
 

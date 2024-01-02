@@ -52,16 +52,6 @@
                                 <input type="date" class="form-control" id="jatuh_tempo" name="jatuh_tempo" required>
                             </div>
 
-                            <div class="form-group">
-                                <label for="tgl_kembali">Tgl Kembali</label>
-                                <input type="date" class="form-control" id="tgl_kembali" name="tgl_kembali" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="perihal">Perihal</label>
-                                <textarea class="form-control" name="perihal" id="perihal" cols="30" rows="3"></textarea>
-                            </div>
-
 
                         </div>
                     </div>
@@ -72,23 +62,10 @@
                     <div class="card">
                         <div class="card-body">
 
-
                             <div class="form-group">
-                                <label for="catatan">Catatan</label>
-                                <textarea class="form-control" name="catatan" id="catatan" cols="30" rows="5"></textarea>
+                                <label for="perihal">Perihal</label>
+                                <textarea class="form-control" name="perihal" id="perihal" cols="30" rows="3"></textarea>
                             </div>
-
-                            <div class="form-group">
-                                <label for="id_status">Status</label>
-                                <select name="id_status" id="id_status" class="form-control">
-                                    <?php foreach ($status as $d) : ?>
-                                        <option value="<?= $d['id_status']; ?>"><?= $d['nama_status']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-
-
-
 
                         </div>
                     </div>

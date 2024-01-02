@@ -61,7 +61,7 @@
                     <td><?= $d['nama_lengkap']; ?></td>
                     <td><?= $d['tgl_pinjam']; ?></td>
                     <td><?= $d['jatuh_tempo']; ?></td>
-                    <td><?= $d['tgl_kembali']; ?></td>
+                    <td><?= ($d['tgl_kembali'] == '0000-00-00') ? '-' : $d['tgl_kembali']; ?></td>
                     <td><?= $d['perihal']; ?></td>
                     <td><?= $d['catatan']; ?></td>
                     <td><?= $d['nama_status']; ?></td>

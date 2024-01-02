@@ -59,10 +59,7 @@
                                 <input type="date" class="form-control" readonly id="tgl_kembali" name="tgl_kembali" value="<?= $data['tgl_kembali']; ?>" required>
                             </div>
 
-                            <div class="form-group">
-                                <label for="perihal">Perihal</label>
-                                <textarea class="form-control" readonly name="perihal" id="perihal" cols="30" rows="3"><?= $data['perihal']; ?></textarea>
-                            </div>
+
 
 
                         </div>
@@ -74,10 +71,14 @@
                     <div class="card">
                         <div class="card-body">
 
+                            <div class="form-group">
+                                <label for="perihal">Perihal</label>
+                                <textarea class="form-control" readonly name="perihal" id="perihal" cols="30" rows="3"><?= $data['perihal']; ?></textarea>
+                            </div>
 
                             <div class="form-group">
                                 <label for="catatan">Catatan</label>
-                                <textarea class="form-control" name="catatan" <?= ($data['id_status'] == 4) ? 'readonly' : ''; ?> id="catatan" cols="30" rows="5"><?= $data['catatan']; ?></textarea>
+                                <textarea class="form-control" name="catatan" <?= ($data['id_status'] == 4) ? 'readonly' : ''; ?> id="catatan" cols="30" rows="3"><?= $data['catatan']; ?></textarea>
                             </div>
 
                             <div class="form-group">
@@ -151,7 +152,7 @@
                             <?php if ($data['id_status'] == 3) : ?>
                                 <button type="submit" class="btn btn-primary ">Return Barang</button>
                             <?php endif; ?>
-                            <a href="<?= base_url($link); ?>" class="btn btn-secondary">Batal</a>
+                            <a href="<?= base_url($link); ?>" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>
                 </div>
