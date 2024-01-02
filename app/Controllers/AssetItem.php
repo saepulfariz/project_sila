@@ -70,7 +70,7 @@ class AssetItem extends BaseController
 
         $data = [
             'error' => true,
-            'data' => autonumberDate($kode_item, 3, 4)
+            'data' => autonumberDate($kode_item, strlen($kode_barang), 4)
         ];
         return json_encode($data);
     }

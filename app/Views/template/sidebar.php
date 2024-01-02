@@ -176,6 +176,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                     </ul>
                 </li>
 
+
                 <li class="nav-item  <?= ($segment == 'asset') ? 'menu-open' : ''; ?>">
                     <a href="#" class="nav-link">
                         <i class="nav-icon  fas fa-shapes"></i>
@@ -185,7 +186,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <?php if (session()->get('id_role') != 4) : ?>
+                        <?php if ((session()->get('id_role') != 4) && (session()->get('id_role') != 3)) : ?>
 
                             <li class="nav-item">
                                 <a href="<?= base_url('asset/item'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'item')) ? 'active' : ''; ?>">
@@ -250,6 +251,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
 
                     </ul>
                 </li>
+
 
                 <?php if (session()->get('id_role') != 4) : ?>
 
