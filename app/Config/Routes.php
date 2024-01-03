@@ -75,6 +75,8 @@ $routes->group('', ['filter' => 'authFilter'], function ($routes) {
     $routes->get('laporan/history', 'Laporan::history');
     $routes->get('laporan/masuk', 'Laporan::masuk');
     $routes->get('laporan/keluar', 'Laporan::keluar');
+    $routes->get('laporan/asset_pinjam', 'Laporan::assetPinjam');
+    $routes->get('laporan/asset_pinjam/(:any)', 'Laporan::assetPinjamDetail/$1');
 
     $routes->get('asset/pinjam/list/list_barang', 'AssetPinjam::listBarang');
     $routes->get('asset/pinjam/list/add_barang', 'AssetPinjam::addBarang');
