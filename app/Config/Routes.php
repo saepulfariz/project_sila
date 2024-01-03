@@ -35,7 +35,7 @@ $routes->post('/register', 'Auth::proses_register');
 $routes->get('/auth', 'Auth::index');
 $routes->post('/auth/proses_login', 'Auth::proses_login');
 
-$routes->group('', ['filter' => 'authFilter'], function ($routes) {
+$routes->group('', ['filter' => '\App\Filters\AuthFilter'], function ($routes) {
     $routes->get('/dashboard', 'Dashboard::index');
 
     // $routes->get('/helpdesk/kategori', 'KategoriHelpdesk::index');
