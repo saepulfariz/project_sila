@@ -16,6 +16,7 @@ class Dashboard extends BaseController
     private $modelkategorihelpdesk;
     private $modelsurat;
     private $modelsuratkategori;
+    private $modelassetpinjam;
     public function __construct()
     {
         $this->modeluser = new UserModel();
@@ -23,6 +24,7 @@ class Dashboard extends BaseController
         $this->modelsurat = new SuratModel();
         $this->modelkategorihelpdesk = new KategoriHelpdeskModel();
         $this->modelsuratkategori = new KategoriSuratModel();
+        $this->modelassetpinjam = new \App\Models\AssetPinjamModel();
     }
 
     public function index()
@@ -36,6 +38,8 @@ class Dashboard extends BaseController
             $data['helpdesk_done'] = $this->modelhelpdesk->select('COUNT(id_helpdesk) AS count')->where('id_status', 2)->where('cid', session()->get('id_user'))->first()['count'];
             $data['surat_pending'] = $this->modelsurat->select('COUNT(id_surat) AS count')->where('id_status', 1)->where('cid', session()->get('id_user'))->first()['count'];
             $data['surat_done'] = $this->modelsurat->select('COUNT(id_surat) AS count')->where('id_status', 2)->where('cid', session()->get('id_user'))->first()['count'];
+            $data['pinjam_pending'] = $this->modelassetpinjam->select('COUNT(id_pinjam) AS count')->where('id_status', 2)->where('cid', session()->get('id_user'))->first()['count'];
+            $data['pinjam_done'] = $this->modelassetpinjam->select('COUNT(id_pinjam) AS count')->where('id_status', 4)->where('cid', session()->get('id_user'))->first()['count'];
             return view('dashboard/mahasiswa', $data);
         } else {
             $sub_chart = "( SELECT COUNT(id_helpdesk) AS COUNT FROM tb_helpdesk WHERE id_kategori = tb_helpdesk_kategori.id_kategori) AS count";

@@ -84,6 +84,30 @@ $resUser = $user->find(session()->get('id_user'));
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="card bg-danger">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold text-white">Pinjam Pending</h4>
+                        <h5 class="text-white"><?= $pinjam_pending; ?></h5>
+                        <a class="mt-1 text-white" href="<?= base_url('asset/pinjam/list'); ?>">
+                            <i class="fas fa-search mr-1"></i> Lihat Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="card bg-purple">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold">Pinjam Done</h4>
+                        <h5 class=""><?= $pinjam_done; ?></h5>
+                        <a class="mt-1 text-white" href="<?= base_url('asset/pinjam/list'); ?>">
+                            <i class="fas fa-search mr-1"></i> Lihat Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
