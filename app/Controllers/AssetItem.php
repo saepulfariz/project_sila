@@ -55,7 +55,7 @@ class AssetItem extends BaseController
         }
 
         // GET kode_item berdasarkan
-        $result = $this->model->where('id_barang', $id_barang)->first();
+        $result = $this->model->where('id_barang', $id_barang)->orderBy('id_item', 'DESC')->first();
 
         $kode_barang = $kode_barang['kode_barang'];
 
