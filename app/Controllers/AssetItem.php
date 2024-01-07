@@ -15,6 +15,8 @@ class AssetItem extends BaseController
     private $modelbarang;
     private $modelstatus;
     private $modelkategori;
+    private $modeltransaksi;
+    private $modeluser;
     private $link = 'asset/item';
     private $view = 'asset/item';
     private $title = 'Asset Item';
@@ -24,6 +26,32 @@ class AssetItem extends BaseController
         $this->modelbarang = new \App\Models\AssetBarangModel();
         $this->modelstatus = new \App\Models\AssetStatusModel();
         $this->modelkategori = new \App\Models\AssetKategoriModel();
+        $this->modeltransaksi = new \App\Models\AssetTransaksiModel();
+        $this->modeluser = new \App\Models\UserModel();
+    }
+
+    public function log()
+    {
+        $data = [
+            'title' => 'Log ' . $this->title,
+            'link' => 'asset/log',
+            'data' => $this->modeltransaksi->select('tb_asset_transaksi.id, kode_item, nama_barang, nama_status, deskripsi, pc.nama_lengkap as pencatat, pj.nama_lengkap as  penanggung_jawab, tgl_transaksi')->join('tb_asset_item', 'tb_asset_item.id_item = tb_asset_transaksi.id_item')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->join('tb_asset_kategori', 'tb_asset_kategori.id_kategori = tb_asset_barang.id_kategori')->join('tb_asset_status', 'tb_asset_status.id_status = tb_asset_transaksi.id_status')->join('tb_user as pj', 'pj.id_user = tb_asset_transaksi.id_penanggung_jawab')->join('tb_user as pc', 'pc.id_user = tb_asset_transaksi.cid')->orderBy('id', 'DESC')->findAll()
+        ];
+
+        return view('asset/log/index', $data);
+    }
+
+    public function logNew()
+    {
+        $data = [
+            'title' => 'New Log ' . $this->title,
+            'link' => 'asset/log',
+            'item' => $this->model->select('id_item,kode_item, nama_barang')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->findAll(),
+            'user' => $this->modeluser->findAll(),
+            'status' => $this->modelstatus->findAll(),
+        ];
+
+        return view('asset/log/new', $data);
     }
 
     public function index()
@@ -102,10 +130,23 @@ class AssetItem extends BaseController
         $data = [
             'kode_item' => $this->request->getVar('kode_item'),
             'id_barang' => $this->request->getVar('id_barang'),
-            'id_status' => $this->request->getVar('id_status'),
+            'id_status' => 1,
         ];
 
         $res = $this->model->save($data);
+        $lastId = $this->model->orderBy('id_item', 'DESC')->first()['id_item'];
+        $data_transaksi = [
+            'id_item' => $lastId,
+            'tgl_transaksi' => date('Y-m-d'),
+            'id_status' => $data['id_status'],
+            'deskripsi' => 'add item',
+            'id_penanggung_jawab' => session()->get('id_user'),
+        ];
+
+        $data_transaksi = createLog($data_transaksi, 0);
+        $this->modeltransaksi->save($data_transaksi);
+
+
         if ($res) {
             $this->alert->set('success', 'Success', 'Add Success');
         } else {

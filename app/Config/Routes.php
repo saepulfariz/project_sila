@@ -64,6 +64,8 @@ $routes->group('', ['filter' => '\App\Filters\AuthFilter'], function ($routes) {
     $routes->get('user/active/(:num)/(:num)', 'User::active/$1/$2');
     $routes->resource('user');
 
+    $routes->get('asset/log', 'AssetItem::log');
+    $routes->get('asset/log/new', 'AssetItem::logNew');
     $routes->resource('surat/masuk', ['controller' => 'SuratMasuk']);
     $routes->resource('surat/keluar', ['controller' => 'SuratKeluar']);
     $routes->resource('asset/item', ['controller' => 'AssetItem']);

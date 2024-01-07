@@ -188,11 +188,22 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
                     <ul class="nav nav-treeview">
                         <?php if ((session()->get('id_role') != 4) && (session()->get('id_role') != 3)) : ?>
 
+
+
                             <li class="nav-item">
                                 <a href="<?= base_url('asset/item'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'item')) ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Item
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="<?= base_url('asset/log'); ?>" class="nav-link <?= (($segment == 'asset') && ($segment2 == 'log')) ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Item Log
                                     </p>
                                 </a>
                             </li>

@@ -8,13 +8,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">New Item</h1>
+                <h1 class="m-0">New Log</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
                     <li class="breadcrumb-item">Asset</li>
-                    <li class="breadcrumb-item">Kelola Item</li>
+                    <li class="breadcrumb-item">Kelola Log</li>
                     <li class="breadcrumb-item active">New</li>
                 </ol>
             </div>
@@ -33,26 +33,45 @@
                 <div class="col-md-5 mb-2">
                     <div class="card">
                         <div class="card-header">
-                            New Item
+                            New Log
                         </div>
                         <div class="card-body">
                             <?= csrf_field(); ?>
 
                             <div class="form-group">
-                                <label for="id_barang">Barang</label>
-                                <select name="id_barang" id="id_barang" class="form-control">
+                                <label for="id_item">Item</label>
+                                <select name="id_item" id="id_item" class="form-control">
                                     <option selected disabled>== PILIH == </option>
-                                    <?php foreach ($barang as $d) : ?>
-                                        <option value="<?= $d['id_barang']; ?>"><?= $d['nama_barang']; ?></option>
+                                    <?php foreach ($item as $d) : ?>
+                                        <option value="<?= $d['id_item']; ?>"><?= $d['kode_item']; ?> | <?= $d['nama_barang']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="kode_item">Kode Item</label>
-                                <input type="text" class="form-control" readonly id="kode_item" name="kode_item" required placeholder="Kode Item">
+                                <label for="deskripsi">Deskripsi</label>
+                                <textarea class="form-control" name="deskripsi" id="deskripsi" cols="30" rows="3"></textarea>
                             </div>
 
+                            <div class="form-group">
+                                <label for="id_status">Status</label>
+                                <select name="id_status" id="id_status" class="form-control">
+                                    <option selected disabled>== PILIH == </option>
+                                    <?php foreach ($status as $d) : ?>
+                                        <option value="<?= $d['id_status']; ?>"><?= $d['nama_status']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_penanggung_jawab">Penanggung Jawab</label>
+                                <select name="id_penanggung_jawab" id="id_penanggung_jawab" class="form-control">
+                                    <option selected disabled>== PILIH == </option>
+                                    <?php foreach ($user as $d) : ?>
+                                        <option value="<?= $d['id_user']; ?>"><?= $d['nama_lengkap']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <a href="<?= base_url($link); ?>" class="btn btn-secondary">Batal</a>
