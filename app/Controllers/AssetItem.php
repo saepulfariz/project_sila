@@ -35,7 +35,7 @@ class AssetItem extends BaseController
         $data = [
             'title' => 'Log ' . $this->title,
             'link' => 'asset/log',
-            'data' => $this->modeltransaksi->select('tb_asset_transaksi.id, kode_item, nama_barang, nama_status, deskripsi, pc.nama_lengkap as pencatat, pj.nama_lengkap as  penanggung_jawab, tgl_transaksi')->join('tb_asset_item', 'tb_asset_item.id_item = tb_asset_transaksi.id_item')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->join('tb_asset_kategori', 'tb_asset_kategori.id_kategori = tb_asset_barang.id_kategori')->join('tb_asset_status', 'tb_asset_status.id_status = tb_asset_transaksi.id_status')->join('tb_user as pj', 'pj.id_user = tb_asset_transaksi.id_penanggung_jawab')->join('tb_user as pc', 'pc.id_user = tb_asset_transaksi.cid')->orderBy('id', 'DESC')->findAll()
+            'data' => $this->modeltransaksi->select('tb_asset_transaksi.id, kode_item, nama_barang, nama_status, deskripsi, pc.nama_lengkap as pencatat, pj.nama_lengkap as  penanggung_jawab, tb_asset_transaksi.created_at')->join('tb_asset_item', 'tb_asset_item.id_item = tb_asset_transaksi.id_item')->join('tb_asset_barang', 'tb_asset_barang.id_barang = tb_asset_item.id_barang')->join('tb_asset_kategori', 'tb_asset_kategori.id_kategori = tb_asset_barang.id_kategori')->join('tb_asset_status', 'tb_asset_status.id_status = tb_asset_transaksi.id_status')->join('tb_user as pj', 'pj.id_user = tb_asset_transaksi.id_penanggung_jawab')->join('tb_user as pc', 'pc.id_user = tb_asset_transaksi.cid')->orderBy('id', 'DESC')->findAll()
         ];
 
         return view('asset/log/index', $data);

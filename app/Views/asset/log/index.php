@@ -47,7 +47,7 @@
                   <th>Deskripsi</th>
                   <th>Pencatat</th>
                   <th>Penanggung Jawab</th>
-                  <th>Tgl Transaksi</th>
+                  <th>Waktu Transaksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -61,7 +61,7 @@
                     <td><?= $d['deskripsi']; ?></td>
                     <td><?= $d['pencatat']; ?></td>
                     <td><?= $d['penanggung_jawab']; ?></td>
-                    <td><?= $d['tgl_transaksi']; ?></td>
+                    <td><?= $d['created_at']; ?></td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>

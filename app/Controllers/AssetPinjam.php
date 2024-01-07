@@ -18,6 +18,7 @@ class AssetPinjam extends BaseController
     private $modelitem;
     private $modelpinjamtransaksi;
     private $modelassetstatus;
+    private $modeltransaksi;
     private $link = 'asset/pinjam/list';
     private $view = 'asset/pinjam/list';
     private $title = 'Asset Pinjam';
@@ -30,6 +31,7 @@ class AssetPinjam extends BaseController
         $this->modelitem = new \App\Models\AssetItemModel();
         $this->modelpinjamtransaksi = new \App\Models\AssetPinjamTransaksiModel();
         $this->modelassetstatus = new \App\Models\AssetStatusModel();
+        $this->modeltransaksi = new \App\Models\AssetTransaksiModel();
     }
 
     public function index()
@@ -190,6 +192,16 @@ class AssetPinjam extends BaseController
                 'id_status' => $id_status
             ];
             $this->modelitem->where('id_item', $d['id_item'])->update(null, $data_update);
+
+            $data_transaksi = [
+                'id_item' => $d['id_item'],
+                'id_status' => $id_status,
+                'deskripsi' => 'Return ' . $this->modelassetstatus->find($id_status)['nama_status'],
+                'tgl_transaksi' => date('Y-m-d'),
+                'id_penanggung_jawab' => session()->get('id_user'),
+            ];
+            $data_transaksi = createLog($data_transaksi, 0);
+            $res = $this->modeltransaksi->save($data_transaksi);
         }
 
 
@@ -397,6 +409,16 @@ class AssetPinjam extends BaseController
                     'id_status' => $d['id_status']
                 ];
                 $this->modelitem->where('id_item', $d['id_item'])->update(null, $data_update);
+
+                $data_transaksi = [
+                    'id_item' => $d['id_item'],
+                    'id_status' => $d['id_status'],
+                    'deskripsi' => 'Pinjam ' . $this->modelassetstatus->find($d['id_status'])['nama_status'],
+                    'tgl_transaksi' => date('Y-m-d'),
+                    'id_penanggung_jawab' => session()->get('id_user'),
+                ];
+                $data_transaksi = createLog($data_transaksi, 0);
+                $res = $this->modeltransaksi->save($data_transaksi);
             }
         }
 
