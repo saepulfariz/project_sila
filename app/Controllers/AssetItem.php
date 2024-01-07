@@ -54,6 +54,50 @@ class AssetItem extends BaseController
         return view('asset/log/new', $data);
     }
 
+    public function logCreate()
+    {
+        $data = [
+            'id_item' => $this->request->getVar('id_item'),
+            'id_status' => $this->request->getVar('id_status'),
+            'deskripsi' => $this->request->getVar('deskripsi'),
+            'tgl_transaksi' => date('Y-m-d'),
+            'id_penanggung_jawab' => $this->request->getVar('id_penanggung_jawab'),
+        ];
+        $data = createLog($data, 0);
+        $res = $this->modeltransaksi->save($data);
+        // update status asset item
+        $data_item = [
+            'id_status' => $data['id_status'],
+        ];
+        $this->model->where('id_item', $data['id_item'])->update(null, $data_item);
+        if ($res) {
+            $this->alert->set('success', 'Success', 'Add Success');
+        } else {
+            $this->alert->set('warning', 'Warning', 'Add Failed');
+        }
+        return redirect()->to('asset/log');
+    }
+
+    public function ajaxLogItem($id)
+    {
+        $item = $this->model->select('id_item, kode_item, id_status')->find($id);
+
+        if (!$item) {
+            $data = [
+                'error' => true,
+                'message' => 'not found'
+            ];
+            return json_encode($data);
+        }
+
+
+        $data = [
+            'error' => false,
+            'data' => $item
+        ];
+        return json_encode($data);
+    }
+
     public function index()
     {
         $data = [

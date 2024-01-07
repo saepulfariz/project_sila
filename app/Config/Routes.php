@@ -65,7 +65,9 @@ $routes->group('', ['filter' => '\App\Filters\AuthFilter'], function ($routes) {
     $routes->resource('user');
 
     $routes->get('asset/log', 'AssetItem::log');
+    $routes->post('asset/log', 'AssetItem::logCreate');
     $routes->get('asset/log/new', 'AssetItem::logNew');
+    $routes->get('asset/log/ajax_item/(:any)', 'AssetItem::ajaxLogItem/$1');
     $routes->resource('surat/masuk', ['controller' => 'SuratMasuk']);
     $routes->resource('surat/keluar', ['controller' => 'SuratKeluar']);
     $routes->resource('asset/item', ['controller' => 'AssetItem']);

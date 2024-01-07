@@ -40,7 +40,7 @@
 
                             <div class="form-group">
                                 <label for="id_item">Item</label>
-                                <select name="id_item" id="id_item" class="form-control">
+                                <select name="id_item" id="id_item" required class="form-control">
                                     <option selected disabled>== PILIH == </option>
                                     <?php foreach ($item as $d) : ?>
                                         <option value="<?= $d['id_item']; ?>"><?= $d['kode_item']; ?> | <?= $d['nama_barang']; ?></option>
@@ -50,13 +50,12 @@
 
                             <div class="form-group">
                                 <label for="deskripsi">Deskripsi</label>
-                                <textarea class="form-control" name="deskripsi" id="deskripsi" cols="30" rows="3"></textarea>
+                                <textarea required class="form-control" name="deskripsi" id="deskripsi" cols="30" rows="3"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="id_status">Status</label>
-                                <select name="id_status" id="id_status" class="form-control">
-                                    <option selected disabled>== PILIH == </option>
+                                <select name="id_status" required id="id_status" class="form-control">
                                     <?php foreach ($status as $d) : ?>
                                         <option value="<?= $d['id_status']; ?>"><?= $d['nama_status']; ?></option>
                                     <?php endforeach; ?>
@@ -65,10 +64,14 @@
 
                             <div class="form-group">
                                 <label for="id_penanggung_jawab">Penanggung Jawab</label>
-                                <select name="id_penanggung_jawab" id="id_penanggung_jawab" class="form-control">
+                                <select name="id_penanggung_jawab" required id="id_penanggung_jawab" class="form-control">
                                     <option selected disabled>== PILIH == </option>
                                     <?php foreach ($user as $d) : ?>
-                                        <option value="<?= $d['id_user']; ?>"><?= $d['nama_lengkap']; ?></option>
+                                        <?php if (session()->get('id_user') == $d['id_user']) : ?>
+                                            <option selected value="<?= $d['id_user']; ?>"><?= $d['nama_lengkap']; ?></option>
+                                        <?php else : ?>
+                                            <option value="<?= $d['id_user']; ?>"><?= $d['nama_lengkap']; ?></option>
+                                        <?php endif; ?>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -91,27 +94,28 @@
 
 <?= $this->section('script') ?>
 <script>
-    function setKodeItem() {
-        var id = $('#id_barang').val();
+    function setStatusItem() {
+        var id = $('#id_item').val();
         $.ajax({
-            url: '<?= base_url($link); ?>/' + id,
+            url: '<?= base_url($link); ?>/ajax_item/' + id,
             method: 'GET', // POST
             data: {
                 // id: id
             },
             dataType: 'json', // json
             success: function(data) {
-                if (data.error != true) {
+                if (data.error == true) {
                     alert('not found');
                 } else {
-                    $('#kode_item').val(data.data);
+                    // $("#id_status option[value=" + data.id_status + "]").attr('selected', true);
+                    $('#id_status').val(data.id_status).change();
                 }
             }
         });
     }
 
-    $('#id_barang').on('change', function() {
-        setKodeItem();
+    $('#id_item').on('change', function() {
+        setStatusItem();
     })
 </script>
 <?= $this->endSection('script') ?>
