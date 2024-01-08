@@ -413,7 +413,7 @@ class AssetPinjam extends BaseController
                 $data_transaksi = [
                     'id_item' => $d['id_item'],
                     'id_status' => $d['id_status'],
-                    'deskripsi' => 'Pinjam ' . $this->modelassetstatus->find($d['id_status'])['nama_status'],
+                    'deskripsi' => 'Transaksi : ' . $this->modelassetstatus->find($d['id_status'])['nama_status'],
                     'tgl_transaksi' => date('Y-m-d'),
                     'id_penanggung_jawab' => session()->get('id_user'),
                 ];

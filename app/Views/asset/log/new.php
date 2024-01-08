@@ -108,7 +108,10 @@
                     alert('not found');
                 } else {
                     // $("#id_status option[value=" + data.id_status + "]").attr('selected', true);
-                    $('#id_status').val(data.id_status).change();
+                    $('#id_status').val(data.data.id_status).change();
+                    // const selectEl = document.getElementById('id_status');
+                    // selectEl.value = parseInt(data.id_status);
+                    // selectEl.dispatchEvent(new Event('change'));
                 }
             }
         });
