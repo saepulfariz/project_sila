@@ -11,16 +11,19 @@
             <div class="m-auto">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                        <a class="nav-link active" aria-current="page" href="<?= base_url(); ?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#surat">Surat</a>
+                        <a class="nav-link" href="<?= base_url('helpdesk'); ?>">Helpdesk</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#helpdesk">Helpdesk</a>
+                        <a class="nav-link" href="<?= base_url('asset'); ?>">Asset</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="<?= base_url('surat'); ?>">Surat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('about'); ?>">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('auth'); ?>">Login</a>
