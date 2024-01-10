@@ -47,6 +47,40 @@ $alert = new App\Libraries\Alert();
 
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/DataTables/datatables.min.css" />
 
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/dist/css/color.css">
+
+    <style>
+        .sidebar-dark-primary {
+            background-color: var(--primary-color);
+        }
+
+        [class*=sidebar-dark-] .sidebar a {
+            color: #fff;
+        }
+
+        .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
+        .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+            background-color: #fff;
+            color: var(--primary-color);
+        }
+
+        .card-header {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {
+            color: #fff;
+        }
+
+        [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active,
+        [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus,
+        [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
+            /* background-color: rgba(255, 255, 255, .9); */
+            color: var(--primary-color);
+        }
+    </style>
+
     <?= $this->renderSection('head'); ?>
 </head>
 

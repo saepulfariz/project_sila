@@ -21,6 +21,7 @@ $alert = new App\Libraries\Alert();
 
     <link rel="stylesheet" href="<?= base_url(); ?>assets/front/owl/assets/owl.carousel.min.css">
 
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/dist/css/color.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/front/css/style.css">
     <?= $this->renderSection('head'); ?>
 </head>

@@ -14,7 +14,7 @@ $resUser = $user->join('tb_role', 'tb_role.id_role = tb_user.id_role')->find(ses
     <!-- Brand Logo -->
     <a href="<?= base_url(); ?>" class="brand-link">
         <img src="<?= base_url(); ?>assets/front/img/sila.png" alt="SILA Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">SILA</span>
+        <span class="brand-text font-weight-bold text-white">SILA</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">

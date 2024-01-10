@@ -1,0 +1,14 @@
+:root {
+  --primary-color: #F25C05;
+  --primary-color-hover: #c94f09;
+  --secondary-color: #FEEFE6;
+}
+
+
+.text-sila {
+  color: var(--primary-color);
+}
+
+.bg-sila {
+  background-color: var(--primary-color);
+}

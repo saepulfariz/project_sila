@@ -97,8 +97,21 @@
     var table = $('#table').DataTable({
         responsive: true,
         "dom": 'Bflrtip',
-        buttons: [
-            'copy', 'excel', 'pdf'
+        buttons: [{
+                extend: 'copy',
+                className: "btn bg-tranparent btn-primary",
+                footer: true
+            },
+            {
+                extend: 'pdf',
+                className: "btn bg-tranparent btn-success",
+                footer: true
+            },
+            {
+                extend: 'excel',
+                className: "btn bg-tranparent btn-danger",
+                footer: true
+            },
         ],
         "pageLength": 5,
         "lengthMenu": [

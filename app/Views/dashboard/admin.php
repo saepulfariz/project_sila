@@ -89,7 +89,7 @@ $resUser = $user->find(session()->get('id_user'));
         <div class="row">
             <div class="col-md-4 mb-2">
                 <div class="card mb-4">
-                    <div class="card-header bg-dark">
+                    <div class="card-header">
                         <i class="fas fa-chart-line mr-1"></i>
                         Helpdesk Kategori
                     </div>
@@ -121,7 +121,7 @@ $resUser = $user->find(session()->get('id_user'));
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header bg-dark">
+                    <div class="card-header">
                         <i class="fas fa-chart-line mr-1"></i>
                         Surat Kategori
                     </div>
@@ -150,7 +150,7 @@ $resUser = $user->find(session()->get('id_user'));
             </div>
             <div class="col-md-8 mb-2">
                 <div class="card">
-                    <div class="card-header bg-dark">
+                    <div class="card-header">
                         Paling Banyak Pengaduan Helpdesk
                     </div>
                     <div class="card-body">
