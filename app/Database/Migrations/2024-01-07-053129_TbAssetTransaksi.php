@@ -39,11 +39,13 @@ class TbAssetTransaksi extends Migration
             'cid' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
+                'unsigned'       => true,
                 'null' => true
             ],
             'uid' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
+                'unsigned'       => true,
                 'null' => true
             ],
             'created_at' => [
@@ -54,6 +56,10 @@ class TbAssetTransaksi extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('id_penanggung_jawab', 'tb_user', 'id_user');
+        $this->forge->addForeignKey('cid', 'tb_user', 'id_user');
+        $this->forge->addForeignKey('id_item', 'tb_asset_item', 'id_item');
+        $this->forge->addForeignKey('id_status', 'tb_asset_status', 'id_status');
         $this->forge->createTable('tb_asset_transaksi');
     }
 

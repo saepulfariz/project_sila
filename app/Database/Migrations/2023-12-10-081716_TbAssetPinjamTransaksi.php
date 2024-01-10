@@ -32,11 +32,13 @@ class TbAssetPinjamTransaksi extends Migration
             'cid' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
+                'unsigned'       => true,
                 'null' => true
             ],
             'uid' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
+                'unsigned'       => true,
                 'null' => true
             ],
             'created_at' => [
@@ -47,6 +49,10 @@ class TbAssetPinjamTransaksi extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('cid', 'tb_user', 'id_user');
+        $this->forge->addForeignKey('id_item', 'tb_asset_item', 'id_item');
+        $this->forge->addForeignKey('id_status', 'tb_asset_status', 'id_status');
+        $this->forge->addForeignKey('kode_pinjam', 'tb_asset_pinjam', 'kode_pinjam');
         $this->forge->createTable('tb_asset_pinjam_transaksi');
     }
 

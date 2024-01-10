@@ -31,6 +31,8 @@ class TbAssetPinjamDetail extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('kode_pinjam', 'tb_asset_pinjam', 'kode_pinjam');
+        $this->forge->addForeignKey('id_barang', 'tb_asset_barang', 'id_barang');
         $this->forge->createTable('tb_asset_pinjam_detail');
     }
 

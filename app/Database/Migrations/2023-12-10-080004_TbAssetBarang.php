@@ -30,6 +30,7 @@ class TbAssetBarang extends Migration
             ],
         ]);
         $this->forge->addKey('id_barang', true);
+        $this->forge->addForeignKey('id_kategori', 'tb_asset_kategori', 'id_kategori');
         $this->forge->createTable('tb_asset_barang');
     }
 

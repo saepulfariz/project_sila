@@ -31,6 +31,8 @@ class TbAssetItem extends Migration
             ],
         ]);
         $this->forge->addKey('id_item', true);
+        $this->forge->addForeignKey('id_barang', 'tb_asset_barang', 'id_barang');
+        $this->forge->addForeignKey('id_status', 'tb_asset_status', 'id_status');
         $this->forge->createTable('tb_asset_item');
     }
 

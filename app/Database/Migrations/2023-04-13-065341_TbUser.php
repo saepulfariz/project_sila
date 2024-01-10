@@ -42,6 +42,7 @@ class TbUser extends Migration
             'id_role' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
+                'unsigned'       => true,
             ],
             'is_active' => [
                 'type'           => 'INT',
@@ -66,6 +67,7 @@ class TbUser extends Migration
         ]);
 
         $this->forge->addKey('id_user', true);
+        $this->forge->addForeignKey('id_role', 'tb_role', 'id_role');
         $this->forge->createTable('tb_user');
     }
 
