@@ -14,7 +14,7 @@
           Fakultas Ilmu Komputer, Universitas Subang
         </p>
 
-        <a href="#" class="fw-bold mt-4 position-relative text-white text-decoration-none">
+        <a href="<?= base_url('about'); ?>" class="fw-bold mt-4 position-relative text-white text-decoration-none">
           <span class="p-0 me-1">Selengkapnya </span>
           <i class="sila fs-5 bi bi-arrow-right position-absolute" style="top: -2px;"></i>
         </a>
@@ -23,10 +23,10 @@
       <div class="col-md-2 mb-2">
         <h4 class="mb-3">Pages</h4>
         <ul>
-          <li>Home</li>
-          <li>Help Desk</li>
-          <li>Log</li>
-          <li>About</li>
+          <li><a class="text-decoration-none text-white" href="<?= base_url(); ?>">Home</a></li>
+          <li><a class="text-decoration-none text-white" href="<?= base_url('helpdesk'); ?>">Help Desk</a></li>
+          <li><a class="text-decoration-none text-white" href="<?= base_url('asset'); ?>">Asset</a></li>
+          <li><a class="text-decoration-none text-white" href="<?= base_url('about'); ?>">About</a></li>
         </ul>
         <hr class="d-lg-none d-md-none border-2 border-white">
       </div>

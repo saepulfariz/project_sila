@@ -30,6 +30,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the defaul
 // route since we don't have to scan directories.
 $routes->get('/', 'Front::index');
+$routes->get('/helpdesk', 'Front::helpdesk');
 $routes->get('/register', 'Auth::register');
 $routes->post('/register', 'Auth::proses_register');
 $routes->get('/auth', 'Auth::index');

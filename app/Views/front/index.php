@@ -12,7 +12,6 @@
                                 dan Aset</h2>
                         </div>
                     </div>
-                    <p class="fw-bold">Layanan Kami</p>
 
                     <p class="mb-4">
                         Selamat datang di Sistem Informasi Layanan & Aset
@@ -21,7 +20,7 @@
                     </p>
                     <div class="row">
                         <div class="col-lg-4 col-5">
-                            <button class="btn-login btn w-100">Help Desk</button>
+                            <a href="<?= base_url('helpdesk'); ?>" class="btn-login btn w-100">Help Desk</a>
 
                         </div>
                     </div>
@@ -43,15 +42,12 @@
             <div class="col-md-5 pt-3 pt-md-0  d-flex flex-column align-items-center justify-content-center">
 
                 <div>
-                    <h2 class="">Tentang Kami</h2>
-                    <p class="fw-bold">Sistem Informasi Layanan & Aset</p>
+                    <h4 class="fw-bold">Sistem Informasi Layanan & Aset</h4>
 
                     <p class="mb-4 mt-4">
-                        Sistem Informasi layanan & Aset (SILA)
-                        adalah sebuah website layanan mahasiswa
-                        Fakultas Ilmu Komputer, Universitas Subang
+                        SILA adalah platform yang dirancang khusus untuk meningkatkan efisiensi dan efektivitas layanan di Fakultas Ilmu Komputer Universitas Subang. Dengan tiga fitur utama: Help Desk, Surat, dan Asset, SILA dirancang untuk menyediakan solusi terintegrasi bagi kebutuhan layanan dan manajemen aset.
                     </p>
-                    <a href="#" class="fw-bold mt-4 position-relative text-white text-decoration-none">
+                    <a href="<?= base_url('about'); ?>" class="fw-bold mt-4 position-relative text-white text-decoration-none">
                         <span class="p-0 me-1">Selengkapnya Tentang Kami </span>
                         <i class=" fs-5 bi bi-arrow-right position-absolute" style="top: -2px;"></i>
                     </a>
@@ -97,10 +93,9 @@
             <div class="col-md-3 mb-2 text-center">
                 <i class="bi bi-journal-text icon-cirle"></i>
                 <div class="text-center">
-                    <p class="fw-bold m-0 p-0 mt-3">LOG</p>
+                    <p class="fw-bold m-0 p-0 mt-3">ASSET</p>
                     <p>
-                        Review Help Desk
-                        Mahasiswa
+                        Lihat dan Pinjam Asset FASILKOM, UNSUB
                     </p>
                 </div>
             </div>

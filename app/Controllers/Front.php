@@ -26,4 +26,14 @@ class Front extends BaseController
 
         return view('front/index', $data);
     }
+
+    public function helpdesk()
+    {
+        $data = [
+            'title' => 'Helpdesk',
+            'helpdesk' => $this->modelhelpdesk->select('tb_helpdesk.created_at as created_at, tb_helpdesk.deskripsi, tb_status.id_status, nama_status, nama_lengkap')->join('tb_status', 'tb_status.id_status = tb_helpdesk.id_status', 'left')->join('tb_user', 'tb_user.id_user = tb_helpdesk.cid', 'left')->findAll(),
+        ];
+
+        return view('front/helpdesk', $data);
+    }
 }
