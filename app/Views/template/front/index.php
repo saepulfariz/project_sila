@@ -16,6 +16,9 @@ $alert = new App\Libraries\Alert();
 
     <link rel="stylesheet" href="<?= base_url(); ?>assets/front/font/bootstrap-icons.min.css">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/fontawesome-free/css/all.min.css">
+
     <link rel="stylesheet" href="<?= base_url(); ?>assets/front/owl/assets/owl.carousel.min.css">
 
     <link rel="stylesheet" href="<?= base_url(); ?>assets/front/css/style.css">

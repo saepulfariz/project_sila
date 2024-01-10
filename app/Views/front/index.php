@@ -91,7 +91,7 @@
             </div>
 
             <div class="col-md-3 mb-2 text-center">
-                <i class="bi bi-journal-text icon-cirle"></i>
+                <i class="fas fa-shapes icon-cirle"></i>
                 <div class="text-center">
                     <p class="fw-bold m-0 p-0 mt-3">ASSET</p>
                     <p>

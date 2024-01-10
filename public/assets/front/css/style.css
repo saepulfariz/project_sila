@@ -241,3 +241,8 @@ footer ul li {
     background-color: #fff;
     color: var(--primary-color);
 }
+
+.navbar-nav .nav-link.active {
+    color: var(--primary-color);
+    font-weight: bold;
+}
