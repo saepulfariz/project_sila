@@ -37,32 +37,7 @@ $alert = new App\Libraries\Alert();
     <script src="<?= base_url(); ?>assets/front/js/jquery-3.6.4.js"></script>
     <script src="<?= base_url(); ?>assets/front/owl/owl.carousel.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            // $(".owl-carousel").owlCarousel();
 
-            var owl = $('.owl-carousel');
-            owl.owlCarousel({
-                items: 4,
-                loop: true,
-                // margin: 10,
-                autoplay: true,
-                autoplayTimeout: 2000,
-                autoplayHoverPause: true,
-                responsive: {
-                    0: {
-                        items: 2
-                    },
-                    600: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 5
-                    }
-                }
-            });
-        });
-    </script>
 
     <?= $alert->init('jquery'); ?>
 
