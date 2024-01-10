@@ -36,4 +36,14 @@ class Front extends BaseController
 
         return view('front/helpdesk', $data);
     }
+
+
+    public function about()
+    {
+        $data = [
+            'title' => 'About',
+        ];
+
+        return view('front/about', $data);
+    }
 }
