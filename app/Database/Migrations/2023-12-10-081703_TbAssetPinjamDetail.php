@@ -16,8 +16,9 @@ class TbAssetPinjamDetail extends Migration
                 'auto_increment' => true,
             ],
             'kode_pinjam' => [
-                'type'       => 'VARCHAR',
+                'type'           => 'VARCHAR',
                 'constraint'     => '100',
+                'null'           => true,
             ],
             'id_barang' => [
                 'type'           => 'INT',
